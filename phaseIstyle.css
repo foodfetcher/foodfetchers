@@ -1,0 +1,65 @@
+/* Styling for the foodfetchers website */
+
+#Navigation {
+	color: white;
+	background-color: #38817a;
+	text-align: right;
+	height: 100px;
+	margin: -8px;
+	padding: 0 10px;
+	box-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+#Navigation a {
+	font-family: Arial;
+	color: white;
+	text-decoration: none;
+}
+
+#Navigation a:hover {
+	text-decoration: underline;
+}
+
+#Content {
+	border-radius: 15px;
+	background-color: #ffed9f;
+	text-align: center;
+	max-width: 1000px;
+	min-height: 600px;
+	margin: 43px auto 80px auto;
+	padding: 10px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+h1, h2, h3 {
+	text-align: center;
+	font-family: Ubuntu, Arial;
+}
+
+#interested {
+	border-radius: 15px;
+	background-color: #38817a;
+	height: 35px;
+	width: 650px;
+	position: fixed;
+	left: 50%;
+	margin-left: -325px;
+	bottom: 0;
+	margin-bottom: 20px;
+	text-align: center;
+	color: black;
+	box-shadow: 0 0 6px rgba(0,0,0,0.7);
+}
+
+#interested h1 {
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+}
+
+body {
+	background-image: url(Images/backgroundfood.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
