@@ -12,7 +12,7 @@
 
 <html>
     <head>
-        <title> Food Fetchers | home </title>
+        <title> Food Fetchers | Home </title>
         <link rel="stylesheet" href="phaseIstyle.css">
     </head>
     <body>
@@ -35,8 +35,12 @@
                 </tr>
             </table>
         </div>
-        <a href = signup.php><div id = "interested">
-            <h1> INTERESTED? CLICK HERE TO GET STARTED! </h1>
-        </div></a>
+		<?php
+			if ($log == "Login"){ 
+				echo '<div id = "interested"><a href = signup.php>
+					<h1> Interested? Click Here To Get Started! </h1>
+					</a></div>';
+			};
+		?>
     </body>
 </html>

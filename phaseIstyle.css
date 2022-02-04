@@ -1,34 +1,14 @@
 /* Styling for the foodfetchers website */
 
-#Navigation {
-	color: white;
-	background-color: #38817a;
-	text-align: right;
-	height: 100px;
-	margin: -8px;
-	padding: 0 10px;
-	box-shadow: 0 0 8px rgba(0,0,0,0.7);
-}
-
-#Navigation a {
-	font-family: Arial;
-	color: white;
-	text-decoration: none;
-}
-
-#Navigation a:hover {
-	text-decoration: underline;
-}
-
-#Content {
-	border-radius: 15px;
-	background-color: #ffed9f;
-	text-align: center;
-	max-width: 1000px;
-	min-height: 600px;
-	margin: 43px auto 80px auto;
-	padding: 10px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+/* General */
+body {
+	background-image: url(Images/backgroundfood.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	margin: 0;
+	min-height: 1500px;
+	--scrollbar-width: calc(100vw - 100%);
 }
 
 h1, h2, h3 {
@@ -36,19 +16,82 @@ h1, h2, h3 {
 	font-family: Ubuntu, Arial;
 }
 
+/* Header */
+#header {
+	font-family: Arial;
+	font-size: 18px;
+	color: white;
+	background-color: #38817a;
+	height: 92px;
+	padding: 0 10px;
+	box-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+#logo {
+	float: left;
+	padding: 1px 0;
+}
+
+#nav {
+	display: flex;
+	float: right;
+	align-items: center;
+	width: auto;
+	height: 100%;
+}
+
+#nav a {
+	font-family: Arial;
+	color: white;
+	text-decoration: none;
+	transition: background-color 200ms;
+	border: 1px solid transparent;
+	padding: 34.5px 10px;
+}
+
+#nav a:hover {
+	background-color: rgba(255,255,255,0.15);
+	border: 1px solid rgba(255,255,255,0.25);
+	transition: 0ms;
+}
+
+#logout {
+	text-align: center;
+	padding: 0 10px;
+	cursor: default;
+}
+
+#logout a {
+	padding: 2px;
+	cursor: pointer;
+}
+
+/* Content */
+#Content {
+	border-radius: 15px;
+	background-color: #cee6be;
+	text-align: center;
+	max-width: 1000px;
+	margin: 43px auto 80px auto;
+	padding: 10px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Interested Banner */
 #interested {
 	border-radius: 15px;
 	background-color: #38817a;
-	height: 35px;
-	width: 650px;
 	position: fixed;
-	left: 50%;
-	margin-left: -325px;
 	bottom: 0;
 	margin-bottom: 20px;
 	text-align: center;
 	color: black;
 	box-shadow: 0 0 6px rgba(0,0,0,0.7);
+	padding: 0 10px;
+	transition: background-color 200ms;
+	transform: translate(calc(50vw - 50%));
+	margin-left: calc(-0.5 * var(--scrollbar-width));
+	margin-right: var(--scrollbar-width);
 }
 
 #interested h1 {
@@ -56,10 +99,12 @@ h1, h2, h3 {
 	margin-block-end: 0px;
 }
 
-body {
-	background-image: url(Images/backgroundfood.png);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
+#interested a {
+	color: black;
+	text-decoration: none;
 }
 
+#interested:hover {
+	background-color: #4cada4;
+	transition: 0ms;
+}
