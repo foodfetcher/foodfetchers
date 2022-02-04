@@ -66,10 +66,6 @@
                     //echo "here!";
                     if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         //print_r($_POST);
-                        $DB_HOST='localhost';
-                        $DB_USER='fetcher1';
-                        $DB_PASS='1234';
-                        $DB_NAME='main';
                         
                         $recipeName = $_POST["recipeName"];
                         $ingredients = $_POST["ingredients"];
@@ -90,7 +86,7 @@
                         $userid = $_SESSION["userid"];
                         $timestamp = date('Y-m-d H:i:s');
                         
-                        $db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
+                        $db = getDefaultDB();
                         $res = pg_query($db, "INSERT INTO recipes (recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ('$recipeName', '$ingredients', '$instructions', '$userid', '$timestamp', '$vegetarian', '$vegan', '$kosher', '$nutfree', '$wheatfree', '$soyfree', '$glutenfree', '$dairyfree') RETURNING recipeid");
                         echo pg_last_error($db);
                         $recipeid = pg_fetch_assoc($res)["recipeid"];
