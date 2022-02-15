@@ -27,11 +27,8 @@
             <a href=createMeal.php>create new meal </a><br/><br/>
             <div id = "results">
                 <?php
-                    $DB_HOST='localhost';
-                    $DB_USER='fetcher1';
-                    $DB_PASS='1234';
-                    $DB_NAME='main'; 
-                    $db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
+                    include 'DButils.php';
+                    $db = getDefaultDB();
                     
                     $userid = $_SESSION['userid'];
                     $res = pg_query($db, "SELECT * FROM meals WHERE customerid='$userid'");
