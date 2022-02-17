@@ -32,8 +32,12 @@
             #restable tr:nth-child(even) {
             background-color: #f9e27f;
             }
-		</style>
-		<?php
+        </style>
+    </head>
+    <body>
+		<div id = "background"></div>
+        <?php
+
             include 'nav.php'; //write out the nav bar
 			include "DButils.php";
             $db = getDefaultDB();

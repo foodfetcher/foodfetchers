@@ -1,3 +1,44 @@
+<?php
+	session_start();
+	if (isset($_SESSION['userid']))
+	{
+		$log = "Logout";
+        header("Location: home.php");
+        die('<a href="home.php">Click here if you are not automatically redirected</a>');
+    }
+	elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
+		$log = "Login";
+        
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $email = strtolower($_POST['email']);
+        $password = $_POST['password'];
+        $address = $_POST['address'];
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+        $zip = $_POST['zip'];
+        $address2 = $_POST['address2'];
+        $number = $_POST['number'];
+        
+        
+        $DB_HOST='localhost';
+        $DB_USER='fetcher1';
+        $DB_PASS='1234';
+        $DB_NAME='main'; 
+        $db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
+		//TODO: check if account already exists before creating it, otherwise accounts get overwritten
+        $res = pg_query($db, "INSERT INTO Customers (Email, Passwd, FirstName, LastName, Address1, Address2, ZipCode, State, PhoneNumber, City) VALUES ('$email', '$password', '$firstName', '$lastName', '$address', '$address2', '$zip', '$state', '$number', '$city')");
+        if ($res)
+        $outcome = "success";
+        else
+        $outcome = "unable to create acount";
+        pg_close($db);
+    }
+	$log = "Login";
+	
+?>
+
+<!DOCTYPE html>
 <html>
     <head>
         <title> Food Fetchers | sign up </title>
@@ -46,6 +87,7 @@
 		?>
 	</head>
     <body>
+		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
 		?> 
