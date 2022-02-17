@@ -50,7 +50,6 @@
     } 
 ?>
 <!DOCTYPE html>
-
 <html>
     <head>
         <title> Food Fetchers | log in </title>
@@ -62,6 +61,7 @@
         ?>
     </head>
     <body>
+		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
         ?> 
