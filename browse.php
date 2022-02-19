@@ -32,7 +32,7 @@
 							<table style="width: 100%;">
 								<tr>
 									<td>
-										<h1 style="margin-block-start: 0; margin-block-end: 0.25em;"> Browse Recipes </h1>
+										<h1 style="margin-block-start: 0; margin-block-end: 0.25em;"> Search Recipes </h1>
 									</td>
 								</tr>
 								
