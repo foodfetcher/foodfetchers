@@ -191,3 +191,81 @@ input[type=checkbox] {
 	color: black;
 	text-decoration: none;
 }
+/* meal planner*/
+#back-container{
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-image:url(Images/back-mealPlan.jpeg);
+}
+#content-container{
+    display:flex;
+    flex-direction: row;
+    flex:1;
+}
+#left-nav{
+    background-color:#38817a;
+    width: 10vw;
+    min-width: 120px;
+}
+#left-nav a{
+    font-family: Arial;
+	color: white;
+	text-decoration: none;
+}
+#left-nav div{
+    min-height: 45px;
+    display:flex;
+    align-items: center;
+    padding: .15vh .5vw .15vh .5vw;
+}
+#left-nav div:hover{
+    background-color: rgba(255,255,255,0.15);
+	border: 1px solid rgba(255,255,255,0.25);
+    min-height: 45px;
+}
+.day-tile{
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+}
+.day-tile-lable{
+    width: 4.125vh;
+    height: 8.5vh; 
+    text-align: center;margin:0 .25vw 0 0;display:flex;
+    text-align: center;
+    align-items:center;
+    justify-content:center;
+    writing-mode:vertical-lr;
+    border-right:2px solid #38817a ;
+}
+.meal-tile{
+    border: 1px solid black;
+    position:relative;
+    background-color: #dbf9d1;
+    width: 8.25vh;
+    height: 8.25vh;
+    text-align: center;
+    align-items:center;
+}
+.meal-tile:hover div.meal-tile-cover{
+    display: block;
+}
+.meal-tile-cover{
+    display: none;
+    position:absolute;
+    background-image:url(Images/plus.png);
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+.meal-tile:hover{
+    border: 1px solid white;
+}
+#content-with-sidenav {
+    margin: 43px auto auto auto;
+    width: 78%;
+    background-color: white;
+    border-radius: 15px;
+}
