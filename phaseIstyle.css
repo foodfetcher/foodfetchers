@@ -1,14 +1,30 @@
 /* Styling for the foodfetchers website */
 
 /* General */
-body {
-	background-image: url(Images/backgroundfood.png);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
-	margin: 0;
-	min-height: 1500px;
+:root {
+	/* Vars */
 	--scrollbar-width: calc(100vw - 100%);
+	
+	/* Colors */
+	--lightgreen: #c3ffaf;
+	--green: #50c928;
+	--darkgreen: #31701c;
+}
+
+body {
+	margin: 0;
+	font-family: Arial;
+	min-height: 150vh; /* for testing purposes until we get more content */
+}
+
+#background {
+	background-image: url(Images/background.jpg);
+	background-size: cover;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: block;
+	z-index: -10;
 }
 
 h1, h2, h3 {
@@ -16,43 +32,98 @@ h1, h2, h3 {
 	font-family: Ubuntu, Arial;
 }
 
+h3, p {
+	margin-block-start: 0;
+}
+
+/* Forms */
+input[type=text], input[type=email], input[type=password], input[type=number] {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	transition: border 200ms;
+	margin-bottom: 2px;
+}
+
+input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=number]:hover {
+	border-color: #888;
+	transition: 0ms;
+}
+
+input[type=text]:active, input[type=email]:active, input[type=password]:active, input[type=number]:active {
+	border-color: #444;
+	transition: 0ms;
+}
+
+input[type=submit], input[type=reset] {
+	padding: 5px 16px;
+	background-color: #eee;
+	font-size: 16px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+input[type=submit]:hover, input[type=reset]:hover {
+	background-color: #fff;
+	border: 1px solid var(--green);
+	border-bottom: 2px solid var(--green);
+	padding-bottom: 4px;
+}
+
+input[type=submit]:active, input[type=reset]:active {
+	background-color: var(--green);
+}
+
+input[type=checkbox] {
+	height: 16px;
+	width: 16px;
+}
+
 /* Header */
 #header {
-	font-family: Arial;
 	font-size: 18px;
-	color: white;
-	background-color: #38817a;
-	height: 92px;
+	color: black;
+	background-color: rgba(255,255,255,0.9);
+	height: 90px;
 	padding: 0 10px;
 	box-shadow: 0 0 8px rgba(0,0,0,0.7);
 }
 
 #logo {
 	float: left;
-	padding: 1px 0;
+	height: 90px;
 }
 
 #nav {
 	display: flex;
 	float: right;
 	align-items: center;
-	width: auto;
 	height: 100%;
+	text-align: center;
 }
 
 #nav a {
-	font-family: Arial;
-	color: white;
+	color: #333;
 	text-decoration: none;
-	transition: background-color 200ms;
+	transition: 200ms;
 	border: 1px solid transparent;
-	padding: 34.5px 10px;
+	border-bottom: 2px solid transparent;
+	padding: 10px 12px;
+	border-radius: 5px;
+	margin: 0 4px;
 }
 
 #nav a:hover {
-	background-color: rgba(255,255,255,0.15);
-	border: 1px solid rgba(255,255,255,0.25);
+	color: #000;
+	background-color: var(--lightgreen);
+	border: 1px solid var(--green);
+	border-bottom: 2px solid var(--green);
 	transition: 0ms;
+}
+
+#nav a:active {
+	background-color: var(--green);
 }
 
 #logout {
@@ -62,36 +133,53 @@ h1, h2, h3 {
 }
 
 #logout a {
-	padding: 2px;
+	padding: 1px;
 	cursor: pointer;
+	border: 2px solid transparent;
+}
+
+#logout a:hover {
+	border: 2px solid var(--green);
 }
 
 /* Content */
 #Content {
 	border-radius: 15px;
-	background-color: #cee6be;
+	background-color: var(--lightgreen);
 	text-align: center;
 	max-width: 1000px;
-	margin: 43px auto 80px auto;
+	margin: 40px auto;
 	padding: 10px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 /* Interested Banner */
 #interested {
+	background-color: rgba(255,255,255,0.9);
 	border-radius: 15px;
-	background-color: #38817a;
+	box-shadow: 0 0 6px rgba(0,0,0,0.7);
 	position: fixed;
 	bottom: 0;
 	margin-bottom: 20px;
-	text-align: center;
-	color: black;
-	box-shadow: 0 0 6px rgba(0,0,0,0.7);
-	padding: 0 10px;
-	transition: background-color 200ms;
-	transform: translate(calc(50vw - 50%));
 	margin-left: calc(-0.5 * var(--scrollbar-width));
 	margin-right: var(--scrollbar-width);
+	padding: 4px 10px;
+	text-align: center;
+	color: black;
+	cursor: pointer;
+	transition: background-color 200ms;
+	transform: translate(calc(50vw - 50%));
+}
+
+#interested:hover {
+	background-color: var(--lightgreen);
+	transition: 0ms;
+	border: 1px solid var(--green);
+	margin-bottom: 19px;
+}
+
+#interested:active {
+	background-color: var(--green);
 }
 
 #interested h1 {
@@ -102,9 +190,4 @@ h1, h2, h3 {
 #interested a {
 	color: black;
 	text-decoration: none;
-}
-
-#interested:hover {
-	background-color: #4cada4;
-	transition: 0ms;
 }

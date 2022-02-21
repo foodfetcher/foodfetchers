@@ -14,25 +14,31 @@
 				include "DButils.php";
 				$db = getDefaultDB();
 				
-				//TODO: check if account already exists before creating it, otherwise accounts get overwritten
-				$res = pg_query_params($db, "INSERT INTO Customers (Email, Passwd, FirstName, LastName, Address1, Address2, ZipCode, State, PhoneNumber, City) VALUES ('$1', '$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10')",
-				strtolower($_POST['email']),
-				$_POST['password'],
-				$_POST['firstName'],
-				$_POST['lastName'],
-				$_POST['address'],
-				$_POST['address2'],
-				$_POST['zip'],
-				$_POST['state'],
-				$_POST['number'],
-				$_POST['city']);
-				if ($res){
-					$outcome = "success";
-					echo '<meta http-equiv="refresh" content="5;url=login.php" />';
+				$res = pg_query_params($db, "SELECT email FROM Customers WHERE email=$1", array(strtolower($_POST['email'])));
+				if(pg_num_rows($res) != 0){
+					$outcome = 'Account with that email already exits! <a href="login.php">login?</a>';
 				}
 				else{
-					$outcome = "unable to create acount";
+					$res2 = pg_query_params($db, "INSERT INTO customers (email, passwd, firstname, lastname, address1, address2, zipcode, state, phonenumber, city) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING userid", array(
+					strtolower($_POST['email']),
+					$_POST['password'],
+					$_POST['firstName'],
+					$_POST['lastName'],
+					$_POST['address'],
+					$_POST['address2'],
+					$_POST['zip'],
+					$_POST['state'],
+					$_POST['number'],
+					$_POST['city']));
+					if (pg_num_rows($res2) == 1){
+						$outcome = "success";
+						echo '<meta http-equiv="refresh" content="5;url=login.php" />';
+					}
+					else{
+						$outcome = "response: " . var_export($res2, true) . "<br/>err: " . pg_last_error($db) . "<br/>ResponseLen: " . pg_num_rows($res2) . "<br/>res:" . print_r(pg_fetch_assoc($res2));
+					}
 				}
+				
 				pg_close($db);
 			}
 			$log = "Login";
@@ -77,7 +83,10 @@
                     echo '<p>Account successfully created. Redirecting to <a href="login.php">login page</a> in 5 seconds... (click the link if this doesn\'t happen automatically)</p>';
 				}
 				else{
-					echo $outcome;
+					if(isset($outcome)){
+						echo "Unable to create account:<br/>" . $outcome;
+					}
+					
 				}
 			?>
 		</div>
