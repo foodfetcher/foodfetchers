@@ -83,7 +83,10 @@
                     echo '<p>Account successfully created. Redirecting to <a href="login.php">login page</a> in 5 seconds... (click the link if this doesn\'t happen automatically)</p>';
 				}
 				else{
-					echo "Unable to create account:<br/>" . $outcome;
+					if(isset($outcome)){
+						echo "Unable to create account:<br/>" . $outcome;
+					}
+					
 				}
 			?>
 		</div>
