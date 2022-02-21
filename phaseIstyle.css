@@ -45,23 +45,34 @@ input[type=text], input[type=email], input[type=password], input[type=number] {
 	margin-bottom: 2px;
 }
 
-input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=number]:hover, input[type=submit]:hover, input[type=reset]:hover {
+input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=number]:hover {
 	border-color: #888;
 	transition: 0ms;
 }
 
-input[type=text]:active, input[type=email]:active, input[type=password]:active, input[type=number]:active, input[type=submit]:active, input[type=reset]:active {
+input[type=text]:active, input[type=email]:active, input[type=password]:active, input[type=number]:active {
 	border-color: #444;
 	transition: 0ms;
 }
 
 input[type=submit], input[type=reset] {
 	padding: 5px 16px;
+	background-color: #eee;
 	font-size: 16px;
 	cursor: pointer;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	transition: border 200ms;
+}
+
+input[type=submit]:hover, input[type=reset]:hover {
+	background-color: #fff;
+	border: 1px solid var(--green);
+	border-bottom: 2px solid var(--green);
+	padding-bottom: 4px;
+}
+
+input[type=submit]:active, input[type=reset]:active {
+	background-color: var(--green);
 }
 
 input[type=checkbox] {
@@ -93,18 +104,26 @@ input[type=checkbox] {
 }
 
 #nav a {
-	color: black;
+	color: #333;
 	text-decoration: none;
-	transition: 150ms;
-	border: 3px solid transparent;
-	padding: 14px 12px;
+	transition: 200ms;
+	border: 1px solid transparent;
+	border-bottom: 2px solid transparent;
+	padding: 10px 12px;
 	border-radius: 5px;
+	margin: 0 4px;
 }
 
 #nav a:hover {
-	background-color: rgba(255,255,255,0.5);
-	border: 3px solid var(--green);
+	color: #000;
+	background-color: var(--lightgreen);
+	border: 1px solid var(--green);
+	border-bottom: 2px solid var(--green);
 	transition: 0ms;
+}
+
+#nav a:active {
+	background-color: var(--green);
 }
 
 #logout {
@@ -136,20 +155,31 @@ input[type=checkbox] {
 
 /* Interested Banner */
 #interested {
+	background-color: rgba(255,255,255,0.9);
 	border-radius: 15px;
-	background-color: var(--lightgreen);
+	box-shadow: 0 0 6px rgba(0,0,0,0.7);
 	position: fixed;
 	bottom: 0;
 	margin-bottom: 20px;
+	margin-left: calc(-0.5 * var(--scrollbar-width));
+	margin-right: var(--scrollbar-width);
+	padding: 4px 10px;
 	text-align: center;
 	color: black;
-	box-shadow: 0 0 6px rgba(0,0,0,0.7);
-	padding: 4px 10px;
 	cursor: pointer;
 	transition: background-color 200ms;
 	transform: translate(calc(50vw - 50%));
-	margin-left: calc(-0.5 * var(--scrollbar-width));
-	margin-right: var(--scrollbar-width);
+}
+
+#interested:hover {
+	background-color: var(--lightgreen);
+	transition: 0ms;
+	border: 1px solid var(--green);
+	margin-bottom: 19px;
+}
+
+#interested:active {
+	background-color: var(--green);
 }
 
 #interested h1 {
@@ -160,9 +190,4 @@ input[type=checkbox] {
 #interested a {
 	color: black;
 	text-decoration: none;
-}
-
-#interested:hover {
-	background-color: var(--green);
-	transition: 50ms;
 }
