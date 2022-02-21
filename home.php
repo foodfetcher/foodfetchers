@@ -39,9 +39,9 @@
         </div>
 		<?php
 			if ($log == "Login"){ 
-				echo '<div id = "interested"><a href = signup.php>
-					<h1> Interested? Click Here To Get Started! </h1>
-					</a></div>';
+				echo '<a href = signup.php><div id = "interested">
+					<h1> Get Started Here! </h1>
+					</div></a>';
 			};
 		?>
     </body>
