@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Food Fetchers | info </title>
+        <title> Food Fetchers | About Us </title>
         <link rel="stylesheet" href="phaseIstyle.css">
         
     </head>
