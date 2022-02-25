@@ -9,7 +9,7 @@
 		$log = "Login";
     }
     
-	include 'DButils.php'
+	include 'DButils.php';
 	
     $mealid = (int)$_GET["id"];
     $mealInfo = array();
