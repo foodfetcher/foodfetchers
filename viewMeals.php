@@ -65,7 +65,6 @@
     </script>
     </head>
     <body>
-		<div id = "background"></div>
         <div id = "back-container">
             
         <?php
