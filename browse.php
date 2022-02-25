@@ -215,7 +215,7 @@
 											}
 											
 											//only selects recipes matching the same search (only that for now) the squiggle squiggle star means like case insensitive and the %s around the variable mean anything can be there
-											$res = pg_query($db, "SELECT * FROM recipes WHERE recipename ~~* '%$recipeName%' AND ingredients ~~* '%$keywordName%' 
+											$res = pg_query($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* '%$recipeName%' AND ingredients ~~* '%$keywordName%' 
 											AND (vegetarian = '$vegetarian' OR vegetarian = '$vegetarian2') 
 											AND (vegan = '$vegan' OR vegan = '$vegan2')
 											AND (kosher = '$kosher' OR kosher = '$kosher2')
@@ -223,7 +223,8 @@
 											AND (wheatfree = '$wheatfree' OR wheatfree = '$wheatfree2')
 											AND (soyfree = '$soyfree' OR soyfree = '$soyfree2')
 											AND (glutenfree = '$glutenfree' OR glutenfree = '$glutenfree2')
-											AND (dairyfree = '$dairyfree' OR dairyfree = '$dairyfree2')");
+											AND (dairyfree = '$dairyfree' OR dairyfree = '$dairyfree2')
+											AND (firstname ~~* '%$authorName%' OR lastname ~~* '%$authorName%')");
 											// INNER JOIN customers ON recipes.userid=customers.userid
 											// AND (firstname ~~* '$authorName' OR lastname ~~* '$authorName')
 											echo '<table width="100%">';
