@@ -231,7 +231,7 @@
 											while($row = pg_fetch_assoc($res)){
 												$notEmpty = true;
 												$recipeid = $row["recipeid"];
-												echo '<td width="25%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+												echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
 												echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
 												$count += 1;
 												if ($count == 4)
