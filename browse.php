@@ -60,34 +60,44 @@
 								<tr>
 									<td style="text-align: left;">
 										<h3 style="margin-block-start: 0.5em; margin-block-end: 0.25em;">Dietary Preferences</h3>
-										<input type="checkbox" id="vegetarian" value="false" name="vegetarianCheck">
-										<label for="vegetarian" style="vertical-align: text-bottom;">Vegetarian</label><br/>
-										<input type="checkbox" id="vegan" value="false" name="veganCheck">
-										<label for="vegan" style="vertical-align: text-bottom;">Vegan</label><br/>
-										<input type="checkbox" id="kosher" value="false" name="kosherCheck">
-										<label for="kosher" style="vertical-align: text-bottom;">Kosher</label><br/>
-										<input type="checkbox" id="nutfree" value="false" name="nutCheck">
-										<label for="nutfree" style="vertical-align: text-bottom;">Nut-Free</label><br/>
-										<input type="checkbox" id="wheatfree" value="false" name="wheatCheck">
-										<label for="wheatfree" style="vertical-align: text-bottom;">Wheat-Free</label><br/>
-										<input type="checkbox" id="soyfree" value="false" name="soyCheck">
-										<label for="soyfree" style="vertical-align: text-bottom;">Soy-Free</label><br/>
-										<input type="checkbox" id="glutenfree" value="false" name="glutenCheck">
-										<label for="glutenfree" style="vertical-align: text-bottom;">Gluten-Free</label><br/>
-										<input type="checkbox" id="dairyfree" value="false" name="dairyCheck">
-										<label for="dairyfree" style="vertical-align: text-bottom;">Dairy-Free</label><br/>
+										<table>
+											<td style="width: 50%">
+												<input type="checkbox" id="vegetarian" value="false" name="vegetarianCheck">
+												<label for="vegetarian" style="vertical-align: text-bottom;">Vegetarian</label><br/>
+												<input type="checkbox" id="vegan" value="false" name="veganCheck">
+												<label for="vegan" style="vertical-align: text-bottom;">Vegan</label><br/>
+												<input type="checkbox" id="kosher" value="false" name="kosherCheck">
+												<label for="kosher" style="vertical-align: text-bottom;">Kosher</label><br/>
+												<input type="checkbox" id="nutfree" value="false" name="nutCheck">
+												<label for="nutfree" style="vertical-align: text-bottom;">Nut-Free</label><br/>
+											</td>
+											<td style="width: 50%; padding-left: 5px;">
+												<input type="checkbox" id="wheatfree" value="false" name="wheatCheck">
+												<label for="wheatfree" style="vertical-align: text-bottom;">Wheat-Free</label><br/>
+												<input type="checkbox" id="soyfree" value="false" name="soyCheck">
+												<label for="soyfree" style="vertical-align: text-bottom;">Soy-Free</label><br/>
+												<input type="checkbox" id="glutenfree" value="false" name="glutenCheck">
+												<label for="glutenfree" style="vertical-align: text-bottom;">Gluten-Free</label><br/>
+												<input type="checkbox" id="dairyfree" value="false" name="dairyCheck">
+												<label for="dairyfree" style="vertical-align: text-bottom;">Dairy-Free</label><br/>
+											</td>
+										</table>
 									</td>
 								</tr>
 										
 								<tr>
 									<td style="cursor: default; padding-top: 5px;">
 										<input type="submit" value="Search" class="seventh">
+										<input type="reset" value="Clear" class="seventh">
+									</td>
+								</tr>
+								<tr>
+									<td>
 										<?php
 											if($log == "Logout"){
 												echo '<input type="submit" name="myrecipes" value="View My Recipes" class = "seventh"/>';
 											}
 										?>
-										<input type="reset" value="Clear" class="seventh">
 									</td>
 								</tr>
 							</table>

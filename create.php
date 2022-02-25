@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Food Fetchers | create </title>
+        <title> Food Fetchers | Create Recipe </title>
         <link rel="stylesheet" href="phaseIstyle.css">
 		<?php
 			//echo "here!";
@@ -69,6 +69,7 @@
 		?>
 	</head>
     <body>
+		<div id="background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
 		?> 

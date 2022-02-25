@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Food Fetchers | log in </title>
+        <title> Food Fetchers | Log In </title>
         <link rel="stylesheet" href="phaseIstyle.css">
 		<?php
 			session_start();
@@ -83,8 +83,6 @@
 					else{
 						echo $outcome;
 					}
-					
-					
 				}
 			?>
 		</div>
