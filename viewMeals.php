@@ -59,6 +59,7 @@
     </script>
     </head>
     <body>
+		<div id = "background"></div>
         <div id = "back-container">
             
         <?php
@@ -200,8 +201,8 @@
                     </tr><!-- END: content row -->
                     <tr>
                     <td colspan="2">
-                        <input type="submit" value = "Submit" class = "seventh" style="width:100%; border-radius:0 0 0 0; border:2px solid #38817a; border-bottom: 0px;" >
-                        <input type="reset" value = "Clear" class = "seventh" style="width:100%;border-radius: 0 0 14px 14px ; border:2px solid #38817a; border-top: 2px solid grey;">
+                        <input type="submit" value = "Submit" class = "seventh" style="width: 100%; border-radius: 0; border: 2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
+                        <input type="reset" value = "Clear" class = "seventh" style="width: 100%; border-radius: 0 0 14px 14px; border: 2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
                     </td>
                     </tr>
             </form>

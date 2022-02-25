@@ -6,15 +6,15 @@
 	--scrollbar-width: calc(100vw - 100%);
 	
 	/* Colors */
-	--lightgreen: #c3ffaf;
+	--lightgreen: #cfffbf;
 	--green: #50c928;
 	--darkgreen: #31701c;
+	--teal: #38817a;
 }
 
 body {
 	margin: 0;
 	font-family: Arial;
-	min-height: 150vh; /* for testing purposes until we get more content */
 }
 
 #background {
@@ -34,6 +34,15 @@ h1, h2, h3 {
 
 h3, p {
 	margin-block-start: 0;
+}
+
+a {
+	color: var(--teal);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 /* Forms */
@@ -107,18 +116,12 @@ input[type=checkbox] {
 	color: #333;
 	text-decoration: none;
 	transition: 200ms;
-	border: 1px solid transparent;
-	border-bottom: 2px solid transparent;
-	padding: 10px 12px;
-	border-radius: 5px;
-	margin: 0 4px;
+	padding: 34.5px 12px;
 }
 
 #nav a:hover {
-	color: #000;
-	background-color: var(--lightgreen);
-	border: 1px solid var(--green);
-	border-bottom: 2px solid var(--green);
+	color: #fff;
+	background-color: var(--teal);
 	transition: 0ms;
 }
 
@@ -130,16 +133,13 @@ input[type=checkbox] {
 	text-align: center;
 	padding: 0 10px;
 	cursor: default;
+	color: #333;
 }
 
 #logout a {
-	padding: 1px;
+	padding: 2px;
 	cursor: pointer;
-	border: 2px solid transparent;
-}
-
-#logout a:hover {
-	border: 2px solid var(--green);
+	border-radius: 4px;
 }
 
 /* Content */
@@ -191,78 +191,94 @@ input[type=checkbox] {
 	color: black;
 	text-decoration: none;
 }
+
 /* meal planner*/
 #back-container{
-    display:flex;
+    display: flex;
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    background-image:url(Images/back-mealPlan.jpeg);
+    background-image: url(Images/back-mealPlan.jpeg);
 }
+
 #content-container{
-    display:flex;
+    display: flex;
     flex-direction: row;
-    flex:1;
+    flex: 1;
 }
+
 #left-nav{
-    background-color:#38817a;
+    background-color: var(--teal);
     width: 10vw;
     min-width: 120px;
 }
+
 #left-nav a{
     font-family: Arial;
 	color: white;
 	text-decoration: none;
 }
+
 #left-nav div{
     min-height: 45px;
-    display:flex;
+    display: flex;
     align-items: center;
     padding: .15vh .5vw .15vh .5vw;
+    border: 1px solid transparent;
 }
+
 #left-nav div:hover{
     background-color: rgba(255,255,255,0.15);
 	border: 1px solid rgba(255,255,255,0.25);
     min-height: 45px;
 }
+
 .day-tile{
-    display:flex;
+    display: flex;
     flex-direction:row;
     flex-wrap: wrap;
 }
+
 .day-tile-lable{
     width: 4.125vh;
     height: 8.5vh; 
-    text-align: center;margin:0 .25vw 0 0;display:flex;
     text-align: center;
-    align-items:center;
-    justify-content:center;
-    writing-mode:vertical-lr;
-    border-right:2px solid #38817a ;
+    margin: 0 .25vw 0 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-lr;
+    border-right: 2px solid var(--teal);
 }
+
 .meal-tile{
     border: 1px solid black;
-    position:relative;
+    position: relative;
     background-color: #dbf9d1;
     width: 8.25vh;
     height: 8.25vh;
     text-align: center;
-    align-items:center;
+    align-items: center;
 }
+
 .meal-tile:hover div.meal-tile-cover{
     display: block;
 }
+
 .meal-tile-cover{
     display: none;
-    position:absolute;
-    background-image:url(Images/plus.png);
+    position: absolute;
+    background-image: url(Images/plus.png);
     background-size: contain;
     height: 100%;
     width: 100%;
 }
+
 .meal-tile:hover{
     border: 1px solid white;
 }
+
 #content-with-sidenav {
     margin: 43px auto auto auto;
     width: 78%;

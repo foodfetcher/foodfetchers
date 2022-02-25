@@ -46,6 +46,7 @@
 		?>
 	</head>
     <body>
+		<div id="background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
 		?> 
