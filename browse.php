@@ -28,7 +28,7 @@
 				<table style="width: 100%;">
 					<tr>
 						<!-- Begin Left (browse) Column -->
-						<td style="width: 30%;">
+						<td style="width: 30%; vertical-align:top;">
 							<table style="width: 100%;">
 								<tr>
 									<td>
@@ -39,21 +39,21 @@
 								<tr>
 									<td style="display: flex;">
 										<label for="recipeName" style="flex: 0; white-space: pre; padding-top: 4px;";>Recipe Name:</label>
-										<input type="text" id="recipeName" placeholder="steamed hams" style="flex: 1; margin-left: 4px;"><br/>
+										<input type="text" id="recipeName" placeholder="steamed hams" name="recipeNameName" style="flex: 1; margin-left: 4px;"><br/>
 									</td>
 								</tr>
 								
 								<tr>
 									<td style="display: flex;">
 										<label for="author" style="flex: 0; white-space: pre; padding-top: 4px;">Author:</label>
-										<input type="text" id="author" placeholder="John Smith" style="flex: 1; margin-left: 4px;"><br/>
+										<input type="text" id="author" placeholder="John Smith" name="authorName" style="flex: 1; margin-left: 4px;"><br/>
 									</td>
 								</tr>
 								
 								<tr>
 									<td style="display: flex;">
 										<label for="keywords" style="flex: 0; white-space: pre; padding-top: 4px;">Key Words:</label>
-										<input type="text" id="keywords" placeholder="walnuts, ice cream, sugar" style="flex: 1; margin-left: 4px;"><br/>
+										<input type="text" id="keywords" placeholder="walnuts, ice cream, sugar" name="keywordName" style="flex: 1; margin-left: 4px;"><br/>
 									</td>
 								</tr>
 								
