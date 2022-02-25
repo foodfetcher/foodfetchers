@@ -235,7 +235,7 @@
 												echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
 												echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
 												$count += 1;
-												if ($count == 4)
+												if ($count == 3)
 												{
 													echo '<tr>';
 													$count = 0;
