@@ -269,3 +269,9 @@ input[type=checkbox] {
     background-color: white;
     border-radius: 15px;
 }
+
+#resultImage {
+    width:  225px;
+    height: 225px;
+    object-fit: cover;
+}
