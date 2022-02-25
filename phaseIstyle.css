@@ -196,9 +196,10 @@ input[type=checkbox] {
 #back-container{
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    background-image: url(Images/back-mealPlan.jpeg);
+    height: calc(100vh );
+    width: calc(100vw - var(--scrollbar-width));
+    background-image:url(Images/background.jpg);
+    background-size:cover;
 }
 
 #content-container{
