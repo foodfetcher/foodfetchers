@@ -17,6 +17,7 @@
     <head>
         <title> Food Fetchers | Meal Planner </title>
         <link rel="stylesheet" href="phaseIstyle.css">
+        <style> body{min-height:100vh;}</style>
         <script>
             function allowDrop(ev) {
                 ev.preventDefault();
@@ -31,7 +32,6 @@
                 var data = ev.dataTransfer.getData("text/html");
                 var nodeCopy = document.getElementById(data).cloneNode(true);
                 var dest=ev.target.id ;
-                nodeCopy.id = dest;
                 nodeCopy.addEventListener('click',addremove);
                 nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.style.backgroundImage = "url(Images/minus.png)";
                 
@@ -40,26 +40,32 @@
                 document.getElementById(newid + "H").value += data.slice(0,data.length - 1);
             }
             
-            function test(){
-                alert("clicked");
-            }
-            
             function addremove(ev){
                 var element = ev.target.parentElement;
+                var targetId = event.target.parentElement.parentElement.id.slice(0,event.target.parentElement.parentElement.id.length - 1);
                 element.remove();
-                var targetId = event.target.id.slice(0,event.target.id.length - 1);
-                document.getElementById(targetId +"H").reset;
-                element.reset();
-            }
-            function clearItem(ev){
-                
+                document.getElementById(targetId + "H").value="";
+                var children = document.getElementById(targetId+"P").children;
+                for (var i=2; i<children.length; i++){
+                    document.getElementById(targetId + "H").value += children[i].id.slice(0,children[i].id.length - 1);
+                }
             }
             function clearAll(){
+                let days = ["day-tile-sun", "day-tile-mon", "day-tile-tues","day-tile-wed","day-tile-thurs","day-tile-fri","day-tile-sat"];
+                days.forEach(clearDay);
+            }
+            function clearDay(value, index, array){
+                var childs = document.getElementById(value + "P");
+                var len =  childs.children.length;
+                for (var i=2; i<len; i++){
+                    childs.lastChild.remove();
+                }
+                document.getElementById(value + "H").value="";
             }
     </script>
     </head>
     <body>
-		<div id = "background"></div>
+	    <div id = "background"></div>
         <div id = "back-container">
             
         <?php
@@ -76,7 +82,7 @@
                     <tr><!-- table header(Meal Plan Name)-->
                         <th colspan = "2" style="background-color: white;border-radius:14px 14px 0 0;border-bottom:4px solid #38817a; padding: 2vh 0 2vh 0">
                             <label for="mealname" style="font-size:2.5vh; font-family: Ubuntu;">Meal Plan Name:</label>
-                            <input type="text" name="mealname" placeholder="My Meal Plan" required>
+                            <input type="text" name="mealname" placeholder="My Meal Plan" style="height:2.5vh; font-size:2.5vh;" required>
                         </th>
                     </tr><!-- END: table header(Meal Plan Name)-->
                     <tr><!-- column headers -->
@@ -156,7 +162,7 @@
                             <table style = "width: 100%"><!-- form table (week of meal plan) -->
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-sunP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
-                                        <input id = "day-tile-sunH" class="hiddenInput" type="text" name="sunday" placeholder="1 2 3 4" required>
+                                        <input id = "day-tile-sunH" class="hiddenInput" type="hidden" name="sunday" placeholder="1 2 3 4" required>
                                         <p id="day-tile-sunC" class="day-tile-lable" style="background-color:#dbf9d1;">Sunday</p>
                                     </div>
                                 </td></tr>
@@ -201,8 +207,8 @@
                     </tr><!-- END: content row -->
                     <tr>
                     <td colspan="2">
-                        <input type="submit" value = "Submit" class = "seventh" style="width: 100%; border-radius: 0; border: 2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
-                        <input type="reset" value = "Clear" class = "seventh" style="width: 100%; border-radius: 0 0 14px 14px; border: 2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
+                        <input type="submit" value = "Submit" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
+                        <input type="reset" value = "Clear" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
                     </td>
                     </tr>
             </form>

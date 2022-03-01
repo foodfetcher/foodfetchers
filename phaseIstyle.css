@@ -198,16 +198,8 @@ input[type=checkbox] {
 #back-container{
     display: flex;
     flex-direction: column;
-<<<<<<< Updated upstream
-    height: 100vh;
-    width: 100vw;
-    background-image: url(Images/back-mealPlan.jpeg);
-=======
-    height: calc(100vh );
+    height: calc(100vh);
     width: calc(100vw - var(--scrollbar-width));
-    background-image: url(Images/background.jpg);
-    background-size: cover;
->>>>>>> Stashed changes
 }
 
 #content-container{
@@ -293,4 +285,10 @@ input[type=checkbox] {
     width: 78%;
     background-color: white;
     border-radius: 15px;
+}
+
+#resultImage {
+    width:  225px;
+    height: 225px;
+    object-fit: cover;
 }
