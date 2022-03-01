@@ -240,10 +240,9 @@ input[type=checkbox] {
     flex-wrap: wrap;
 }
 
-.day-tile-lable{
+.day-tile-label{
     width: 4.125vh;
-    height: 8.5vh; 
-    text-align: center;
+    min-height: 8.5vh; 
     margin: 0 .25vw 0 0;
     display: flex;
     text-align: center;
@@ -251,6 +250,7 @@ input[type=checkbox] {
     justify-content: center;
     writing-mode: vertical-lr;
     border-right: 2px solid var(--teal);
+	cursor: default;
 }
 
 .meal-tile{
@@ -261,10 +261,18 @@ input[type=checkbox] {
     height: 8.25vh;
     text-align: center;
     align-items: center;
+	cursor: pointer;
 }
 
 .meal-tile:hover div.meal-tile-cover{
     display: block;
+}
+
+.meal-tile-text{
+	width: 100%;
+	position: absolute;
+	text-align: center;
+	background-color: rgba(244,244,244,.8);
 }
 
 .meal-tile-cover{
@@ -285,6 +293,7 @@ input[type=checkbox] {
     width: 78%;
     background-color: white;
     border-radius: 15px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 #resultImage {

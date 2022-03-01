@@ -114,9 +114,9 @@
                                         echo pg_last_error($db);
                                         while($row = pg_fetch_assoc($res)){
                                         echo '<div id= "'. $row['recipeid'] .'C" class ="meal-tile"  draggable="true" ondragstart="drag(event)">
-                                            <div id= "'. $row['recipeid'] .'C" class = "meal-tile-text" style="width:100%;position:absolute;text-align:center;background-color: rgba(244,244,244,.8)">' . $row['recipename'] . '</div>
+                                            <div id= "'. $row['recipeid'] .'C" class = "meal-tile-text">' . $row['recipename'] . '</div>
                                             <div id= "'. $row['recipeid'] .'C" class= "meal-tile-cover" ></div>
-                                            <img id= "'. $row['recipeid'] .'C" src="coverimages/' . $row['recipeid'] . '" alt="recipe cover image" style="max-width:100%;max-height:100%;object-fit:cover;"/>
+                                            <img id= "'. $row['recipeid'] .'C" src="coverimages/' . $row['recipeid'] . '" alt="recipe cover image" style="width:100%;height:100%;object-fit:cover;"/>
                                         </div>';
                                         }
                                         pg_close($db);
@@ -163,43 +163,43 @@
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-sunP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-sunH" class="hiddenInput" type="hidden" name="sunday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-sunC" class="day-tile-lable" style="background-color:#dbf9d1;">Sunday</p>
+                                        <p id="day-tile-sunC" class="day-tile-label" style="background-color:#dbf9d1;">Sunday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#bee5c1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-monP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-monH" class="hiddenInput" type="hidden" name="monday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-monC" class="day-tile-lable" style="background-color:#bee5c1;">Monday</p>
+                                        <p id="day-tile-monC" class="day-tile-label" style="background-color:#bee5c1;">Monday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ; ">
                                     <div id ="day-tile-tuesP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-tuesH" class="hiddenInput" type="hidden" name="tuesday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-tuesC"  class="day-tile-lable" style="background-color:#a3d0b1">Tuesday</p>
+                                        <p id="day-tile-tuesC"  class="day-tile-label" style="background-color:#a3d0b1">Tuesday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#bee5c1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-wedP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-wedH" class="hiddenInput" type="hidden" name="wednesday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-wedC"  class="day-tile-lable"style="background-color:#87bca3">Wednesday</p>
+                                        <p id="day-tile-wedC"  class="day-tile-label"style="background-color:#87bca3">Wednesday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-thursP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-thursH" class="hiddenInput" type="hidden" name="thursday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-thursC" class="day-tile-lable" style="background-color:#6da895">Thursday</p>
+                                        <p id="day-tile-thursC" class="day-tile-label" style="background-color:#6da895">Thursday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#bee5c1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-friP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-friH" class="hiddenInput" type="hidden" name="friday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-friC"  class="day-tile-lable" style="background-color:#539587">Friday</p>
+                                        <p id="day-tile-friC"  class="day-tile-label" style="background-color:#539587">Friday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-satP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-satH" class="hiddenInput" type="hidden" name="saturday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-satC"  class="day-tile-lable" style="background-color:#38817a">Saturday</p>
+                                        <p id="day-tile-satC"  class="day-tile-label" style="background-color:#38817a">Saturday</p>
                                     </div>
                                 </td></tr>
                             </table><!-- END: form table (week of meal plan) -->
