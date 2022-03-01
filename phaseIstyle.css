@@ -270,7 +270,7 @@ input[type=checkbox] {
 .meal-tile-cover{
     display: none;
     position: absolute;
-    background-image: url(Images/plus.png);
+    /*background-image: url(Images/plus.png); <-- File not on server */
     background-size: contain;
     height: 100%;
     width: 100%;
@@ -288,7 +288,7 @@ input[type=checkbox] {
 }
 
 #resultImage {
-    width:  225px;
+    width: 225px;
     height: 225px;
     object-fit: cover;
 }

@@ -33,7 +33,7 @@
                 var nodeCopy = document.getElementById(data).cloneNode(true);
                 var dest=ev.target.id ;
                 nodeCopy.addEventListener('click',addremove);
-                nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.style.backgroundImage = "url(Images/minus.png)";
+                //nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.style.backgroundImage = "url(Images/minus.png)"; <-- File not on server
                 
                 var newid = event.target.id.slice(0,event.target.id.length - 1);
                 document.getElementById(newid+"P").appendChild(nodeCopy);
@@ -74,7 +74,7 @@
         
         <div id = "content-container">
             <?php
-                include 'sideNavMealPlan.php'; //write out the nav bar
+                include 'sideNavMealPlan.php'; //write out the side nav bar
             ?>
             <div id = "content-with-sidenav">
                 <table id = "planner-table" style="width: 100%;"><!-- parent table-->
@@ -85,12 +85,12 @@
                             <input type="text" name="mealname" placeholder="My Meal Plan" style="height:2.5vh; font-size:2.5vh;" required>
                         </th>
                     </tr><!-- END: table header(Meal Plan Name)-->
-                    <tr><!-- column headers -->
-                            <td>
-                                <h1 style="font-size:2.5vh; font-family: Ubuntu;background-color: #dbf9d1; border-right:2px solid #38817a ;border-left:2px solid #38817a ;margin:0; padding: 0;">My Meals</h1>
+                    <tr style="font-family: Ubuntu;"><!-- column headers -->
+                            <td style="background-color: #dbf9d1; border-right: 2px solid #38817a; border-left: 2px solid #38817a;">
+                                <h1 style="font-size:2.5vh; margin:0;">My Meals</h1>
                             </td>
-                            <td>
-                                <h1 style="font-size:2.5vh; font-family: Ubuntu;background-color: #dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;margin:0; padding: 0;;">My Plan</h1>
+                            <td style="background-color: #dbf9d1; border-right: 2px solid #38817a; border-left: 2px solid #38817a;">
+                                <h1 style="font-size:2.5vh; margin:0;">My Plan</h1>
                             </td>
                     </tr><!-- END: column headers -->
                     <tr><!-- content row -->
