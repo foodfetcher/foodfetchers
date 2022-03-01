@@ -43,7 +43,7 @@
 						$outcome = "Password does not match.";
 						}else{
 						$outcome = "success";
-						echo '<meta http-equiv="refresh" content="5;url=home.php" />';
+						echo '<meta http-equiv="refresh" content="3;url=home.php" />';
 						$log = "Logout";
 						$_SESSION["userid"] = $row["userid"];
 						$_SESSION["firstname"] = $row["firstname"];
@@ -74,7 +74,7 @@
 			</form>
             <?php 
                 if($outcome == 'success'){
-                    echo '<p>Successfully logged in. Redirecting to <a href="home.php">home page</a> in 5 seconds... (click the link if this doesn\'t happen automatically)</p>';
+                    echo '<p>Welcome back ' . $_SESSION["firstname"] . '! Redirecting you to <a href="home.php">Home</a>.</p>';
 				}
 				else{
 					if($db === false){

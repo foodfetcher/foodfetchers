@@ -7,9 +7,10 @@
 	
 	/* Colors */
 	--lightgreen: #cfffbf;
-	--green: #50c928;
+	--green: #50b82e;
 	--darkgreen: #31701c;
 	--teal: #38817a;
+	--lightteal: #47a69d;
 }
 
 body {
@@ -34,6 +35,7 @@ h1, h2, h3 {
 
 h3, p {
 	margin-block-start: 0;
+	margin-block-end: 0.5em;
 }
 
 a {
@@ -116,7 +118,7 @@ input[type=checkbox] {
 	color: #333;
 	text-decoration: none;
 	transition: 200ms;
-	padding: 34.5px 12px;
+	padding: 35px 12px;
 }
 
 #nav a:hover {
@@ -126,7 +128,7 @@ input[type=checkbox] {
 }
 
 #nav a:active {
-	background-color: var(--green);
+	background-color: var(--lightteal);
 }
 
 #logout {
@@ -192,13 +194,20 @@ input[type=checkbox] {
 	text-decoration: none;
 }
 
-/* meal planner*/
+/* Meal Planner */
 #back-container{
     display: flex;
     flex-direction: column;
+<<<<<<< Updated upstream
     height: 100vh;
     width: 100vw;
     background-image: url(Images/back-mealPlan.jpeg);
+=======
+    height: calc(100vh );
+    width: calc(100vw - var(--scrollbar-width));
+    background-image: url(Images/background.jpg);
+    background-size: cover;
+>>>>>>> Stashed changes
 }
 
 #content-container{
