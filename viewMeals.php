@@ -113,7 +113,7 @@
                                         WHERE favorites.userid='$userid';");
                                         echo pg_last_error($db);
                                         while($row = pg_fetch_assoc($res)){
-                                        echo '<div id= "'. $row['recipeid'] .'C" class ="meal-tile"  draggable="true" ondragstart="drag(event)">
+                                        echo '<div id= "'. $row['recipeid'] .'C" class ="meal-tile" draggable="true" ondragstart="drag(event)">
                                             <div id= "'. $row['recipeid'] .'C" class = "meal-tile-text">' . $row['recipename'] . '</div>
                                             <div id= "'. $row['recipeid'] .'C" class= "meal-tile-cover" ></div>
                                             <img id= "'. $row['recipeid'] .'C" src="coverimages/' . $row['recipeid'] . '" alt="recipe cover image" style="width:100%;height:100%;object-fit:cover;"/>
@@ -207,8 +207,8 @@
                     </tr><!-- END: content row -->
                     <tr>
                     <td colspan="2">
-                        <input type="submit" value = "Submit" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
-                        <input type="reset" value = "Clear" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
+                        <input type="submit" value = "Create Meal Plan" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
+                        <input type="reset" value = "Clear Plan" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
                     </td>
                     </tr>
             </form>

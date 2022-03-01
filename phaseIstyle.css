@@ -254,7 +254,7 @@ input[type=checkbox] {
 }
 
 .meal-tile{
-    border: 1px solid black;
+    border: 1px solid var(--teal);
     position: relative;
     background-color: #dbf9d1;
     width: 8.25vh;
@@ -262,6 +262,10 @@ input[type=checkbox] {
     text-align: center;
     align-items: center;
 	cursor: pointer;
+}
+
+.meal-tile:hover{
+    border: 1px solid black;
 }
 
 .meal-tile:hover div.meal-tile-cover{
@@ -282,10 +286,6 @@ input[type=checkbox] {
     background-size: contain;
     height: 100%;
     width: 100%;
-}
-
-.meal-tile:hover{
-    border: 1px solid white;
 }
 
 #content-with-sidenav {
