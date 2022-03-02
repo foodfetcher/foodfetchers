@@ -34,13 +34,13 @@
 				//echo $res;
 				//echo pg_last_error($db);
 				if(pg_num_rows($res) != 1){
-					$outcome = "Email not recognised";
+					$outcome = "Error: Email not recognized.";
 				}
 				else{
 					$row = pg_fetch_assoc($res);
 					//print_r($row);
 					if($password == $row["password"]){
-						$outcome = "Password does not match.";
+						$outcome = "Error: Incorrect password.";
 						}else{
 						$outcome = "success";
 						echo '<meta http-equiv="refresh" content="3;url=home.php" />';
@@ -59,18 +59,19 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-		?> 
-        <div id = "Content">
-            <form name = "login" action = "login.php" method = "post" onSubmit="">
-                <h1> Log in </h1>
-                <label for="email">E-Mail Address</label>
-                <input type = "email" name = "email" id = "email" required>
-                <label for="password">Password</label>
-                <input type = "password" name = "password" id = "password" required> </br>
-                
-                <input type="submit" value = "Submit">
-                <input type="reset" value = "Clear">
-                
+		?>
+        <div id = "Content" style = "max-width: 320px;">
+            <h1> Log In </h1>
+			<form name = "login" action = "login.php" method = "post" onSubmit="">
+				<table style="width: 100%;"><tr><td style="display: flex;">
+					<label for="email" style="flex: 0; white-space: pre; padding-top: 4px;">E-Mail Address: </label>
+					<input type = "email" name = "email" id = "email" style = "flex: 1;" required></td></tr>
+					<tr><td style="display: flex;"><label for="password" style="flex: 0; white-space: pre; padding-top: 4px;">Password: </label>
+					<input type = "password" name = "password" id = "password" style = "flex: 1;" required></td></tr>
+					
+					<tr><td><input type="submit" value = "Log In">
+					<!--<input type="reset" value = "Clear">-->
+				</td></tr></table>
 			</form>
             <?php 
                 if($outcome == 'success'){
@@ -78,7 +79,7 @@
 				}
 				else{
 					if($db === false){
-						echo "error: Could not connect to user database.";
+						echo "Error: Could not connect to user database.";
 					}
 					else{
 						echo $outcome;
