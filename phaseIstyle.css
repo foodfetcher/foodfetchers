@@ -97,28 +97,30 @@ input[type=checkbox] {
 	color: black;
 	background-color: rgba(255,255,255,0.9);
 	height: 90px;
-	padding: 0 10px;
 	box-shadow: 0 0 8px rgba(0,0,0,0.7);
+	position: fixed;
+	width: calc(100vw - var(--scrollbar-width));
+	display: flex;
 }
 
 #logo {
-	float: left;
 	height: 90px;
 }
 
 #nav {
 	display: flex;
-	float: right;
 	align-items: center;
 	height: 100%;
 	text-align: center;
+	margin-left: auto;
+	overflow: hidden;
 }
 
 #nav a {
 	color: #333;
 	text-decoration: none;
 	transition: 200ms;
-	padding: 34.5px 12px;
+	padding: 35px 12px;
 }
 
 #nav a:hover {
@@ -144,10 +146,14 @@ input[type=checkbox] {
 	border-radius: 4px;
 }
 
+#headpad {
+	height: 90px;
+}
+
 /* Content */
 #Content {
 	border-radius: 15px;
-	background-color: var(--lightgreen);
+	background-color: rgba(255,255,255,0.95);
 	text-align: center;
 	max-width: 1000px;
 	margin: 40px auto;
@@ -206,12 +212,19 @@ input[type=checkbox] {
     display: flex;
     flex-direction: row;
     flex: 1;
+	min-height: 100vh;
+}
+
+#left-nav-container{
+	width: 10vw;
+	min-width: 120px;
 }
 
 #left-nav{
     background-color: var(--teal);
     width: 10vw;
-    min-width: 120px;
+	position: fixed;
+	height: 100%;
 }
 
 #left-nav a{
@@ -289,7 +302,7 @@ input[type=checkbox] {
 }
 
 #content-with-sidenav {
-    margin: 43px auto auto auto;
+    margin: 40px auto auto auto;
     width: 78%;
     background-color: white;
     border-radius: 15px;

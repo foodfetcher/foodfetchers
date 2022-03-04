@@ -26,5 +26,5 @@
             echo "<a href = signup.php>Sign Up</a>";
         }
 		
-    echo'</div></div>'; 
+    echo'</div></div><div id = "headpad"></div>'; 
 ?>

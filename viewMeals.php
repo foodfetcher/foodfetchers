@@ -17,7 +17,7 @@
     <head>
         <title> Food Fetchers | Meal Planner </title>
         <link rel="stylesheet" href="phaseIstyle.css">
-        <style> body{min-height:100vh;}</style>
+        <style> body{min-height:100vh;} </style>
         <script>
             function allowDrop(ev) {
                 ev.preventDefault();
@@ -62,12 +62,11 @@
                 }
                 document.getElementById(value + "H").value="";
             }
-    </script>
+		</script>
     </head>
     <body>
 	    <div id = "background"></div>
-        <div id = "back-container">
-            
+        
         <?php
             include 'nav.php'; //write out the nav bar
         ?> 
@@ -214,7 +213,6 @@
             </form>
                 </table><!-- END: parent table-->
             </div>
-        </div>
         </div>
     </body>
 </html>
