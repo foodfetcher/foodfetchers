@@ -17,7 +17,7 @@
     <head>
         <title> Food Fetchers | Meal Planner </title>
         <link rel="stylesheet" href="phaseIstyle.css">
-        <style> body{min-height:100vh;}</style>
+        <style> </style>
         <script>
             function allowDrop(ev) {
                 ev.preventDefault();
