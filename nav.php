@@ -2,20 +2,19 @@
     echo '<div id = "header">
 		<a href = home.php>
 			<div id = "logo">
-				<img src="Images/logo.png" width="100" height="90" alt="Food Fetcher Logo">
+				<img src="Images/logo-dark.png" width="75" height="90" alt="Food Fetcher Logo">
 			</div>
 		</a>
 		
 		<div id = "nav">
         <a href = home.php>Home</a>';
 		
-        echo '<a href = browse.php>Find Recipes</a>
-        <a href = info.php>About Us</a>';
+        echo '<a href = browse.php>Browse Recipes</a>';
 		
         if($log == "Logout"){
             $first = $_SESSION["firstname"];
             echo "<a href = create.php>Create Recipe</a>
-				<a href = viewMeals.php>My Meals</a>";
+				<a href = viewMeals.php>Meal Plans</a>";
             echo "<div id = 'logout'>Hello, $first<br><a href = login.php>$log</a></div>";
         }
         else{
@@ -23,7 +22,7 @@
         }
 		
 		if($log == "Login"){
-            echo "<a href = signup.php>Sign Up</a>";
+            echo "<a id='signup' href = signup.php>Sign Up</a>";
         }
 		
     echo'</div></div><div id = "headpad"></div>'; 
