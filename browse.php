@@ -119,7 +119,30 @@
 											$userid = $_SESSION['userid'];
 											$res = pg_query($db, "SELECT * FROM recipes WHERE creatorid='$userid'");
 											while($row = pg_fetch_assoc($res)){
-												echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></br>';
+												$notEmpty = true;
+												$recipeid = $row["recipeid"];
+												
+												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+
+												if (file_exists($filename)) {
+													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+												} else {
+													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+												}
+												
+												
+												echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
+												$count += 1;
+												if ($count == 3)
+												{
+													echo '<tr>';
+													$count = 0;
+												}
+											}
+											echo '</table>';
+											if ($count == 0 && $notEmpty == false)
+											{
+												echo 'Sorry, no recipes matched those filters. Try widening your search!';
 											}
 										}
 										else{
@@ -232,7 +255,16 @@
 											while($row = pg_fetch_assoc($res)){
 												$notEmpty = true;
 												$recipeid = $row["recipeid"];
-												echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+												
+												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+
+												if (file_exists($filename)) {
+													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+												} else {
+													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+												}
+												
+												
 												echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
 												$count += 1;
 												if ($count == 3)
