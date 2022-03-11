@@ -96,15 +96,17 @@ input[type=checkbox] {
 	font-size: 18px;
 	color: black;
 	background-color: rgba(255,255,255,0.9);
-	height: 90px;
+	height: 80px;
 	box-shadow: 0 0 8px rgba(0,0,0,0.7);
 	position: fixed;
-	width: calc(100vw - var(--scrollbar-width));
+	width: calc(100vw - var(--scrollbar-width) - 20px); /* -20px for padding */
 	display: flex;
+	padding: 0 10px;
 }
 
 #logo {
-	height: 90px;
+	height: 80px;
+	width: 62px;
     padding: 0 1vw;
 }
 
@@ -148,7 +150,7 @@ input[type=checkbox] {
 }
 
 #headpad {
-	height: 90px;
+	height: 80px;
 }
 
 /* Content */
@@ -161,8 +163,6 @@ input[type=checkbox] {
 	padding: 10px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
-
-
 
 /* Meal Planner */
 #back-container{
