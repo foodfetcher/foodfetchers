@@ -2,7 +2,7 @@
     echo '<div id = "header">
 		<a href = home.php>
 			<div id = "logo">
-				<img src="Images/logo-dark.png" width="75" height="90" alt="Food Fetcher Logo">
+				<img src="Images/logo-dark.png" width="65" height="85" alt="Food Fetcher Logo">
 			</div>
 		</a>
 		
@@ -25,5 +25,5 @@
             echo "<a id='signup' href = signup.php>Sign Up</a>";
         }
 		
-    echo'</div></div>'; 
+    echo'</div></div><div id = "headpad"></div>'; 
 ?>

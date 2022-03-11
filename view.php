@@ -72,11 +72,14 @@
                         echo "<h1>Unknown Recipe!</h1>";
                     }
                     else{
-                        echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image" width="500"/><br/>';
+                        echo "<table><tbody style='vertical-align: top;'><td style='width: 50%;'>";
+                        echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image" style="width: 100%;"/>';
+                        echo "</td><td style='padding-left: 5px;'>";
                         echo "<p>Created by: " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>";
                         echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";
-                        echo "<p>Ingredients: " . $queryResultRow['ingredients'] . "</p><br/>";
-                        echo "<p>Instructions: <br/>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p><br/>";
+                        echo "<h3>Ingredients:</h3><p>" . $queryResultRow['ingredients'] . "</p>";
+                        echo "<h3>Instructions:</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
+                        echo "</td></tbody></table>";
                         if(isset($_SESSION["userid"])){
                             echo '<form method="post">';
                             echo '<input name="favorite" type="hidden" value="yes">';

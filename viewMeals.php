@@ -17,7 +17,6 @@
     <head>
         <title> Food Fetchers | Meal Planner </title>
         <link rel="stylesheet" href="phaseIstyle.css">
-        <style> </style>
         <script>
             function allowDrop(ev) {
                 ev.preventDefault();
@@ -33,7 +32,7 @@
                 var nodeCopy = document.getElementById(data).cloneNode(true);
                 var dest=ev.target.id ;
                 nodeCopy.addEventListener('click',addremove);
-                nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.style.backgroundImage = "url(Images/minus.png)";
+                //nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.style.backgroundImage = "url(Images/minus.png)"; <-- File not on server
                 
                 var newid = event.target.id.slice(0,event.target.id.length - 1);
                 document.getElementById(newid+"P").appendChild(nodeCopy);
@@ -62,19 +61,18 @@
                 }
                 document.getElementById(value + "H").value="";
             }
-    </script>
+		</script>
     </head>
     <body>
 	    <div id = "background"></div>
-        <div id = "back-container">
-            
+        
         <?php
             include 'nav.php'; //write out the nav bar
         ?> 
         
         <div id = "content-container">
             <?php
-                include 'sideNavMealPlan.php'; //write out the nav bar
+                include 'sideNavMealPlan.php'; //write out the side nav bar
             ?>
             <div id = "content-with-sidenav">
                 <table id = "planner-table" style="width: 100%;"><!-- parent table-->
@@ -85,12 +83,12 @@
                             <input type="text" name="mealname" placeholder="My Meal Plan" style="height:2.5vh; font-size:2.5vh;" required>
                         </th>
                     </tr><!-- END: table header(Meal Plan Name)-->
-                    <tr><!-- column headers -->
-                            <td>
-                                <h1 style="font-size:2.5vh; font-family: Ubuntu;background-color: #dbf9d1; border-right:2px solid #38817a ;border-left:2px solid #38817a ;margin:0; padding: 0;">My Meals</h1>
+                    <tr style="font-family: Ubuntu;"><!-- column headers -->
+                            <td style="background-color: #dbf9d1; border-right: 2px solid #38817a; border-left: 2px solid #38817a;">
+                                <h1 style="font-size:2.5vh; margin:0;">My Meals</h1>
                             </td>
-                            <td>
-                                <h1 style="font-size:2.5vh; font-family: Ubuntu;background-color: #dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;margin:0; padding: 0;;">My Plan</h1>
+                            <td style="background-color: #dbf9d1; border-right: 2px solid #38817a; border-left: 2px solid #38817a;">
+                                <h1 style="font-size:2.5vh; margin:0;">My Plan</h1>
                             </td>
                     </tr><!-- END: column headers -->
                     <tr><!-- content row -->
@@ -113,10 +111,10 @@
                                         WHERE favorites.userid='$userid';");
                                         echo pg_last_error($db);
                                         while($row = pg_fetch_assoc($res)){
-                                        echo '<div id= "'. $row['recipeid'] .'C" class ="meal-tile"  draggable="true" ondragstart="drag(event)">
-                                            <div id= "'. $row['recipeid'] .'C" class = "meal-tile-text" style="width:100%;position:absolute;text-align:center;background-color: rgba(244,244,244,.8)">' . $row['recipename'] . '</div>
+                                        echo '<div id= "'. $row['recipeid'] .'C" class ="meal-tile" draggable="true" ondragstart="drag(event)">
+                                            <div id= "'. $row['recipeid'] .'C" class = "meal-tile-text">' . $row['recipename'] . '</div>
                                             <div id= "'. $row['recipeid'] .'C" class= "meal-tile-cover" ></div>
-                                            <img id= "'. $row['recipeid'] .'C" src="coverimages/' . $row['recipeid'] . '" alt="recipe cover image" style="max-width:100%;max-height:100%;object-fit:cover;"/>
+                                            <img id= "'. $row['recipeid'] .'C" src="coverimages/' . $row['recipeid'] . '" alt="recipe cover image" style="width:100%;height:100%;object-fit:cover;"/>
                                         </div>';
                                         }
                                         pg_close($db);
@@ -163,43 +161,43 @@
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-sunP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-sunH" class="hiddenInput" type="hidden" name="sunday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-sunC" class="day-tile-lable" style="background-color:#dbf9d1;">Sunday</p>
+                                        <p id="day-tile-sunC" class="day-tile-label" style="background-color:#dbf9d1;">Sunday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#bee5c1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-monP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-monH" class="hiddenInput" type="hidden" name="monday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-monC" class="day-tile-lable" style="background-color:#bee5c1;">Monday</p>
+                                        <p id="day-tile-monC" class="day-tile-label" style="background-color:#bee5c1;">Monday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ; ">
                                     <div id ="day-tile-tuesP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-tuesH" class="hiddenInput" type="hidden" name="tuesday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-tuesC"  class="day-tile-lable" style="background-color:#a3d0b1">Tuesday</p>
+                                        <p id="day-tile-tuesC"  class="day-tile-label" style="background-color:#a3d0b1">Tuesday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#bee5c1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-wedP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-wedH" class="hiddenInput" type="hidden" name="wednesday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-wedC"  class="day-tile-lable"style="background-color:#87bca3">Wednesday</p>
+                                        <p id="day-tile-wedC"  class="day-tile-label"style="background-color:#87bca3">Wednesday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-thursP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-thursH" class="hiddenInput" type="hidden" name="thursday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-thursC" class="day-tile-lable" style="background-color:#6da895">Thursday</p>
+                                        <p id="day-tile-thursC" class="day-tile-label" style="background-color:#6da895">Thursday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#bee5c1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-friP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-friH" class="hiddenInput" type="hidden" name="friday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-friC"  class="day-tile-lable" style="background-color:#539587">Friday</p>
+                                        <p id="day-tile-friC"  class="day-tile-label" style="background-color:#539587">Friday</p>
                                     </div>
                                 </td></tr>
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-satP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
                                         <input id = "day-tile-satH" class="hiddenInput" type="hidden" name="saturday" placeholder="1 2 3 4" required>
-                                        <p id="day-tile-satC"  class="day-tile-lable" style="background-color:#38817a">Saturday</p>
+                                        <p id="day-tile-satC"  class="day-tile-label" style="background-color:#38817a">Saturday</p>
                                     </div>
                                 </td></tr>
                             </table><!-- END: form table (week of meal plan) -->
@@ -207,14 +205,13 @@
                     </tr><!-- END: content row -->
                     <tr>
                     <td colspan="2">
-                        <input type="submit" value = "Submit" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
-                        <input type="reset" value = "Clear" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
+                        <input type="submit" value = "Create Meal Plan" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
+                        <input type="reset" value = "Clear Plan" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
                     </td>
                     </tr>
             </form>
                 </table><!-- END: parent table-->
             </div>
-        </div>
         </div>
     </body>
 </html>

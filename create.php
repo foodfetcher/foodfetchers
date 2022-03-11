@@ -72,49 +72,49 @@
 		<div id="background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-		?> 
-        <div id = "Content">
-		<h1> Create your own recipe </h1>
-		<form action="create.php" method="post" enctype="multipart/form-data">
-			<label for="recipeName">Recipe name:</label>
-			<input type="text" name="recipeName" placeholder="steamed hams" value="<?php echo $recipeName;?>" required><br/>
+		?>
+		<div id = "Content">
+			<h1> Create your own recipe </h1>
+			<form action="create.php" method="post" enctype="multipart/form-data">
+				<label for="recipeName">Recipe name:</label>
+				<input type="text" name="recipeName" placeholder="steamed hams" value="<?php echo $recipeName;?>" required><br/>
+				
+				<label for="coverimage" value="<?php echo $coverImage;?>">Cover Image:</label>
+				<input type="file" name="coverimage" accept=".png, .jpeg, .jpg"><br/>
+				
+				<label for="ingredients">Ingredients</label>
+			<input type="text" name="ingredients" placeholder="walnuts, soy sauce, cinnamon" value="<?php echo $ingredients;?>" required><br/>
 			
-			<label for="coverimage" value="<?php echo $coverImage;?>">Cover Image:</label>
-			<input type="file" name="coverimage" accept=".png, .jpeg, .jpg"><br/>
+			<label for="instructions">Instructions</label><br>
+			<textarea name="instructions" rows="12" cols="80" placeholder="describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post! (just don't be evil with those tags)" required><?php echo $instructions;?></textarea><br/>
+			<p>Declare your recipe as:</p>
 			
-			<label for="ingredients">Ingredients</label>
-		<input type="text" name="ingredients" placeholder="walnuts, soy sauce, cinnamon" value="<?php echo $ingredients;?>" required><br/>
+			<label for="vegetarian">Vegetarian</label>
+			<input type="checkbox" name="vegetarian" <?php if($vegetarian=="true"){echo "checked";} ?>><br/>
+			<label for="vegan">Vegan</label>
+			<input type="checkbox" name="vegan" <?php if($vegan=="true"){echo "checked";} ?>><br/>
+			<label for="kosher">Kosher</label>
+			<input type="checkbox" name="kosher" <?php if($kosher=="true"){echo "checked";} ?>><br/>
+			<label for="nutfree">Nut-Free</label>
+			<input type="checkbox" name="nutfree" <?php if($nutfree=="true"){echo "checked";} ?>><br/>
+			<label for="wheatfree">Wheat-Free</label>
+			<input type="checkbox" name="wheatfree" <?php if($wheatfree=="true"){echo "checked";} ?>><br/>
+			<label for="soyfree">Soy-Free</label>
+			<input type="checkbox" name="soyfree" <?php if($soyfree=="true"){echo "checked";} ?>><br/>
+			<label for="glutenfree">Gluten-Free</label>
+			<input type="checkbox" name="glutenfree" <?php if($glutenfree=="true"){echo "checked";} ?>><br/>
+			<label for="dairyfree">Dairy-Free</label>
+			<input type="checkbox" name="dairyfree" <?php if($dairyfree=="true"){echo "checked";} ?>><br/>
+			
+			<input type="submit" value = "Submit" class = "seventh">
+			<input type="reset" value = "Clear" class = "seventh">
+			</form>
 		
-		<label for="instructions">Instructions</label><br>
-		<textarea name="instructions" rows="12" cols="80" placeholder="describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post! (just don't be evil with those tags)" required><?php echo $instructions;?></textarea><br/>
-		<p>Declare your recipe as:</p>
-		
-		<label for="vegetarian">Vegetarian</label>
-		<input type="checkbox" name="vegetarian" <?php if($vegetarian=="true"){echo "checked";} ?>><br/>
-		<label for="vegan">Vegan</label>
-		<input type="checkbox" name="vegan" <?php if($vegan=="true"){echo "checked";} ?>><br/>
-		<label for="kosher">Kosher</label>
-		<input type="checkbox" name="kosher" <?php if($kosher=="true"){echo "checked";} ?>><br/>
-		<label for="nutfree">Nut-Free</label>
-		<input type="checkbox" name="nutfree" <?php if($nutfree=="true"){echo "checked";} ?>><br/>
-		<label for="wheatfree">Wheat-Free</label>
-		<input type="checkbox" name="wheatfree" <?php if($wheatfree=="true"){echo "checked";} ?>><br/>
-		<label for="soyfree">Soy-Free</label>
-		<input type="checkbox" name="soyfree" <?php if($soyfree=="true"){echo "checked";} ?>><br/>
-		<label for="glutenfree">Gluten-Free</label>
-		<input type="checkbox" name="glutenfree" <?php if($glutenfree=="true"){echo "checked";} ?>><br/>
-		<label for="dairyfree">Dairy-Free</label>
-		<input type="checkbox" name="dairyfree" <?php if($dairyfree=="true"){echo "checked";} ?>><br/>
-		
-		<input type="submit" value = "Submit" class = "seventh">
-		<input type="reset" value = "Clear" class = "seventh">
-		</form>
-		
-		<div id = "results">
-			<?php 
-				echo $outcome;
-			?>
-		</div>
+			<div id = "results">
+				<?php 
+					echo $outcome;
+				?>
+			</div>
 		</div>
 	</body>
 </html>

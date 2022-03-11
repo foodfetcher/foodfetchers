@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="phaseIstyle.css">
         <style>
             /* alt header for home page*/
-            #header {
+            /*#header {
                 display:flex;
                 font-size: 2vh;
                 height: 6vh;
@@ -62,13 +62,13 @@
                 padding: 2px;
                 cursor: pointer;
                 border-radius: 0px;
-            }
+            }*/
             #background {
                 background-image:url(Images/background1.jpg);
             }
             /* Main Title, Sub Title*/
             #intro {
-                height: calc(92vh - 90px); 
+                height: calc(92vh - 80px); 
                 display:flex; 
                 flex-direction:column; 
                 justify-content: center;align-items: left;

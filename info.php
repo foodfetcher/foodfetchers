@@ -15,15 +15,14 @@
     <head>
         <title> Food Fetchers | About Us </title>
         <link rel="stylesheet" href="phaseIstyle.css">
-        
     </head>
     <body>
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-        ?> 
+        ?>
         <div id = "Content">
-            <h1> Info</h1>
+            <h1>About Us</h1>
         </div>
     </body>
 </html>

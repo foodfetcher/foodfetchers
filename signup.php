@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Food Fetchers | sign up </title>
+        <title> Food Fetchers | Sign Up </title>
         <link rel="stylesheet" href="phaseIstyle.css">
 		<?php
 			session_start();
@@ -16,7 +16,7 @@
 				
 				$res = pg_query_params($db, "SELECT email FROM Customers WHERE email=$1", array(strtolower($_POST['email'])));
 				if(pg_num_rows($res) != 0){
-					$outcome = 'Account with that email already exits! <a href="login.php">login?</a>';
+					$outcome = 'Account with that email already exits! <a href="login.php">Login?</a>';
 				}
 				else{
 					$res2 = pg_query_params($db, "INSERT INTO customers (email, passwd, firstname, lastname, address1, address2, zipcode, state, phonenumber, city) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING userid", array(
@@ -32,7 +32,7 @@
 					$_POST['city']));
 					if (pg_num_rows($res2) == 1){
 						$outcome = "success";
-						echo '<meta http-equiv="refresh" content="5;url=login.php" />';
+						echo '<meta http-equiv="refresh" content="3;url=login.php" />';
 					}
 					else{
 						$outcome = "response: " . var_export($res2, true) . "<br/>err: " . pg_last_error($db) . "<br/>ResponseLen: " . pg_num_rows($res2) . "<br/>res:" . print_r(pg_fetch_assoc($res2));
