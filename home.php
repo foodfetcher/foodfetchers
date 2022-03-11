@@ -102,12 +102,12 @@
                 cursor: pointer;
                 transition: background-color 200ms;
                 width: 45vh;
+				border: 1px solid transparent;
             }
             #interested:hover {
                 background-color: var(--lightgreen);
                 transition: 0ms;
                 border: 1px solid var(--green);
-                margin-bottom: 19px;
             }
             #interested:active {
                 background-color: var(--green);
