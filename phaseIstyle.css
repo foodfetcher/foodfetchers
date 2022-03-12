@@ -93,7 +93,7 @@ input[type=checkbox] {
 
 /* Header */
 #header {
-	font-size: 18px;
+	font-size: 20px;
 	color: black;
 	background-color: rgba(255,255,255,0.9);
 	height: 80px;
@@ -123,7 +123,7 @@ input[type=checkbox] {
 	color: #333;
 	text-decoration: none;
 	transition: 200ms;
-	padding: 35px 12px;
+	padding: 36px 1.5vw;
 }
 
 #nav a:hover {
@@ -136,11 +136,20 @@ input[type=checkbox] {
 	background-color: var(--lightteal);
 }
 
+#signup, #logout {
+	margin-right: 1vw;
+}
+
+#signup {
+	background-color: var(--green);
+}
+
 #logout {
 	text-align: center;
 	padding: 0 10px;
 	cursor: default;
 	color: #333;
+	line-height: 1.2;
 }
 
 #logout a {
