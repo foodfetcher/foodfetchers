@@ -150,13 +150,12 @@
                                 }  
                                 pg_close($db);
                             }
-                                ?>
+                            ?>
                         </div>
                     </td>
                     <td style="width:66.66%"><!-- right column (meal plan)-->
                         <!--<table style="width:100%; border: 2px solid chartreuse;"> right table (meal plan)-->
                         <!-- form for positng new meal plan -->
-                        
                             <table style = "width: 100%"><!-- form table (week of meal plan) -->
                                 <tr><td style="background-color:#dbf9d1;border-right:2px solid #38817a ;border-left:2px solid #38817a ;">
                                     <div id ="day-tile-sunP" class= "day-tile" ondrop="drop(event)" ondragover = "allowDrop(event)">
@@ -201,15 +200,15 @@
                                     </div>
                                 </td></tr>
                             </table><!-- END: form table (week of meal plan) -->
-                    </td>
+                        </td>
                     </tr><!-- END: content row -->
                     <tr>
-                    <td colspan="2">
-                        <input type="submit" value = "Create Meal Plan" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
-                        <input type="reset" value = "Clear Plan" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
-                    </td>
+						<td colspan="2">
+							<input type="submit" value = "Create Meal Plan" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
+							<input type="reset" value = "Clear Planner" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
+						</td>
                     </tr>
-            </form>
+                </form>
                 </table><!-- END: parent table-->
             </div>
         </div>

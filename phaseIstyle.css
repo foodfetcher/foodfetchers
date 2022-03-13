@@ -97,7 +97,7 @@ input[type=checkbox] {
 	color: black;
 	background-color: rgba(255,255,255,0.9);
 	height: 80px;
-	box-shadow: 0 0 8px rgba(0,0,0,0.7);
+	box-shadow: 0 0 8px rgba(0,0,0,0.6);
 	position: fixed;
 	width: calc(100vw - var(--scrollbar-width) - 20px); /* -20px for padding */
 	display: flex;
@@ -174,15 +174,6 @@ input[type=checkbox] {
 }
 
 /* Meal Planner */
-#back-container{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: calc(100vw - var(--scrollbar-width));
-    background-image:url(Images/background3.jpg);
-    background-size:cover;
-}
-
 #content-container{
     display: flex;
     flex-direction: row;
@@ -250,6 +241,8 @@ input[type=checkbox] {
     text-align: center;
     align-items: center;
 	cursor: pointer;
+	transition: border 200ms;
+	margin: 1px;
 }
 
 .meal-tile:hover{
@@ -270,7 +263,7 @@ input[type=checkbox] {
 .meal-tile-cover{
     display: none;
     position: absolute;
-    /*background-image: url(Images/plus.png); <-- File not on server */
+    background-image: url(Images/plus.png);
     background-size: contain;
     height: 100%;
     width: 100%;
