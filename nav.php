@@ -15,7 +15,7 @@
             $first = $_SESSION["firstname"];
             echo "<a href = create.php>Create Recipe</a>
 				<a href = viewMeals.php>Meal Plans</a>";
-            echo "<div id = 'logout'>Hello, $first<br><a href = login.php>$log</a></div>";
+            echo "<div id = 'logout'>Hello, <a href=viewAccount.php>$first</a><br><a href = login.php>$log</a></div>";
         }
         else{
             echo "<a href = login.php>$log</a>";

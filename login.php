@@ -48,6 +48,7 @@
 						$_SESSION["userid"] = $row["userid"];
 						$_SESSION["firstname"] = $row["firstname"];
 						$_SESSION["lastname"] = $row["lastname"];
+						$_SESSION["email"] = $email;
 					}
 				}
 				pg_close($db);
