@@ -75,7 +75,7 @@
 			</form>
             <?php 
                 if($outcome == 'success'){
-                    echo '<p>Welcome back ' . $_SESSION["firstname"] . '! Redirecting you to <a href="home.php">Home</a>.</p>';
+                    echo '<p>Welcome back ' . $_SESSION["firstname"] . '!<br>Redirecting you to <a href="home.php">Home</a>.</p>';
 				}
 				else{
 					if($db === false){
