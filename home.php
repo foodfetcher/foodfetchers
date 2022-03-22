@@ -76,9 +76,10 @@
                 flex-direction: column; 
                 justify-content: center;
                 align-items: left;
-                padding: 0 2vw; 
+                padding: 40px 2vw 0; 
                 background-color: rgba(0,0,0,.3); 
                 width: 50vh;
+				margin-bottom: -40px;
             }
             #title{
                 text-align: left;
@@ -161,7 +162,7 @@
                 Fast.<br>Simple.<br>Delicious.<br>
             </p>
             <p id="sub-title">
-                The<br>Perfect<br>Meal Planner<br><u>For You</u>
+                The<br>Perfect<br>Meal Planner<br>For You
             </p>
             <?php
 			if ($log == "Login"){ 
