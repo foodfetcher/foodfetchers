@@ -13,8 +13,8 @@
 				if (ini_get("session.use_cookies")) {
 					$params = session_get_cookie_params();
 					setcookie(session_name(), '', time() - 42000,
-					$params["path"], $params["domain"],
-					$params["secure"], $params["httponly"]
+								$params["path"], $params["domain"],
+								$params["secure"], $params["httponly"]
 					);
 				}
 				session_destroy();
@@ -24,31 +24,32 @@
 			}
 			elseif($_SERVER['REQUEST_METHOD'] === 'POST'){
 				include "DButils.php";
-				$email = strtolower($_POST ['email']);
-				$password = $_POST ['password'];
+				$email = strtolower($_POST['email']);
+				$password = $_POST['password'];
 				
 				$db = getDefaultDB();
 				
 				$query = "SELECT * FROM customers WHERE email='$email'";
 				$res = pg_query($db, $query);
-				//echo $res;
+				
 				//echo pg_last_error($db);
-				if(pg_num_rows($res) != 1){
+				if(pg_num_rows($res) == 0){
 					$outcome = "Error: Email not recognized.";
 				}
 				else{
 					$row = pg_fetch_assoc($res);
 					//print_r($row);
-					if($password == $row["password"]){
+					if($password != $row["passwd"]){
 						$outcome = "Error: Incorrect password.";
-						}else{
+					}
+					else{
 						$outcome = "success";
 						echo '<meta http-equiv="refresh" content="3;url=home.php" />';
 						$log = "Logout";
 						$_SESSION["userid"] = $row["userid"];
 						$_SESSION["firstname"] = $row["firstname"];
 						$_SESSION["lastname"] = $row["lastname"];
-						$_SESSION["email"] = $email;
+						$_SESSION["email"] = $row["email"];
 					}
 				}
 				pg_close($db);

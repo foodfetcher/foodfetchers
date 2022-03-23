@@ -5,6 +5,22 @@
 		return pg_connect('host=localhost user=fetcher1 password=1234 dbname=main');
 	}
 	
+	//returns true if the passwords should be considered to be equal, false otherwise
+	function comparePasswords($givenPassword, $DBPassword, $userid) {
+		if($givenPassword == $DBPassword){
+			return True;
+		}
+		else{
+			return False;
+		}
+	}
+	
+	//converts the given "password" string to one suitable for storing in the database
+	//(will hash/salt it)
+	function passwordToDB($password, $userid) {
+		return $passwd;
+	}
+	
 	/* function doesUserExist($db, $email) : string|false|null{
 		$res = pg_query_params($db, "SELECT userid FROM customers WHERE email=$1;", $email);
 	} */
