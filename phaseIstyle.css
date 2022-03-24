@@ -93,11 +93,11 @@ input[type=checkbox] {
 
 /* Header */
 #header {
-	font-size: 18px;
+	font-size: 20px;
 	color: black;
 	background-color: rgba(255,255,255,0.9);
 	height: 80px;
-	box-shadow: 0 0 8px rgba(0,0,0,0.7);
+	box-shadow: 0 0 8px rgba(0,0,0,0.6);
 	position: fixed;
 	width: calc(100vw - var(--scrollbar-width) - 20px); /* -20px for padding */
 	display: flex;
@@ -123,7 +123,7 @@ input[type=checkbox] {
 	color: #333;
 	text-decoration: none;
 	transition: 200ms;
-	padding: 35px 12px;
+	padding: 36px 1.5vw;
 }
 
 #nav a:hover {
@@ -136,11 +136,20 @@ input[type=checkbox] {
 	background-color: var(--lightteal);
 }
 
+#signup, #logout {
+	margin-right: 1vw;
+}
+
+#signup {
+	background-color: var(--green);
+}
+
 #logout {
 	text-align: center;
 	padding: 0 10px;
 	cursor: default;
 	color: #333;
+	line-height: 1.2;
 }
 
 #logout a {
@@ -165,15 +174,6 @@ input[type=checkbox] {
 }
 
 /* Meal Planner */
-#back-container{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: calc(100vw - var(--scrollbar-width));
-    background-image:url(Images/background3.jpg);
-    background-size:cover;
-}
-
 #content-container{
     display: flex;
     flex-direction: row;
@@ -241,6 +241,8 @@ input[type=checkbox] {
     text-align: center;
     align-items: center;
 	cursor: pointer;
+	transition: border 200ms;
+	margin: 1px;
 }
 
 .meal-tile:hover{
@@ -261,7 +263,7 @@ input[type=checkbox] {
 .meal-tile-cover{
     display: none;
     position: absolute;
-    /*background-image: url(Images/plus.png); <-- File not on server */
+    background-image: url(Images/plus.png);
     background-size: contain;
     height: 100%;
     width: 100%;
