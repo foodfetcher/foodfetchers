@@ -34,13 +34,13 @@
 				
 				//echo pg_last_error($db);
 				if(pg_num_rows($res) == 0){
-					$outcome = "Error: Email not recognized.";
+					$outcome = "Incorrect email or password (email)";
 				}
 				else{
 					$row = pg_fetch_assoc($res);
 					//print_r($row);
 					if($password != $row["passwd"]){
-						$outcome = "Error: Incorrect password.";
+						$outcome = "Incorrect email or password (password)";
 					}
 					else{
 						$outcome = "success";
@@ -50,6 +50,7 @@
 						$_SESSION["firstname"] = $row["firstname"];
 						$_SESSION["lastname"] = $row["lastname"];
 						$_SESSION["email"] = $row["email"];
+						$_POST = array();
 					}
 				}
 				pg_close($db);
@@ -67,9 +68,9 @@
 			<form name = "login" action = "login.php" method = "post" onSubmit="">
 				<table style="width: 100%;"><tr><td style="display: flex;">
 					<label for="email" style="flex: 0; white-space: pre; padding-top: 4px;">E-Mail Address: </label>
-					<input type = "email" name = "email" id = "email" style = "flex: 1;" required></td></tr>
+					<input type = "email" name = "email" id = "email" style="flex: 1;" value="<?php if(isset($_POST['email'])){ echo htmlentities($_POST['email']);}?>" required></td></tr>
 					<tr><td style="display: flex;"><label for="password" style="flex: 0; white-space: pre; padding-top: 4px;">Password: </label>
-					<input type = "password" name = "password" id = "password" style = "flex: 1;" required></td></tr>
+					<input type = "password" name = "password" id = "password" style="flex: 1;" value="<?php if(isset($_POST['password'])){ echo htmlentities($_POST['password']);}?>" required></td></tr>
 					
 					<tr><td><input type="submit" value = "Log In">
 					<!--<input type="reset" value = "Clear">-->

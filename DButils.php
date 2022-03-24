@@ -18,7 +18,7 @@
 	//converts the given "password" string to one suitable for storing in the database
 	//(will hash/salt it)
 	function passwordToDB($password, $userid) {
-		return $passwd;
+		return $password;
 	}
 	
 	/* function doesUserExist($db, $email) : string|false|null{
