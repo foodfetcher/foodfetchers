@@ -11,6 +11,8 @@
 	--darkgreen: #31701c;
 	--teal: #38817a;
 	--lightteal: #47a69d;
+    --color1-white: rgb(244,244,244);
+    --color2-darkGreyT: rgba(0,0,0,.35);
 }
 
 body {
@@ -160,6 +162,9 @@ input[type=checkbox] {
 
 #headpad {
 	height: 80px;
+}
+#sidepad {
+	width: 10vw;
 }
 
 /* Content */
