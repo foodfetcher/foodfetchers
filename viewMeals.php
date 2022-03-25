@@ -31,12 +31,20 @@
                 var data = ev.dataTransfer.getData("text/html");
                 var nodeCopy = document.getElementById(data).cloneNode(true);
                 var dest=ev.target.id ;
+                nodeCopy.id = ev.target.id;
                 nodeCopy.addEventListener('click',addremove);
-                //nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.style.backgroundImage = "url(Images/minus.png)"; <-- File not on server
-                
+                nodeCopy.firstChild.nextSibling.id = dest;
+                nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.id =  dest;
+                nodeCopy.firstChild.nextSibling.nextSibling.nextSibling.style.backgroundImage = "url(Images/minus.png)";
+                nodeCopy.style.height= "8.25vh";
                 var newid = event.target.id.slice(0,event.target.id.length - 1);
                 document.getElementById(newid+"P").appendChild(nodeCopy);
-                document.getElementById(newid + "H").value += data.slice(0,data.length - 1);
+                if(document.getElementById(newid + "H").value == ""){
+                    document.getElementById(newid + "H").value +=  data.slice(0,data.length - 1) ;
+                }
+                else{
+                    document.getElementById(newid + "H").value += " " + data.slice(0,data.length - 1) ;
+                }
             }
             
             function addremove(ev){
