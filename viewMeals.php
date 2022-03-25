@@ -93,7 +93,7 @@
                     </tr><!-- END: table header(Meal Plan Name)-->
                     <tr style="font-family: Ubuntu;"><!-- column headers -->
                             <td style="background-color: #dbf9d1; border-right: 2px solid #38817a; border-left: 2px solid #38817a;">
-                                <h1 style="font-size:2.5vh; margin:0;">My Meals</h1>
+                                <h1 style="font-size:2.5vh; margin:0;">My Favorites</h1>
                             </td>
                             <td style="background-color: #dbf9d1; border-right: 2px solid #38817a; border-left: 2px solid #38817a;">
                                 <h1 style="font-size:2.5vh; margin:0;">My Plan</h1>
