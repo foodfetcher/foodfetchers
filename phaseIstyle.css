@@ -248,7 +248,6 @@ input[type=checkbox] {
 	overflow: hidden;
 	padding: 0;
 	margin: 0;
-	transition: 0;
 }
 
 #info-cover {
@@ -276,28 +275,29 @@ input[type=checkbox] {
 }
 
 /* Plate Animation*/
-#info #plate1 {
+#plate1 {
+	position: relative;
+	right: 10vw;
+	margin: 0 -10vw 0 0;
 	transform: rotate(0deg);
 	left: -10vw;
-	transition: 3s;
+	transition: transform 3s, left 3s;
 }
 
 #info:hover #plate1{
 	transform: rotate(180deg);
 	left: 80vw;
-	transition: 3s;
-	transition-delay: 0.25s;
+	transition: transform 3s 0.25s, left 3s 0.25s;
 }
 
-#info #info-cover {
+#info-cover {
 	left: -100vw;
-	transition: 3s;
+	transition: left 3s;
 }
 
 #info:hover #info-cover{
 	left: 0vw;
-	transition: 3s;
-	transition-delay: 0.25s;
+	transition: left 3s 0.25s;
 }
 
 /* Meal Planner */

@@ -72,7 +72,7 @@
 					</table>
                 </div>
             </div>
-            <img id="plate1" height="100%" src="Images/plate1.png" style="position: relative; right: 10vw; margin:0 -10vw 0 0;">
+            <img id="plate1" height="100%" src="Images/plate1.png">
             <div id="info-title">
                 <div>
 					<p style="font-size: 5vh; border-bottom: 3px solid var(--green);">Plan for a Healthier You</p>
