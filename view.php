@@ -75,7 +75,13 @@
                     }
                     else{
                         echo "<table><tbody style='vertical-align: top;'><td style='width: 50%;'>";
-                        echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image" style="width: 100%;"/>';
+						            $filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+						            if (file_exists($filename)) {
+							              echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%;"/>';
+						            } else {
+							              echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%;"/>';
+						            }
+                        
                         echo "</td><td style='padding-left: 5px;'>";
                         echo "<p>Created by: " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>";
                         echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";
