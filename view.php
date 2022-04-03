@@ -12,11 +12,8 @@
     $recipeid = (int)$_GET["id"] ?? (int)$_POST["id"];
     $queryResultRow = Array();
     $creatorInfo = Array();
-    $DB_HOST='localhost';
-    $DB_USER='fetcher1';
-    $DB_PASS='1234';
-    $DB_NAME='main'; 
-    $db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
+    include "DButils.php";
+	$db = getDefaultDB();
     
     $res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeid'");
     if(pg_num_rows($res) == 0){
@@ -45,8 +42,13 @@
         $res = pg_query($db, "INSERT INTO favorites (recipeid, userid) values ($recipeid, $userid);");
         echo pg_last_error($db);
     }
+	else if(isset($_POST["unfavorite"])){
+		$userid = $_SESSION["userid"];
+        $res = pg_query($db, "DELETE FROM favorites WHERE recipeid='$recipeid' AND userid='$userid';");
+        echo pg_last_error($db);
+	}
     
-    pg_close($db);
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -72,31 +74,40 @@
                         echo "<h1>Unknown Recipe!</h1>";
                     }
                     else{
-<<<<<<< Updated upstream
-                        echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image" width="500"/><br/>';
-=======
                         echo "<table><tbody style='vertical-align: top;'><td style='width: 50%;'>";
-						$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
-						if (file_exists($filename)) {
-							echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%;"/>';
-						} else {
-							echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%;"/>';
-						}
+						            $filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+						            if (file_exists($filename)) {
+							              echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%;"/>';
+						            } else {
+							              echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%;"/>';
+						            }
                         
                         echo "</td><td style='padding-left: 5px;'>";
->>>>>>> Stashed changes
                         echo "<p>Created by: " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>";
                         echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";
-                        echo "<p>Ingredients: " . $queryResultRow['ingredients'] . "</p><br/>";
-                        echo "<p>Instructions: <br/>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p><br/>";
+                        echo "<h3>Ingredients:</h3><p>" . $queryResultRow['ingredients'] . "</p>";
+                        echo "<h3>Instructions:</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
+                        echo "</td></tbody></table>";
                         if(isset($_SESSION["userid"])){
-                            echo '<form method="post">';
-                            echo '<input name="favorite" type="hidden" value="yes">';
-                            echo '<input name="id" type="hidden" value="' . $recipeid . '">';
-                            echo '<input type="submit" value = "Add to favorites" class = "seventh">';
-                            echo "</form>";
+							$userid = $_SESSION["userid"];
+							$res = pg_query($db, "SELECT * FROM favorites WHERE recipeid='$recipeid' AND userid='$userid';");
+							if(pg_num_rows($res) != 0){
+								echo '<form method="post">';
+								echo '<input name="unfavorite" type="hidden" value="yes">';
+								echo '<input name="id" type="hidden" value="' . $recipeid . '">';
+								echo '<input type="submit" value = "Remove from favorites" class = "seventh">';
+								echo "</form>";
+							}
+							else{
+								echo '<form method="post">';
+								echo '<input name="favorite" type="hidden" value="yes">';
+								echo '<input name="id" type="hidden" value="' . $recipeid . '">';
+								echo '<input type="submit" value = "Add to favorites" class = "seventh">';
+								echo "</form>";
+							}
                         }
                     }
+					pg_close($db);
                 ?>
             </div>
         </div>

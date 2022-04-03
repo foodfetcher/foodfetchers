@@ -9,7 +9,7 @@
 		$log = "Login";
     }
     
-	include 'DButils.php'
+	include 'DButils.php';
 	
     $mealid = (int)$_GET["id"];
     $mealInfo = array();
@@ -52,6 +52,60 @@
             #restable tr:nth-child(even) {
             background-color: #f9e27f;
             }
+            #content-container{
+                height: calc(100vh - 80px);
+                display:flex;
+            }
+            #plan-display{
+                width: 85vw;
+                height:90%;
+                margin: auto;
+                background-color: var(--color2-darkGreyT);
+                display:flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+            }
+            #plan-title{
+                width:83vw;
+                height:10%;
+                background-color: var(--color1-white);
+                margin: 2vh 1vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #plan-title h1{
+                font-size: 5vh;
+                margin: 0;
+                background-color: var(--color1-white);
+                width: 83vw;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #week-display {
+                height:calc(90% - 4vh);
+                display:flex;
+                flex-direction: row;
+                padding: 0 1vw;
+                gap: 1vw;
+                flex:1;
+            }
+            #week-display h2{
+                font-size: 3vh;
+                margin: 1vh .25vw 1vh .25vw;
+                border-bottom: 1px solid black;
+                padding: 0 0 1.25vh 0;
+            }
+            #week-display ol{
+                padding-right: 1vw;
+            }
+            .day {
+                height: calc(100% - 2vh);;
+                flex:1;
+                background-color: var(--color1-white);
+            }
         </style>
     </head>
     <body>
@@ -59,26 +113,36 @@
         <?php
             include 'nav.php'; //write out the nav bar
         ?> 
-        <div id = "Content">
-            <h1> <?php echo $mealInfo["mealname"] ?? "Unknown Meal"; ?> </h1>
-            <div id = "results">
-                <?php
-                    echo "<table id=restable>";
-                    echo "<th>day</th>";
-                    echo "<th>recipes on that day</th>";
+        <div id = "content-container">
+            <?php
+            include 'sideNavMealPlan.php'; //write out the nav bar
+            ?> 
+            <div id = "plan-display">
+                <div id= "plan-title">
+                    <h1> <?php echo $mealInfo["mealname"] ?? "Unknown Plan"; ?> </h1>
+                </div>
+                <div id = "week-display">
+                    <?php
+                    $weekDays = array("Sunday","Monday","Tuesday","Wednsday","Thursday","Friday","Saturday");
                     foreach(array(0,1,2,3,4,5,6) as $day){
-                        echo "<tr><td>$day</td><td>";
+                        $dayName = $weekDays[$day];
+                        echo "<div class = 'day'><h2>$dayName</h2><ol>";
+                        
                         $res = pg_query($db, "SELECT * FROM mealline WHERE day=$day AND mealid=$mealid;");
                         echo pg_last_error($db);
                         while($row = pg_fetch_assoc($res)){
+                            $thisId = $row["recipeid"] ;
+                            $result = pg_query($db, "SELECT * FROM recipes WHERE recipeid=$thisId;");
+                            $rrow = pg_fetch_assoc($result);
                             //print_r($row);
-                            echo $row["recipeid"] . " ";
+                            echo "<li>";
+                            echo $rrow["recipename"] . "</li>";
                         }
-                        echo "</td></tr>";
+                        echo "</ol></div>";
                     }
-                    echo "</table>";
                     pg_close($db);
-                ?>
+                    ?>
+                </div>
             </div>
         </div>
     </body>
