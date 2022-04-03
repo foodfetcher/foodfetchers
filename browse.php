@@ -149,107 +149,93 @@
 											$recipeName = $_POST['recipeNameName'];
 											$authorName = $_POST['authorName'];
 											$keywordName = $_POST['keywordName'];
+											$alwayson = "on";
 											if ($vegetarian = $_POST['vegetarianCheck'] == "false") //false when it is checked?
 											{
 												$vegetarian = "on";
-												$vegetarian2 = "on";
 											}
 											else //when it is not checked
 											{
 												$vegetarian = "off";
-												$vegetarian2 = "on";
 											}
 											
 											if ($vegan = $_POST['veganCheck'] == "false") //false when it is checked?
 											{
 												$vegan = "on";
-												$vegan2 = "on";
 											}
 											else //when it is not checked
 											{
 												$vegan = "off";
-												$vegan2 = "on";
 											}
 											
 											if ($kosher = $_POST['kosherCheck'] == "false") //false when it is checked?
 											{
 												$kosher = "on";
-												$kosher2 = "on";
 											}
 											else //when it is not checked
 											{
 												$kosher = "off";
-												$kosher2 = "on";
 											}
 											
 											if ($nutfree = $_POST['nutCheck'] == "false") //false when it is checked?
 											{
 												$nutfree = "on";
-												$nutfree2 = "on";
 											}
 											else //when it is not checked
 											{
 												$nutfree = "off";
-												$nutfree2 = "on";
 											}
 											
 											if ($wheatfree = $_POST['wheatCheck'] == "false") //false when it is checked?
 											{
 												$wheatfree = "on";
-												$wheatfree2 = "on";
 											}
 											else //when it is not checked
 											{
 												$wheatfree = "off";
-												$wheatfree2 = "on";
 											}
 											
 											if ($soyfree = $_POST['soyCheck'] == "false") //false when it is checked?
 											{
 												$soyfree = "on";
-												$soyfree2 = "on";
 											}
 											else //when it is not checked
 											{
 												$soyfree = "off";
-												$soyfree2 = "on";
 											}
 											
 											if ($glutenfree = $_POST['glutenCheck'] == "false") //false when it is checked?
 											{
 												$glutenfree = "on";
-												$glutenfree2 = "on";
 											}
 											else //when it is not checked
 											{
 												$glutenfree = "off";
-												$glutenfree2 = "on";
 											}
 											
 											if ($dairyfree = $_POST['dairyCheck'] == "false") //false when it is checked?
 											{
 												$dairyfree = "on";
-												$dairyfree2 = "on";
 											}
 											else //when it is not checked
 											{
 												$dairyfree = "off";
-												$dairyfree2 = "on";
 											}
 											
-											//only selects recipes matching the same search (only that for now) the squiggle squiggle star means like case insensitive and the %s around the variable mean anything can be there
-											$res = pg_query($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* '%$recipeName%' AND ingredients ~~* '%$keywordName%' 
-											AND (vegetarian = '$vegetarian' OR vegetarian = '$vegetarian2') 
-											AND (vegan = '$vegan' OR vegan = '$vegan2')
-											AND (kosher = '$kosher' OR kosher = '$kosher2')
-											AND (nutfree = '$nutfree' OR nutfree = '$nutfree2')
-											AND (wheatfree = '$wheatfree' OR wheatfree = '$wheatfree2')
-											AND (soyfree = '$soyfree' OR soyfree = '$soyfree2')
-											AND (glutenfree = '$glutenfree' OR glutenfree = '$glutenfree2')
-											AND (dairyfree = '$dairyfree' OR dairyfree = '$dairyfree2')
-											AND (firstname ~~* '%$authorName%' OR lastname ~~* '%$authorName%')");
-											// INNER JOIN customers ON recipes.userid=customers.userid
-											// AND (firstname ~~* '$authorName' OR lastname ~~* '$authorName')
+
+											
+											$res = pg_query_params($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* $1 AND ingredients ~~* $2
+											AND (vegetarian = $3 OR vegetarian = $4)
+											AND (vegan = $5 OR vegan = $4)
+											AND (kosher = $6 OR kosher = $4)
+											AND (nutfree = $7 OR nutfree = $4)
+											AND (wheatfree = $8 OR wheatfree = $4)
+											AND (soyfree = $9 OR soyfree = $4)
+											AND (glutenfree = $10 OR glutenfree = $4)
+											AND (dairyfree = $11 OR dairyfree = $4)
+											AND (firstname ~~* $12 OR lastname ~~* $12)",
+											array("%" . $recipeName . "%", "%" . $keywordName . "%", $vegetarian, $alwayson, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, "%" . $authorName . "%"));
+
 											echo '<table width="100%">';
 											$count = 0;
 											while($row = pg_fetch_assoc($res)){
