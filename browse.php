@@ -87,7 +87,7 @@
 										
 								<tr>
 									<td style="cursor: default; padding-top: 5px;">
-										<input type="submit" value="Search" class="seventh">
+										<input type="submit" value="Search" name="searchRecipe" class="seventh">
 										<input type="reset" value="Clear" class="seventh">
 									</td>
 								</tr>
@@ -96,6 +96,19 @@
 										<?php
 											if($log == "Logout"){
 												echo '<input type="submit" name="myrecipes" value="View My Recipes" class = "seventh"/>';
+											}
+											else
+											{
+												echo '<input type="submit" name="surprise" value="Surprise Me!" class = "seventh"/>';
+											}
+										?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<?php
+											if($log == "Logout"){
+												echo '<input type="submit" name="surprise" value="Surprise Me!" class = "seventh"/>';
 											}
 										?>
 									</td>
@@ -114,8 +127,9 @@
 										$DB_PASS='1234';
 										$DB_NAME='main'; 
 										$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
+										
+										//clicking the view my recipes button
 										if(isset($_POST['myrecipes'])){
-											//echo "myrecipes";
 											$userid = $_SESSION['userid'];
 											$res = pg_query($db, "SELECT * FROM recipes WHERE creatorid='$userid'");
 											while($row = pg_fetch_assoc($res)){
@@ -145,7 +159,121 @@
 												echo 'Sorry, no recipes matched those filters. Try widening your search!';
 											}
 										}
-										else{
+										
+										//clicking the surprise me button
+										if(isset($_POST['surprise'])){
+											$recipeName = $_POST['recipeNameName'];
+											$authorName = $_POST['authorName'];
+											$keywordName = $_POST['keywordName'];
+											$alwayson = "on";
+											if ($vegetarian = $_POST['vegetarianCheck'] == "false") //false when it is checked?
+											{
+												$vegetarian = "on";
+											}
+											else //when it is not checked
+											{
+												$vegetarian = "off";
+											}
+											
+											if ($vegan = $_POST['veganCheck'] == "false") //false when it is checked?
+											{
+												$vegan = "on";
+											}
+											else //when it is not checked
+											{
+												$vegan = "off";
+											}
+											
+											if ($kosher = $_POST['kosherCheck'] == "false") //false when it is checked?
+											{
+												$kosher = "on";
+											}
+											else //when it is not checked
+											{
+												$kosher = "off";
+											}
+											
+											if ($nutfree = $_POST['nutCheck'] == "false") //false when it is checked?
+											{
+												$nutfree = "on";
+											}
+											else //when it is not checked
+											{
+												$nutfree = "off";
+											}
+											
+											if ($wheatfree = $_POST['wheatCheck'] == "false") //false when it is checked?
+											{
+												$wheatfree = "on";
+											}
+											else //when it is not checked
+											{
+												$wheatfree = "off";
+											}
+											
+											if ($soyfree = $_POST['soyCheck'] == "false") //false when it is checked?
+											{
+												$soyfree = "on";
+											}
+											else //when it is not checked
+											{
+												$soyfree = "off";
+											}
+											
+											if ($glutenfree = $_POST['glutenCheck'] == "false") //false when it is checked?
+											{
+												$glutenfree = "on";
+											}
+											else //when it is not checked
+											{
+												$glutenfree = "off";
+											}
+											
+											if ($dairyfree = $_POST['dairyCheck'] == "false") //false when it is checked?
+											{
+												$dairyfree = "on";
+											}
+											else //when it is not checked
+											{
+												$dairyfree = "off";
+											}
+											
+
+											
+											$res = pg_query_params($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* $1 AND ingredients ~~* $2
+											AND (vegetarian = $3 OR vegetarian = $4)
+											AND (vegan = $5 OR vegan = $4)
+											AND (kosher = $6 OR kosher = $4)
+											AND (nutfree = $7 OR nutfree = $4)
+											AND (wheatfree = $8 OR wheatfree = $4)
+											AND (soyfree = $9 OR soyfree = $4)
+											AND (glutenfree = $10 OR glutenfree = $4)
+											AND (dairyfree = $11 OR dairyfree = $4)
+											AND (firstname ~~* $12 OR lastname ~~* $12)",
+											array("%" . $recipeName . "%", "%" . $keywordName . "%", $vegetarian, $alwayson, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, "%" . $authorName . "%"));
+											
+											$count = 0;
+											$resultArray=array();
+											while($row = pg_fetch_assoc($res)){
+												$notEmpty = true;
+												$recipeid = $row["recipeid"];
+												array_push($resultArray, $recipeid);
+												$count += 1;
+											}
+											if ($count > 0){
+												$rand = $resultArray[array_rand($resultArray)];
+												//echo $rand;
+												echo "<script> location.href='https://foodfetchers.ddns.net/view.php?id=$rand'; </script>";
+												exit;
+											}
+											if ($count == 0 && $notEmpty == false)
+											{
+												echo 'Sorry, no recipes matched those filters. Try widening your search!';
+											}
+										}
+										
+										//clicking the search button ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+										if(isset($_POST['searchRecipe'])){
 											$recipeName = $_POST['recipeNameName'];
 											$authorName = $_POST['authorName'];
 											$keywordName = $_POST['keywordName'];
