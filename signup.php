@@ -53,30 +53,30 @@
         <div id = "Content">
             <form name = "signup" action = "signup.php" method = "post">
                 <h1> Create an Account </h1>
-                <label for="firstName" class = "names">First Name:*</label>
+                <label for="firstName">First Name:*</label>
                 <input type = "text" name = "firstName" id = "firstName" required>
-                <label for="lastName" class = "names">Last Name:*</label>
+                <label for="lastName">Last Name:*</label>
                 <input type = "text" name = "lastName" id = "lastName" required> </br>
-                <label for="email" class = "second">Email Address:*</label>
+                <label for="email">Email Address:*</label>
                 <input type = "email" name = "email" id = "email" required>
-                <label for="password" class = "second">Password:*</label>
+                <label for="password">Password:*</label>
                 <input type = "password" name = "password" id = "password" required> </br>
-                <label for="address" class = "third">Address:*</label>
+                <label for="address">Address:*</label>
                 <input type = "text" name = "address" id = "address" required>
-                <label for="city" class = "third">City:*</label>
+                <label for="city">City:*</label>
                 <input type = "text" name = "city" id = "city" required> </br>
-                <label for="state" class = "fourth">State:*</label>
+                <label for="state">State:*</label>
                 <input type = "text" name = "state" id = "state" required>
-                <label for="zip" class = "fourth">Zip Code:*</label>
+                <label for="zip">Zip Code:*</label>
                 <input type = "number" name = "zip" id = "zip" required> </br>
-                <label for="address2" class = "fifth">Address 2:</label>
+                <label for="address2">Address 2:</label>
                 <input type = "text" name = "address2" id = "address2">
-                <label for="number" class = "fifth">Phone Number:</label>
+                <label for="number">Phone Number:</label>
                 <input type = "number" name = "number" id = "number"> </br>
-                <label class = "sixth">* Denotes required field </label> </br>
+                <label>* Denotes required field </label> </br>
                 
-                <input type="submit" value = "Submit" class = "seventh">
-                <input type="reset" value = "Clear" class = "seventh">
+                <input type="submit" value = "Submit">
+                <input type="reset" value = "Clear">
 			</form>
             
             <?php 

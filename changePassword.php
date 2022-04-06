@@ -95,7 +95,7 @@
                 <input type = "password" name = "confirmpass" id = "confirmpass" value="<?php if(isset($_POST['confirmpass'])){ echo htmlentities($_POST['confirmpass']);}?>"
 																							<?php if($confirmPassError == 1){ echo 'style="border:1px solid red;"';}?> required></br>
                 
-                <input type="submit" value = "Submit" class = "seventh">
+                <input type="submit" value = "Submit">
 			</form>
 			</br>
 			<?php
