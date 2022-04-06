@@ -60,7 +60,7 @@
 								<tr>
 									<td style="text-align: left;">
 										<h3 style="margin-block-start: 0.5em; margin-block-end: 0.25em;">Dietary Preferences</h3>
-										<table>
+										<table style="width: 100%; padding: 0 20px;">
 											<td style="width: 50%">
 												<input type="checkbox" id="vegetarian" value="false" name="vegetarianCheck">
 												<label for="vegetarian" style="vertical-align: text-bottom;">Vegetarian</label><br/>
@@ -87,19 +87,19 @@
 										
 								<tr>
 									<td style="cursor: default; padding-top: 5px;">
-										<input type="submit" value="Search" name="searchRecipe" class="seventh">
-										<input type="reset" value="Clear" class="seventh">
+										<input type="submit" value="Search" name="searchRecipe">
+										<input type="reset" value="Clear">
 									</td>
 								</tr>
 								<tr>
 									<td>
 										<?php
 											if($log == "Logout"){
-												echo '<input type="submit" name="myrecipes" value="View My Recipes" class = "seventh"/>';
+												echo '<input type="submit" name="myrecipes" value="View My Recipes"/>';
 											}
 											else
 											{
-												echo '<input type="submit" name="surprise" value="Surprise Me!" class = "seventh"/>';
+												echo '<input type="submit" name="surprise" value="Surprise Me!"/>';
 											}
 										?>
 									</td>
@@ -108,7 +108,7 @@
 									<td>
 										<?php
 											if($log == "Logout"){
-												echo '<input type="submit" name="surprise" value="Surprise Me!" class = "seventh"/>';
+												echo '<input type="submit" name="surprise" value="Surprise Me!"/>';
 											}
 										?>
 									</td>

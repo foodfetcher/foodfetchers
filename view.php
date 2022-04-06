@@ -95,14 +95,14 @@
 								echo '<form method="post">';
 								echo '<input name="unfavorite" type="hidden" value="yes">';
 								echo '<input name="id" type="hidden" value="' . $recipeid . '">';
-								echo '<input type="submit" value = "Remove from favorites" class = "seventh">';
+								echo '<input type="submit" value = "Remove from favorites">';
 								echo "</form>";
 							}
 							else{
 								echo '<form method="post">';
 								echo '<input name="favorite" type="hidden" value="yes">';
 								echo '<input name="id" type="hidden" value="' . $recipeid . '">';
-								echo '<input type="submit" value = "Add to favorites" class = "seventh">';
+								echo '<input type="submit" value = "Add to favorites">';
 								echo "</form>";
 							}
                         }

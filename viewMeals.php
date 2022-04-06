@@ -212,8 +212,8 @@
                     </tr><!-- END: content row -->
                     <tr>
 						<td colspan="2">
-							<input type="submit" value = "Create Meal Plan" class = "seventh" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
-							<input type="reset" value = "Clear Planner" class = "seventh" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
+							<input type="submit" value = "Create Meal Plan" style="width:100%; border-radius:0; border:2px solid var(--teal); border-bottom: 0px; padding-bottom: 4px;" >
+							<input type="reset" value = "Clear Planner" onclick="clearAll()" style="width:100%; border-radius: 0 0 14px 14px ; border:2px solid var(--teal); border-top: 2px solid grey; padding-bottom: 4px;">
 						</td>
                     </tr>
                 </form>
