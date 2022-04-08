@@ -117,7 +117,7 @@
 						</td>
 						
 						<!-- Begin Right (results) Column -->
-						<td style="width: 70%; vertical-align: top; border-left: 1px solid #888; padding-left: 5px;">
+						<td style="width: 70%; vertical-align: top; border-left: 1px solid #888; padding-left: 5px; font-size: 20px; font-family: ubuntu;">
 							<div id = "results">
 								<?php
 									if($_SERVER['REQUEST_METHOD'] === 'POST'){

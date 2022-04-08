@@ -179,11 +179,6 @@ input[type=checkbox] {
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-#results {
-	font-size: 20px;
-	font-family: ubuntu;
-}
-
 /* Homepage Intro */
 #intro {
 	height: calc(100vh);
