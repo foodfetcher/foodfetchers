@@ -139,9 +139,9 @@
 												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
 												if (file_exists($filename)) {
-													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+													echo '<td width="33%" style="vertical-align:top"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
 												} else {
-													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+													echo '<td width="33%" style="vertical-align:top"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
 												}
 												
 												
@@ -263,7 +263,7 @@
 											if ($count > 0){
 												$rand = $resultArray[array_rand($resultArray)];
 												//echo $rand;
-												echo "<script> location.href='https://foodfetchers.ddns.net/view.php?id=$rand'; </script>";
+												echo "<script> location.href='/view.php?id=$rand'; </script>";
 												exit;
 											}
 											if ($count == 0 && $notEmpty == false)
@@ -373,9 +373,9 @@
 												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
 												if (file_exists($filename)) {
-													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+													echo '<td width="33%" style="vertical-align:top"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
 												} else {
-													echo '<td width="33%" ><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image" width="200px" object-fit:none/></a></br>';
+													echo '<td width="33%" style="vertical-align:top"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
 												}
 												
 												
