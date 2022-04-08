@@ -68,7 +68,6 @@
             #plan-title{
                 width:83vw;
                 height:10%;
-                background-color: var(--color1-white);
                 margin: 2vh 1vw;
                 display: flex;
                 justify-content: center;
@@ -83,6 +82,36 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding-left: 11vw;
+            }
+            #buttons{
+                width:11vw;
+                height: 100%;
+                flex-shrink: 0;
+                border-left: 2px solid transparent;
+                display:flex;
+                flex-direction: column;
+                gap:.25vh;
+            }
+            .buttons {
+                height: 50%;
+                border-radius: 0;
+                border: 2px solid transparent;
+                padding: .5vh 0 0 0;
+                background-color:var(--color1-white);
+                text-align: center;
+                font-family: arial;
+                color: black;
+                text-decoration:none;
+                font-size: 2vh;
+            }
+            .buttons p{
+                
+                margin:0;
+            }
+            .buttons:hover{
+                border-color: var(--green);
+                text-decoration:none;
             }
             #week-display {
                 height:calc(90% - 4vh);
@@ -120,6 +149,12 @@
             <div id = "plan-display">
                 <div id= "plan-title">
                     <h1> <?php echo $mealInfo["mealname"] ?? "Unknown Plan"; ?> </h1>
+                    <div id="buttons">
+                        <?php
+                        echo '<a class="buttons" href=groceryList.php?id=' . $mealid . ' ><p>View Ingredients</p></a>';
+                        ?>
+                        <button class="buttons" type="button" value="delete"><p>Delete Recipe</p></button>
+                    </div>
                 </div>
                 <div id = "week-display">
                     <?php
@@ -143,6 +178,7 @@
                     pg_close($db);
                     ?>
                 </div>
+                
             </div>
         </div>
     </body>
