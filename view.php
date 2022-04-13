@@ -87,6 +87,13 @@
                         echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";
                         echo "<h3>Ingredients:</h3><p>" . $queryResultRow['ingredients'] . "</p>";
                         echo "<h3>Instructions:</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
+			echo "<h3>Dietary Information:</h3>";
+                        foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
+                                if($queryResultRow[$diet] == "t"){
+                                        echo $diet . "<br>";
+                                }
+                        }
+
                         echo "</td></tbody></table>";
                         if(isset($_SESSION["userid"])){
 							$userid = $_SESSION["userid"];

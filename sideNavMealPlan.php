@@ -1,4 +1,4 @@
-<nav id = "left-nav">
+<nav id = "left-nav" >
                 <a class= "left-nav-tile" href=viewAccount.php>
                     <?php
                         $first = $_SESSION["firstname"];
@@ -6,18 +6,19 @@
                     ?>
                 </a>
                 <a class= "left-nav-tile" href=browse.php >
-                    <div style="border-top: 2px solid white">
+                    <div style="border-top: 2.25px solid white">
                         Browse Recipes
                     </div>
                 </a>
                 <a class= "left-nav-tile" href=viewMeals.php >
-                    <div  style="border-bottom: .7px solid white; border-top: .7px solid white">
+                    <div  style="border-bottom: 2.25px solid white; border-top: 2.25px solid white">
                         New Meal Plan
                     </div>
                 </a>
-                <div class= "left-nav-tile" style="border-bottom: 2px solid white; pointer-events:none;">
+                <div class= "left-nav-tile" style="border-bottom: .7px solid white; pointer-events:none;">
                     <a>My Meal Plans</a>
                 </div>
+                <div style="display:flex; flex-direction: column; max-height: 55vh; overflow-y:auto;overflow-x:hidden;border-bottom: 2px solid white;">
                 <?php
                     $DB_HOST='localhost';
                     $DB_USER='fetcher1';
@@ -32,8 +33,6 @@
                     }
                     //pg_close($db);
                 ?>
-                <div class= "left-nav-tile" style="border-bottom: 2px solid white; border-top: 2px solid white">
-                    <a>Grocery List</a>
                 </div>
                 
 </nav>
