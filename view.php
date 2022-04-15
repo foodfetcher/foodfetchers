@@ -90,7 +90,33 @@
 			echo "<h3>Dietary Information:</h3>";
                         foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
                                 if($queryResultRow[$diet] == "t"){
-                                        echo $diet . "<br>";
+									if($diet == "vegetarian"){
+										echo "Vegetarian<br>";
+									}
+									if($diet == "vegan"){
+										echo "Vegan<br>";
+									}
+									if($diet == "kosher"){
+										echo "Kosher<br>";
+									}
+									if($diet == "nutfree"){
+										echo "Nut-Free<br>";
+									}
+									if($diet == "wheatfree"){
+										echo "Wheat-Free<br>";
+									}
+									if($diet == "soyfree"){
+										echo "Soy-Free<br>";
+									}
+									if($diet == "glutenfree"){
+										echo "Gluten-Free<br>";
+									}
+									if($diet == "dairyfree"){
+										echo "Dairy-Free<br>";
+									}
+									/*else {
+										echo $diet . "<br>";
+									}*/
                                 }
                         }
 
