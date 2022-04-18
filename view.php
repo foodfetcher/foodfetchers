@@ -67,7 +67,8 @@
             include 'nav.php'; //write out the nav bar
         ?> 
         <div id = "Content">
-            <h1> <?php echo $queryResultRow["recipename"]; ?> </h1>
+            <h1 style="margin-block-end: 0.2em;"> <?php echo $queryResultRow["recipename"]; ?> </h1>
+			<?php echo "<p>Created by " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>"; ?>
             <div id = "results">
                 <?php
                     if(isset($invalidRecipe)){
@@ -83,8 +84,8 @@
 						            }
                         
                         echo "</td><td style='padding-left: 5px;'>";
-                        echo "<p>Created by: " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>";
-                        echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";
+                        
+                        /*echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";*/
                         echo "<h3>Ingredients:</h3><p>" . $queryResultRow['ingredients'] . "</p>";
                         echo "<h3>Instructions:</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
 			echo "<h3>Dietary Information:</h3>";
