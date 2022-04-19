@@ -72,23 +72,23 @@
             <div id = "results">
                 <?php
                     if(isset($invalidRecipe)){
-                        echo "<h1>Unknown Recipe!</h1>";
+                        echo "<h1>Unknown Recipe</h1>";
                     }
                     else{
                         echo "<table><tbody style='vertical-align: top;'><td style='width: 50%;'>";
 						            $filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 						            if (file_exists($filename)) {
-							              echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%;"/>';
+							              echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
 						            } else {
-							              echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%;"/>';
+							              echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
 						            }
                         
                         echo "</td><td style='padding-left: 5px;'>";
                         
                         /*echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";*/
-                        echo "<h3>Ingredients:</h3><p>" . $queryResultRow['ingredients'] . "</p>";
-                        echo "<h3>Instructions:</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
-			echo "<h3>Dietary Information:</h3>";
+                        echo "<h3>Ingredients</h3><p>" . $queryResultRow['ingredients'] . "</p>";
+                        echo "<h3>Instructions</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
+			echo "<h3>Dietary Information</h3>";
                         foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
                                 if($queryResultRow[$diet] == "t"){
 									if($diet == "vegetarian"){
