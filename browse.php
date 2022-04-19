@@ -130,6 +130,7 @@
 										
 										//clicking the view my recipes button
 										if(isset($_POST['myrecipes'])){
+											echo '<table width="100%">';
 											$userid = $_SESSION['userid'];
 											$res = pg_query($db, "SELECT * FROM recipes WHERE creatorid='$userid'");
 											while($row = pg_fetch_assoc($res)){
@@ -166,6 +167,7 @@
 											$authorName = $_POST['authorName'];
 											$keywordName = $_POST['keywordName'];
 											$alwayson = "on";
+											$count = 0;
 											if ($vegetarian = $_POST['vegetarianCheck'] == "false") //false when it is checked?
 											{
 												$vegetarian = "on";
@@ -253,7 +255,6 @@
 											
 											// clicking the surprise me button
 											if(isset($_POST['surprise'])){
-												$count = 0;
 												$resultArray=array();
 												while($row = pg_fetch_assoc($res)){
 													$notEmpty = true;
@@ -275,7 +276,6 @@
 											// clicking the search button
 											if(isset($_POST['searchRecipe'])){
 												echo '<table width="100%">';
-												$count = 0;
 												while($row = pg_fetch_assoc($res)){
 													$notEmpty = true;
 													$recipeid = $row["recipeid"];
