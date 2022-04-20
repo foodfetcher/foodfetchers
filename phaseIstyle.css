@@ -396,6 +396,23 @@ input[type=checkbox] {
     width: 100%;
 }
 
+#profile {
+	text-align: center;
+	background-color: rgba(255,255,255,0.95);
+}
+
+.profile {
+	border-radius: 15px;
+	background-color: rgba(255,255,255,0.95);
+	text-align: center;
+	max-width: 1000px;
+	margin: 40px auto;
+	padding: 10px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	overflow: hidden;
+	display: inline-block;
+}
+
 #content-with-sidenav {
     margin: 40px auto auto auto;
     width: 78%;
