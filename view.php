@@ -67,30 +67,57 @@
             include 'nav.php'; //write out the nav bar
         ?> 
         <div id = "Content">
-            <h1> <?php echo $queryResultRow["recipename"]; ?> </h1>
+            <h1 style="margin-block-end: 0.2em;"> <?php echo $queryResultRow["recipename"]; ?> </h1>
+			<?php echo "<p>Created by " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>"; ?>
             <div id = "results">
                 <?php
                     if(isset($invalidRecipe)){
-                        echo "<h1>Unknown Recipe!</h1>";
+                        echo "<h1>Unknown Recipe</h1>";
                     }
                     else{
                         echo "<table><tbody style='vertical-align: top;'><td style='width: 50%;'>";
 						            $filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 						            if (file_exists($filename)) {
-							              echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%;"/>';
+							              echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
 						            } else {
-							              echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%;"/>';
+							              echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
 						            }
                         
                         echo "</td><td style='padding-left: 5px;'>";
-                        echo "<p>Created by: " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>";
-                        echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";
-                        echo "<h3>Ingredients:</h3><p>" . $queryResultRow['ingredients'] . "</p>";
-                        echo "<h3>Instructions:</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
-			echo "<h3>Dietary Information:</h3>";
+                        
+                        /*echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";*/
+                        echo "<h3>Ingredients</h3><p>" . $queryResultRow['ingredients'] . "</p>";
+                        echo "<h3>Instructions</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
+			echo "<h3>Dietary Information</h3>";
                         foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
                                 if($queryResultRow[$diet] == "t"){
-                                        echo $diet . "<br>";
+									if($diet == "vegetarian"){
+										echo "Vegetarian<br>";
+									}
+									if($diet == "vegan"){
+										echo "Vegan<br>";
+									}
+									if($diet == "kosher"){
+										echo "Kosher<br>";
+									}
+									if($diet == "nutfree"){
+										echo "Nut-Free<br>";
+									}
+									if($diet == "wheatfree"){
+										echo "Wheat-Free<br>";
+									}
+									if($diet == "soyfree"){
+										echo "Soy-Free<br>";
+									}
+									if($diet == "glutenfree"){
+										echo "Gluten-Free<br>";
+									}
+									if($diet == "dairyfree"){
+										echo "Dairy-Free<br>";
+									}
+									/*else {
+										echo $diet . "<br>";
+									}*/
                                 }
                         }
 

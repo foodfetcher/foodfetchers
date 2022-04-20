@@ -408,4 +408,10 @@ input[type=checkbox] {
     width: 225px;
     height: 225px;
     object-fit: cover;
+	transition: box-shadow 200ms;
+}
+
+#resultImage:hover {
+	box-shadow: 0 0 3px gray;
+	transition: 0ms;
 }
