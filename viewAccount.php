@@ -54,7 +54,6 @@
 					echo "<div id='Email'>Email: $email</div>";
 					echo '</br><a id="password" href=changePassword.php>Change Password</a></br></br>';
 				?>
-				<a id="password" href=changePassword.php>Change Password</a>
 			</div>
         </div>
 		<div class="profile">
