@@ -40,6 +40,8 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
+			
+			$maxCol = 6;
         ?> 
         <div id="Content">
             <h1> My Profile</h1>
@@ -78,7 +80,7 @@
 						$recipeid = $row["recipeid"];
 						$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 					
-						if ($count == 8){
+						if ($count == $maxCol){
 							$count = 0;
 							echo '</tr><tr>';
 						}
@@ -105,7 +107,6 @@
 		</div>
 		<div class="profile">
 			<h2> Meal Plans </h2>
-			
 			<?php
 				$DB_HOST='localhost';
 				$DB_USER='fetcher1';
@@ -126,7 +127,7 @@
 					echo '<tr>';
 					
 					while($row = pg_fetch_assoc($res)){
-						if ($count == 8){
+						if ($count == $maxCol){
 							$count = 0;
 							echo '</tr><tr>';
 						}

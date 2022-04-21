@@ -409,8 +409,6 @@ input[type=checkbox] {
 	margin: 40px auto;
 	padding: 10px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
-	overflow: hidden;
-	display: inline-block;
 }
 
 #content-with-sidenav {
