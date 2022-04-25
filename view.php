@@ -139,6 +139,12 @@
 								echo '<input type="submit" value = "Add to favorites">';
 								echo "</form>";
 							}
+
+							$res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1 AND creatorid=$2;", Array($recipeid, $userid));
+							//echo $recipeid . $userid . " " . pg_last_error($db);
+							if(pg_num_rows($res) != 0){
+								echo "<a href='create.php?recipeid=$recipeid'>edit</a>";
+							}
                         }
                     }
 					pg_close($db);
