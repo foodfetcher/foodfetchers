@@ -17,14 +17,15 @@
         <title> Food Fetchers | Create Recipe </title>
         <link rel="stylesheet" href="phaseIstyle.css">
 		<?php
+			include 'DButils.php';
 			//echo "here!";
 			if($_SERVER['REQUEST_METHOD'] === 'POST'){
 				//print_r($_POST);
-				
+				$recipeid = $_POST["recipeid"];
 				$recipeName = $_POST["recipeName"];
 				$ingredients = $_POST["ingredients"];
 				$instructions = $_POST["instructions"];
-				$vegetarian = filter_var($_POST["vegetarian"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false"; 
+				$vegetarian = filter_var($_POST["vegetarian"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$vegan = filter_var($_POST["vegan"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$kosher = filter_var($_POST["kosher"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$nutfree = filter_var($_POST["nutfree"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
@@ -32,18 +33,32 @@
 				$soyfree = filter_var($_POST["soyfree"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$glutenfree = filter_var($_POST["glutenfree"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$dairyfree = filter_var($_POST["dairyfree"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
-				
+
 				$coverImage = $_FILES['coverimage'];
-				
+
 				//TODO: make sure to validate and sanitize these fields
-				
+
 				$userid = $_SESSION["userid"];
 				$timestamp = date('Y-m-d H:i:s');
-				include 'DButils.php';
 				$db = getDefaultDB();
-				$res = pg_query_params($db, "INSERT INTO recipes (recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING recipeid", array($recipeName, $ingredients, $instructions, $userid, $timestamp, 
-				
-				$vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree));
+				if(isset($recipeid)){
+					$res = pg_query_params($db, "SELECT recipeid FROM recipes WHERE recipeid=$1 AND creatorid=$2;", Array($recipeid, $userid));
+					if(pg_num_rows($res) != 0){
+						if(isset($_POST["delete"])){
+							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
+						}
+						else{
+							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
+						$res = pg_query_params($db, "INSERT INTO recipes (recipeid, recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING recipeid", array($recipeid, $recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree));
+						}
+					}
+					else{
+						$outcome = "You do not have permission to edit this recipe";
+					}
+				}
+				else{
+					$res = pg_query_params($db, "INSERT INTO recipes (recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING recipeid", array($recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree));
+				}
 				if($res === false){
 					$outcome = pg_last_error($db) . $vegetarian;
 				}
@@ -61,9 +76,35 @@
 						$outcome = "success";
 					}
 				}
-				
+
 				//print_r($coverImage);
-				
+
+				pg_close($db);
+			}
+			else if($_SERVER["REQUEST_METHOD"] == "GET"){
+				$recipeid = $_GET["recipeid"];
+				$userid = $_SESSION["userid"];
+				$db = getDefaultDB();
+				if(isset($recipeid)){
+					$res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid = $1 AND creatorid = $2;", Array($recipeid, $userid));
+					if(!isset($userid) || pg_num_rows($res) == 0){
+						http_response_code(403);
+						die("You do not have permission to edit this recipe!" . pg_num_rows($res));
+					}
+					$recipeInfo = pg_fetch_assoc($res);
+					$recipeName = $recipeInfo["recipename"];
+					$ingredients = $recipeInfo["ingredients"];
+					$instructions = $recipeInfo["instructions"];
+					$vegetarian = $recipeInfo["vegetarian"] == 't' ? "true" : "false";
+					$vegan = $recipeInfo["vegan"] == 't' ? "true" : "false";
+					$kosher = $recipeInfo["kosher"] == 't' ? "true" : "false";
+					$nutfree = $recipeInfo["nutfree"] == 't' ? "true" : "false";
+					$wheatfree = $recipeInfo["wheatfree"] == 't' ? "true" : "false";
+					$soyfree = $recipeInfo["soyfree"] == 't' ? "true" : "false";
+					$glutenfree = $recipeInfo["glutenfree"] == 't' ? "true" : "false";
+					$dairyfree = $recipeInfo["dairyfree"] == 't' ? "true" : "false";
+					//var_dump($vegetarian);
+				}
 				pg_close($db);
 			}
 		?>
@@ -74,12 +115,18 @@
             include 'nav.php'; //write out the nav bar
 		?>
 		<div id = "Content">
-			<h1> Create your own recipe </h1>
+		<h1> <?php if(isset($recipeName)){echo "Editing '" . $recipeName . "'";}else{echo "Create your own recipe";} ?> </h1>
 			<table style="width: 100%">
 				<form action="create.php" method="post" enctype="multipart/form-data">
 				<tr>
 					<td style="width: 30%">
 						<table style="width: 100%">
+							<tr>
+								<td>
+
+								</td>
+							</tr>
+
 							<tr>
 								<td style="display: flex;">
 									<label for="recipeName" style="flex: 0; white-space: pre; padding-top: 4px;">Recipe Name:</label>
@@ -88,7 +135,7 @@
 							</tr>
 							<tr>
 								<td style="display: flex;">
-									<label for="coverimage" style="flex: 0; white-space: pre; padding-top: 2px;" value="<?php echo $coverImage;?>">Recipe Image:</label>
+									<label for="coverimage" style="flex: 0; white-space: pre; padding-top: 2px;">Recipe Image:</label>
 									<input type="file" name="coverimage" accept=".png, .jpeg, .jpg" style="flex: 1; margin-left: 4px; width: 100%;"><br/>
 								</td>
 							</tr>
@@ -105,6 +152,7 @@
 								<td style="text-align: left;">
 									<table style="width: 100%; padding: 0 20px;">
 										<td style="width: 50%;">
+											<?php if(isset($recipeid)){ echo('<input type="hidden" name="recipeid" value="' . $recipeid . '">');}?>
 											<input type="checkbox" name="vegetarian" <?php if($vegetarian=="true"){echo "checked";} ?>>
 											<label for="vegetarian">Vegetarian</label><br/>
 											<input type="checkbox" name="vegan" <?php if($vegan=="true"){echo "checked";} ?>>
@@ -142,9 +190,21 @@
 				</tr>
 				</form>
 			</table>
-		
+			<?php
+			if(isset($recipeid)){
+				echo "
+				<form action='create.php' method='post'>
+					<input type='hidden' name='delete' value = 'true'>
+					<input type='hidden' name='recipeid' value = '$recipeid'>
+					<input type='submit' value = 'Delete this recipe (permanent)' style='color: red'>
+				</form>
+				";
+			}
+
+			?>
+
 			<div id = "results">
-				<?php 
+				<?php
 					echo $outcome;
 				?>
 			</div>
