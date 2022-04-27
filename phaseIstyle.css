@@ -180,9 +180,14 @@ input[type=checkbox] {
 }
 
 /* Homepage Intro */
-#intro {
-	height: calc(100vh - 90px);
+#landing {
+	height: calc(100vh - 14px);
 	display: flex;
+}
+
+#intro {
+	display: flex;
+	height: 100%;
 	flex-direction: column;
 	text-align: left;
 	color: #fff;
