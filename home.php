@@ -78,9 +78,6 @@
 				?>
 			</div>
 		</div>
-		
-
-        
         <div id="border-line" style="height:1.5vh; background-color:var(--green);"></div>
         <div id="info">
             <div id="info-cover">
