@@ -180,8 +180,12 @@ input[type=checkbox] {
 }
 
 /* Homepage Intro */
+#landing {
+	height: calc(100vh - 14px);
+	display: flex;
+}
+
 #intro {
-	height: calc(100vh - 90px);
 	display: flex;
 	flex-direction: column;
 	text-align: left;
@@ -189,7 +193,6 @@ input[type=checkbox] {
 	justify-content: center;
 	padding: 0 2vw;
 	background-color: rgba(0,0,0,0.3);
-	width: 50vh;
 }
 
 #intro a:hover {

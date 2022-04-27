@@ -31,56 +31,53 @@
 			include "DButils.php";
             $db = getDefaultDB();
         ?> 
-        <div id="intro">
-            <p id="title">
-                Fast.<br>Simple.<br>Delicious.<br>
-            </p>
-            <p id="sub-title">
-                <i>The Meal Planner Made For You</i>
-            </p>
-            <?php
-				if ($log == "Login"){ 
-					echo '<a href = signup.php><div id = "interested">
-						<p> Click Here to Get Started! </p>
-						</div></a>';
-				};
-            ?>
-        </div>
-		
-		<div id="Content">
-		<?php
-			$dateSeed = date("Ymd"); //sets the current date to a YYYYMMDD format
-			mt_srand($dateSeed); //sets the date from above as the seed to the random number generator below, ensuring each day will have only one recipe
-			$allRecipes = pg_query($db, "SELECT recipeid FROM recipes");
-			$idArray=array();
-			while($row = pg_fetch_assoc($allRecipes)){
-				$recipeid = $row["recipeid"];
-				$intrecipeid = intval($recipeid);
-				array_push($idArray, $intrecipeid);
-			}
-			$arrayCount = (count($idArray));
-			$recipeOfTheDay = mt_rand(1,$arrayCount-1);
-			echo "<br>";
-			$recipeOfTheDay = $idArray[$recipeOfTheDay];
-			echo '<table width="100%">';
-			$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
-			while($row = pg_fetch_assoc($res)){
-				echo '<style=text-align:center;"> Recipe of the Day';
-				$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
-
-				if (file_exists($filename)) {
-					echo '<td width="33%" style="vertical-align:top"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
-					} 
-					else 
-					{
-					echo '<td width="33%" style="vertical-align:top"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+		<div id="landing">
+			<div id="intro">
+				<p id="title">
+					Fast.<br>Simple.<br>Delicious.<br>
+				</p>
+				<p id="sub-title">
+					<i>The Meal Planner Made For You</i>
+				</p>
+				<?php
+					if ($log == "Login"){ 
+						echo '<a href = signup.php><div id = "interested">
+							<p> Click Here to Get Started! </p>
+							</div></a>';
+					};
+				?>
+			</div>
+			<div id="Content" style="width: auto; margin: auto; padding: 20px 40px; background-color: rgba(255,255,255,0.8);">
+				<?php
+					$dateSeed = date("Ymd"); //sets the current date to a YYYYMMDD format
+					mt_srand($dateSeed); //sets the date from above as the seed to the random number generator below, ensuring each day will have only one recipe
+					$allRecipes = pg_query($db, "SELECT recipeid FROM recipes");
+					$idArray=array();
+					while($row = pg_fetch_assoc($allRecipes)){
+						$recipeid = $row["recipeid"];
+						$intrecipeid = intval($recipeid);
+						array_push($idArray, $intrecipeid);
 					}
-				echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
-			}
-			echo '</table>';
-		?>
+					$arrayCount = (count($idArray));
+					$recipeOfTheDay = mt_rand(1,$arrayCount-1);
+					$recipeOfTheDay = $idArray[$recipeOfTheDay];
+					$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
+					while($row = pg_fetch_assoc($res)){
+						echo '<h3>Recipe of the Day</h3>';
+						$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+
+						if (file_exists($filename)) {
+							echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
+							} 
+							else 
+							{
+							echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+							}
+						echo '<h3 style="margin-block-end: 0;"><a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></h3>';
+					}
+				?>
+			</div>
 		</div>
-        
         <div id="border-line" style="height:1.5vh; background-color:var(--green);"></div>
         <div id="info">
             <div id="info-cover">
