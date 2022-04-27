@@ -122,12 +122,6 @@
 					<td style="width: 30%">
 						<table style="width: 100%">
 							<tr>
-								<td>
-
-								</td>
-							</tr>
-
-							<tr>
 								<td style="display: flex;">
 									<label for="recipeName" style="flex: 0; white-space: pre; padding-top: 4px;">Recipe Name:</label>
 									<input type="text" name="recipeName" placeholder="steamed hams" style="flex: 1; margin-left: 4px;" value="<?php echo $recipeName;?>" required><br/>
@@ -179,7 +173,7 @@
 					</td>
 					<td style="width: 70%; vertical-align: top; border-left: 1px solid #888; padding-left: 5px;">
 						<label for="instructions">Instructions</label><br>
-						<textarea name="instructions" rows="12" cols="80" placeholder="describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post! (just don't be evil with those tags)" required><?php echo $instructions;?></textarea>
+						<textarea name="instructions" rows="12" cols="90" style="resize: vertical;" placeholder="describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post! (just don't be evil with those tags)" required><?php echo $instructions;?></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -193,11 +187,7 @@
 			<?php
 			if(isset($recipeid)){
                     include 'deleteRecipe.php';//include delete modal
-                    
 			}
-            
-               
-            
 			?>
 		</div>
 	</body>

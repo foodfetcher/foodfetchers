@@ -76,49 +76,47 @@
                     }
                     else{
                         echo "<table><tbody style='vertical-align: top;'><td style='width: 50%;'>";
-						            $filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
-						            if (file_exists($filename)) {
-							              echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
-						            } else {
-							              echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
-						            }
+						$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+						if (file_exists($filename)) {
+							echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
+						}
+						else {
+							echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
+						}
                         
                         echo "</td><td style='padding-left: 5px;'>";
                         
                         /*echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";*/
                         echo "<h3>Ingredients</h3><p>" . $queryResultRow['ingredients'] . "</p>";
                         echo "<h3>Instructions</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
-			echo "<h3>Dietary Information</h3>";
+                        echo "<h3>Dietary Information</h3>";
                         foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
-                                if($queryResultRow[$diet] == "t"){
-									if($diet == "vegetarian"){
-										echo "Vegetarian<br>";
-									}
-									if($diet == "vegan"){
-										echo "Vegan<br>";
-									}
-									if($diet == "kosher"){
-										echo "Kosher<br>";
-									}
-									if($diet == "nutfree"){
-										echo "Nut-Free<br>";
-									}
-									if($diet == "wheatfree"){
-										echo "Wheat-Free<br>";
-									}
-									if($diet == "soyfree"){
-										echo "Soy-Free<br>";
-									}
-									if($diet == "glutenfree"){
-										echo "Gluten-Free<br>";
-									}
-									if($diet == "dairyfree"){
-										echo "Dairy-Free<br>";
-									}
-									/*else {
-										echo $diet . "<br>";
-									}*/
-                                }
+							if($queryResultRow[$diet] == "t"){
+								if($diet == "vegetarian"){
+									echo "✓&nbsp;Vegetarian&nbsp; ";
+								}
+								if($diet == "vegan"){
+									echo "✓&nbsp;Vegan&nbsp; ";
+								}
+								if($diet == "kosher"){
+									echo "✓&nbsp;Kosher&nbsp; ";
+								}
+								if($diet == "nutfree"){
+									echo "✓&nbsp;Nut&#8209;Free&nbsp; ";
+								}
+								if($diet == "wheatfree"){
+									echo "✓&nbsp;Wheat&#8209;Free&nbsp; ";
+								}
+								if($diet == "soyfree"){
+									echo "✓&nbsp;Soy&#8209;Free&nbsp; ";
+								}
+								if($diet == "glutenfree"){
+									echo "✓&nbsp;Gluten&#8209;Free&nbsp; ";
+								}
+								if($diet == "dairyfree"){
+									echo "✓&nbsp;Dairy&#8209;Free&nbsp; ";
+								}
+							}
                         }
 
                         echo "</td></tbody></table>";
