@@ -10,7 +10,6 @@
         header("Location: home.php");
         die('<a href="home.php">Click here if you are not automatically redirected</a>');
 	}
-    
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +18,7 @@
         <link rel="stylesheet" href="phaseIstyle.css">
 		<?php
 			include 'DButils.php';
+			//echo "here!";
 			if($_SERVER['REQUEST_METHOD'] === 'POST'){
 				//print_r($_POST);
 				$recipeid = $_POST["recipeid"];
@@ -93,7 +93,7 @@
 					}
 					$recipeInfo = pg_fetch_assoc($res);
 					$recipeName = $recipeInfo["recipename"];
-					$ingredients = $recipeInfo["ingredients"];
+					$ingredients = json_decode($recipeInfo["ingredients"]);
 					$instructions = $recipeInfo["instructions"];
 					$vegetarian = $recipeInfo["vegetarian"] == 't' ? "true" : "false";
 					$vegan = $recipeInfo["vegan"] == 't' ? "true" : "false";
@@ -104,6 +104,8 @@
 					$glutenfree = $recipeInfo["glutenfree"] == 't' ? "true" : "false";
 					$dairyfree = $recipeInfo["dairyfree"] == 't' ? "true" : "false";
 					//var_dump($vegetarian);
+
+					echo "<script>var ingredients = '$ingredients'</script>";
 				}
 				pg_close($db);
 			}
@@ -115,18 +117,12 @@
             include 'nav.php'; //write out the nav bar
 		?>
 		<div id = "Content">
-		<h1> <?php if(isset($recipeName)){echo "Editing: " . $recipeName . "";}else{echo "Create your own recipe";} ?> </h1>
+		<h1> <?php if(isset($recipeName)){echo "Editing '" . $recipeName . "'";}else{echo "Create your own recipe";} ?> </h1>
 			<table style="width: 100%">
 				<form action="create.php" method="post" enctype="multipart/form-data">
 				<tr>
-					<td style="width: 30%">
+					<td style="width: 30%; vertical-align: top;">
 						<table style="width: 100%">
-							<tr>
-								<td>
-
-								</td>
-							</tr>
-
 							<tr>
 								<td style="display: flex;">
 									<label for="recipeName" style="flex: 0; white-space: pre; padding-top: 4px;">Recipe Name:</label>
@@ -140,9 +136,29 @@
 								</td>
 							</tr>
 							<tr>
-								<td style="display: flex;">
-									<label for="ingredients" style="flex: 0; white-space: pre; padding-top: 4px;">Ingredients:</label>
-									<input type="text" name="ingredients" placeholder="walnuts, soy sauce, cinnamon" style="flex: 1; margin-left: 4px;" value="<?php echo $ingredients;?>" required><br/>
+								<td>
+									<div id="ingredientsTable">
+										<input type='number' name='amount' style="width: 32px; margin-right: 4px;">
+										<select name='unit'>
+											<option value='teaspoon'>tsp</option>
+											<option value='tablespoon'>tbsp</option>
+											<option value='floz'>fl oz</option>
+											<option value='oz'>oz</option>
+											<option value='cup'>cup</option>
+											<option value='pint'>pint</option>
+											<option value='quart'>quart</option>
+											<option value='ml'>ml</option>
+											<option value='liter'>l</option>
+											<option value='g'>g</option>
+										</select>
+										<input type='text' name='ingredient' placeholder='ingredient' style="width:100%; margin-left: 4px;"><br/>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<button style="width: 100%">Add More Ingredients</button>
+									<input type='hidden' value='placeholder json'/>
 								</td>
 							</tr>
 							<tr>
@@ -179,7 +195,7 @@
 					</td>
 					<td style="width: 70%; vertical-align: top; border-left: 1px solid #888; padding-left: 5px;">
 						<label for="instructions">Instructions</label><br>
-						<textarea name="instructions" rows="12" cols="80" placeholder="describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post! (just don't be evil with those tags)" required><?php echo $instructions;?></textarea>
+						<textarea name="instructions" rows="14" cols="90" style="resize: vertical;" placeholder="describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post! (just don't be evil with those tags)" required><?php echo $instructions;?></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -192,13 +208,15 @@
 			</table>
 			<?php
 			if(isset($recipeid)){
-                    include 'deleteRecipe.php';//include delete modal
-                    
+				include 'deleteRecipe.php';//include delete modal
 			}
-            
-               
-            
 			?>
+
+			<div id = "results">
+				<?php
+					echo $outcome;
+				?>
+			</div>
 		</div>
 	</body>
 </html>
