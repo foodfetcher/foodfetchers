@@ -10,6 +10,7 @@
         header("Location: home.php");
         die('<a href="home.php">Click here if you are not automatically redirected</a>');
 	}
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,6 @@
         <link rel="stylesheet" href="phaseIstyle.css">
 		<?php
 			include 'DButils.php';
-			//echo "here!";
 			if($_SERVER['REQUEST_METHOD'] === 'POST'){
 				//print_r($_POST);
 				$recipeid = $_POST["recipeid"];
@@ -115,7 +115,7 @@
             include 'nav.php'; //write out the nav bar
 		?>
 		<div id = "Content">
-		<h1> <?php if(isset($recipeName)){echo "Editing '" . $recipeName . "'";}else{echo "Create your own recipe";} ?> </h1>
+		<h1> <?php if(isset($recipeName)){echo "Editing: " . $recipeName . "";}else{echo "Create your own recipe";} ?> </h1>
 			<table style="width: 100%">
 				<form action="create.php" method="post" enctype="multipart/form-data">
 				<tr>
@@ -192,22 +192,13 @@
 			</table>
 			<?php
 			if(isset($recipeid)){
-				echo "
-				<form action='create.php' method='post'>
-					<input type='hidden' name='delete' value = 'true'>
-					<input type='hidden' name='recipeid' value = '$recipeid'>
-					<input type='submit' value = 'Delete this recipe (permanent)' style='color: red'>
-				</form>
-				";
+                    include 'deleteRecipe.php';//include delete modal
+                    
 			}
-
+            
+               
+            
 			?>
-
-			<div id = "results">
-				<?php
-					echo $outcome;
-				?>
-			</div>
 		</div>
 	</body>
 </html>
