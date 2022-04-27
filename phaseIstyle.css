@@ -187,14 +187,12 @@ input[type=checkbox] {
 
 #intro {
 	display: flex;
-	height: 100%;
 	flex-direction: column;
 	text-align: left;
 	color: #fff;
 	justify-content: center;
 	padding: 0 2vw;
 	background-color: rgba(0,0,0,0.3);
-	width: 50vh;
 }
 
 #intro a:hover {
