@@ -18,20 +18,20 @@
         <title> Food Fetchers | Your Account </title>
         <link rel="stylesheet" href="phaseIstyle.css">
         <style>
-			.favorites table, .meals table {
+			.favorites table, .mealPlans table, .meals table{
 				width: 100%;
 			}
 
-			.favorites td {
+			.favorites td, .meals td {
 				width: 10%;
 				vertical-align: top;
 			}
 
-			.meals tr {
+			.mealPlans tr {
 				height: 25px;
 			}
 
-			.meals td {
+			.mealPlans td {
 				width: 8%;
 			}
 		</style>
@@ -101,18 +101,18 @@
 					echo '</tr>';
 					echo '</table>';
 				}
-				pg_close($db);
+				//pg_close($db);
 			?>
 		</div>
 		<div class="profile">
 			<h2> Meal Plans </h2>
 			<?php
-				$DB_HOST='localhost';
+				/*$DB_HOST='localhost';
 				$DB_USER='fetcher1';
 				$DB_PASS='1234';
 				$DB_NAME='main'; 
 				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
-
+				*/
 				//display account recipes
 				$res = pg_query($db, "SELECT * FROM meals WHERE customerid='$userid'");
 
@@ -122,7 +122,7 @@
 				else{
 					$count = 0;
 
-					echo '<table class="meals">';
+					echo '<table class="mealPlans">';
 					echo '<tr>';
 
 					while($row = pg_fetch_assoc($res)){
@@ -133,6 +133,57 @@
 						//echo '<td>';
 						echo '<td>';
 						echo '<a href="viewMeal.php?id=' . $row["mealid"] . '"><div>' . $row['mealname'] . '</div></a>';
+						echo '</td>';
+						$count++;
+					}
+
+					echo '</tr>';
+					echo '</table>';
+				}
+				//pg_close($db);
+			?>
+		</div>
+		<div class="profile">
+			<h2> Your Recipes </h2>
+			<?php
+				/*$DB_HOST='localhost';
+				$DB_USER='fetcher1';
+				$DB_PASS='1234';
+				$DB_NAME='main'; 
+				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
+				*/
+				//display account recipes
+				$res1 = pg_query($db, "SELECT * FROM recipes WHERE creatorid='$userid'");
+
+				if ($res1 === false){
+					echo 'It looks like you do have not created any recipes. Go to the create recipe page to make one!';
+				}
+				else{
+					$count = 0;
+
+					echo '<table class="meals">';
+					echo '<tr>';
+
+					while($row = pg_fetch_assoc($res1)){
+						$recipeid = $row["recipeid"];
+						$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+
+						if ($count == $maxCol){
+							$count = 0;
+							echo '</tr><tr>';
+						}
+
+						echo '<td>';
+						if (file_exists($filename)) {
+							echo '<a href="view.php?id=' . $recipeid . '"><img id="recipeImage" src="coverimages/' . $recipeid . '" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
+						} 
+						else {
+							echo '<a href="view.php?id=' . $recipeid . '"><img id="recipeImage" src="coverimages/logo.png" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
+						}
+
+						$recipeName = pg_query($db, "SELECT recipename FROM recipes WHERE recipeid='$recipeid'");
+						$row = pg_fetch_assoc($recipeName);
+						echo '<a href="view.php?id=' . $recipeid . '">' . $row['recipename'] . '</a></br>';
 						echo '</td>';
 						$count++;
 					}

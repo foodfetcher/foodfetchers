@@ -300,101 +300,6 @@ input[type=checkbox] {
 	transition: left 3s 0.25s;
 }
 
-/* Meal Planner */
-#content-container{
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-	min-height: calc(100vh - 80px);
-}
-
-#left-nav-container{
-	width: 10vw;
-	min-width: 120px;
-}
-
-#left-nav{
-    background-color: var(--teal);
-    width: 10vw;
-	position: fixed;
-	height: 100%;
-}
-
-#left-nav a{
-    font-family: Arial;
-	color: white;
-	text-decoration: none;
-}
-
-#left-nav div{
-    min-height: 45px;
-    display: flex;
-    align-items: center;
-    padding: .15vh .5vw .15vh .5vw;
-    border: 1px solid transparent;
-}
-
-#left-nav div:hover{
-    background-color: rgba(255,255,255,0.15);
-	border: 1px solid rgba(255,255,255,0.25);
-    min-height: 45px;
-}
-
-.day-tile{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.day-tile-label{
-    width: 4.125vh;
-    min-height: 8.5vh; 
-    margin: 0 .25vw 0 0;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    writing-mode: vertical-lr;
-    border-right: 2px solid var(--teal);
-	cursor: default;
-}
-
-.meal-tile{
-    border: 1px solid var(--teal);
-    position: relative;
-    background-color: #dbf9d1;
-    width: 8.25vh;
-    height: 8.25vh;
-    text-align: center;
-    align-items: center;
-	cursor: pointer;
-	transition: border 200ms;
-	margin: 1px;
-}
-
-.meal-tile:hover{
-    border: 1px solid black;
-}
-
-.meal-tile:hover div.meal-tile-cover{
-    display: block;
-}
-
-.meal-tile-text{
-	width: 100%;
-	position: absolute;
-	text-align: center;
-	background-color: rgba(244,244,244,.8);
-}
-
-.meal-tile-cover{
-    display: none;
-    position: absolute;
-    background-image: url(Images/plus.png);
-    background-size: contain;
-    height: 100%;
-    width: 100%;
-}
 
 #profile {
 	text-align: center;
@@ -408,14 +313,6 @@ input[type=checkbox] {
 	max-width: 1000px;
 	margin: 40px auto;
 	padding: 10px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-#content-with-sidenav {
-    margin: 40px auto auto auto;
-    width: 78%;
-    background-color: white;
-    border-radius: 15px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
