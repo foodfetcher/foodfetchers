@@ -200,6 +200,7 @@
                 justify-content: center;
                 cursor:default;
                 border-bottom: 1px solid black;
+                flex-shrink: 0;
             }
             .day-tile-content{
                 flex-grow: 1;
