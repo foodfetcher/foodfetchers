@@ -8,28 +8,38 @@
 	{
 		$log = "Login";
     }
-    
+
 	include 'DButils.php';
-	
+
     $mealid = (int)$_GET["id"];
     $mealInfo = array();
     $db = getDefaultDB();
- 
-    $DB_HOST='localhost';
-    $DB_USER='fetcher1';
-    $DB_PASS='1234';
-    $DB_NAME='main'; 
+
     $userid = $_SESSION['userid'];
-    $db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
     $delimeter ="#$%^&";
-    
+
+	//handle recipe deletion
+	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["delete"]) && filter_var($_POST["delete"], FILTER_VALIDATE_BOOLEAN)){
+		$res = pg_query_params($db, "SELECT mealid FROM meals WHERE mealid=$1 AND customerid=$2;", Array($_POST["mealid"], $userid));
+		if(pg_num_rows($res) == 0){
+			$deleteOutcome = "You do not have permission to edit this meal plan!";
+		}else{
+			$res = pg_query_params($db, "DELETE FROM meals WHERE mealid=$1;", Array($_POST["mealid"]));
+			if($res == false){
+				$deleteOutcome = pg_last_error($db);
+			}else{
+				$deleteOutcome = "Success!";
+			}
+		}
+	}
+
     function getIngredients($planId,$delimeter, $db){
         $res = pg_query($db, "SELECT ingredients FROM mealline INNER JOIN
         recipes ON mealline.recipeid=recipes.recipeid WHERE mealid=$planId
         ");
         echo pg_last_error($db);
         echo '<ul class="ingredients-list">';
-        
+
             $groceryList = Array();
         while($row = pg_fetch_assoc($res)){
             $input = explode($delimeter,$row['ingredients'],PHP_INT_MAX);
@@ -46,19 +56,19 @@
                             //echo '<br>';echo ' total: '; echo $elt ;echo $lastElt + $total. '<br>';
                            $groceryList[$exists] = $numElt + $total;
                             $match = true;
-                            
+
                             break;
-                        } 
+                        }
                     }
                     if(!$match){
                     $groceryList = $groceryList + Array($newElt => $numElt );
                     }
                     $numElt = false;
                     $unitElt = false;
-                    
+
                 } elseif($numElt){
                     $unitElt = $elt;
-                
+
                 } else {
                 $numElt = $elt;
                 }
@@ -68,7 +78,7 @@
                 echo '<li>' . $quantity . ' ' . $ingredient . '</li>';
             }
         echo '</ul>';
-        
+
     }
 
 ?>
@@ -87,7 +97,7 @@
         function toggleOpen(el){
             var viewMeal = el.parentElement.nextElementSibling;
             var viewIngredients = viewMeal.nextElementSibling;
-            
+
             if (viewMeal.style.height) {
                 el.classList.toggle("open");
                 viewMeal.style.height = null;
@@ -96,7 +106,7 @@
                 el.classList.toggle("open");
                 viewMeal.style.height = "calc(90% - 1vh)";
                 viewIngredients.style.height = "calc(90% - 1vh)";
-            } 
+            }
         }
         function openIngredients(el){
             var viewMeal = el.parentElement.parentElement;
@@ -125,20 +135,20 @@
         <?php
             include 'nav.php'; //write out the nav bar
             include 'deletePlan.php';//delete confirmation modal
-        ?> 
+        ?>
             <div id = "plan-display">
                 <?php
                     $res = pg_query($db, "SELECT * FROM meals WHERE customerid=$userid");
                     echo pg_last_error($db);
                     while($row = pg_fetch_assoc($res)){
-                    $planName=$row["mealname"];
-                    echo '<div class="plan-title">
-                              <div class="plan-title-text" onclick="scrollToTop(this)" >'.$planName.'</div>
-                          </div>';
-                                              
-                    $mealid = $row['mealid'];
-                    include 'viewMeal.php';
-                    include 'viewIngredients.php';
+						$planName=$row["mealname"];
+						echo '<div class="plan-title">
+								  <div class="plan-title-text" onclick="scrollToTop(this)" >'.$planName.'</div>
+							  </div>';
+
+						$mealid = $row['mealid'];
+						include 'viewMeal.php';
+						include 'viewIngredients.php';
                     }
                     echo '<div id="bottom-spacer"></div>';
                     pg_close($db);
