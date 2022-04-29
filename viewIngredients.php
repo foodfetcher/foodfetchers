@@ -12,7 +12,7 @@
         </button>
         <div class="ingredients-section">
             <?php
-               getIngredients($mealid,$delimeter, $db);
+               listIngredients($mealid, $db);
             ?>
         </div>
     </div>

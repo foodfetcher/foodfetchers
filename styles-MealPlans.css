@@ -210,7 +210,6 @@
             }
             #scroll-image{
                 position: fixed;
-                width: 4vw;
                 height: 30vh;
                 left: 88vw;
                 bottom: 5.5vh;
@@ -340,7 +339,9 @@
                 display: none;
                 position: absolute;
                 background-image: url(Images/plus.png);
-                background-size: contain;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100% 100%;
                 height: 100%;
                 width: 100%;
             }

@@ -4,14 +4,15 @@ function clearModal(el){
         event.target.style.display = "none";
     }
 }
-function showModal(){
+function showModal(planId){
     document.getElementById('deleteModal').style.display='flex';
+    document.getElementById('trueDelete').value=planId;
 }
 function showOutcome(){
-    document.getElementById('resultsTitle').innerHTML= 'resultsTitle';
+    document.getElementById('resultsTitle').innerHTML= 'resultsTitle'; 
 }
 function returnFromPage(){
-    window.location.href = "browse.php";
+    window.location.href = "MealPlans.php";
 }
 </script>
 <style>
@@ -133,7 +134,7 @@ function returnFromPage(){
             <input type="submit" value="Delete" onclick="showOutcome()" id="deleteButton">
         </div>
         <input type='hidden' name='delete' value='true'>
-        <input type='hidden' name='mealid' value="<?php echo $mealid ?>">
+        <input id="trueDelete" type='hidden' name='recipeid' value="">
     </div>
 </div>
 </form>

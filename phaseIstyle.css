@@ -334,7 +334,35 @@ input[type=checkbox] {
 }
 
 /* Ingredient Table */
-#ingredientsTable {
+
+#ingredients-column{
+    display:flex;
+    flex-direction:column;
+}
+.ingredients-row{
 	display: flex;
 	flex-direction: row;
+}
+.ingredients-row-num{
+	width: 20%;
+    margin: 0;
+}
+.ingredients-row-select{
+	width: 20%;
+    height: 27px;
+    padding: 0;
+}
+.ingredients-row-ing{
+	margin-left: 4px;
+    flex:1;
+}
+
+.ingredientsX{
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+.ingredientsX:hover {
+    cursor: pointer;
+    color: #f44336;
 }

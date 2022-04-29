@@ -1,6 +1,6 @@
 
 
-<div class="view-meal"  >
+<div class="view-meal">
         
                 <div class="week-display">
                     <?php
@@ -17,6 +17,7 @@
                             $result = pg_query($db, "SELECT * FROM recipes WHERE recipeid=$thisId;");
                             $rrow = pg_fetch_assoc($result);
                             //print_r($row);
+                            if(!empty($rrow)){
                              echo '<div class ="meal-tile">
                                             <div class = "meal-tile-text">' . $rrow['recipename'] . '</div>
                                             <div class= "meal-tile-cover" ></div>';
@@ -27,6 +28,7 @@
 												} else {
 													echo '<img src="Images/logo.png" alt="recipe cover image" style="width:100%;height:100%;object-fit:cover;">
                                                 </div>';}
+                            }
                         }
                         echo "</div></div>";
                     }
@@ -35,7 +37,7 @@
                     
                 </div>
                 <div class="submit-clear">
-                        <input type="button" value = "Delete Meal Plan"  onclick="showModal()" >
+                        <input type="button" value = "Delete Meal Plan" onclick="showModal('<?php echo $mealid; ?>')" >
                         <input type="button" value = "View Ingredients" onclick="openIngredients(this)" >
                     </div>
 </div>

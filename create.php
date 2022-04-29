@@ -18,12 +18,11 @@
         <link rel="stylesheet" href="phaseIstyle.css">
 		<?php
 			include 'DButils.php';
-			//echo "here!";
 			if($_SERVER['REQUEST_METHOD'] === 'POST'){
 				//print_r($_POST);
 				$recipeid = $_POST["recipeid"];
-				$recipeName = $_POST["recipeName"];
-				$ingredients = $_POST["ingredients"];
+                $recipeName = $_POST["recipeName"];
+				$ingredients = json_encode($_POST["ingredients"]);
 				$instructions = $_POST["instructions"];
 				$vegetarian = filter_var($_POST["vegetarian"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$vegan = filter_var($_POST["vegan"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
@@ -48,7 +47,7 @@
 							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
 						}
 						else{
-						pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
+							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
 						$res = pg_query_params($db, "INSERT INTO recipes (recipeid, recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING recipeid", array($recipeid, $recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree));
 						}
 					}
@@ -93,7 +92,7 @@
 					}
 					$recipeInfo = pg_fetch_assoc($res);
 					$recipeName = $recipeInfo["recipename"];
-					$ingredients = json_decode($recipeInfo["ingredients"]);
+					$ingredients = $recipeInfo["ingredients"];
 					$instructions = $recipeInfo["instructions"];
 					$vegetarian = $recipeInfo["vegetarian"] == 't' ? "true" : "false";
 					$vegan = $recipeInfo["vegan"] == 't' ? "true" : "false";
@@ -104,24 +103,59 @@
 					$glutenfree = $recipeInfo["glutenfree"] == 't' ? "true" : "false";
 					$dairyfree = $recipeInfo["dairyfree"] == 't' ? "true" : "false";
 					//var_dump($vegetarian);
-
-					echo "<script>var ingredients = '$ingredients'</script>";
 				}
 				pg_close($db);
 			}
 		?>
+        <script>
+        var ingIndx = 0;
+        function newIngredientLine(){
+            var inputs = document.getElementById("ingredients-template").content.firstElementChild.children;
+            for(var i=0;i<3; i++){
+                inputs[i].name = inputs[i].name.slice(0,12) + ingIndx + inputs[i].name.slice(13);
+            }
+            ingIndx++;
+            var ingredientsCol = document.getElementById("ingredients-column");
+            var ingredientsRow = document.getElementById("ingredients-template").content.cloneNode(true);
+            ingredientsCol.appendChild(ingredientsRow);
+        }
+        function removeIngredientLine(el){
+            el.parentElement.remove();
+        }
+        </script>
 	</head>
     <body>
+        <template id="ingredients-template">
+			<div class="ingredients-row">
+				<input class='ingredients-row-num' type='number' name='ingredients[*][num]' style="width: 32px; margin-right: 4px;">
+				<select class='ingredients-row-select' name='ingredients[*][unit]'>
+                    <option value='teaspoon'>tsp</option>
+					<option value='tablespoon'>tbsp</option>
+					<option value='floz'>fl oz</option>
+					<option value='oz'>oz</option>
+                    <option value='cup'>cup</option>
+                    <option value='pint'>pint</option>
+					<option value='quart'>quart</option>
+					<option value='ml'>ml</option>
+					<option value='liter'>l</option>
+                    <option value='g'>g</option>
+				</select>
+				<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' placeholder='ingredient'>
+                <div class='ingredientsX' onclick="removeIngredientLine(this)">&#10006;</div>
+                <?php if(isset($recipeName)){echo '<style>.ingredientsX{display:block;}</style>';}else{echo '<style>.ingredientsX{display:none;}</style>';} ?>
+			</div>
+        </template>
 		<div id="background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
 		?>
 		<div id = "Content">
-		<h1> <?php if(isset($recipeName)){echo "Editing '" . $recipeName . "'";}else{echo "Create your own recipe";} ?> </h1>
+		<h1> <?php if(isset($recipeName)){echo "Editing: " . $recipeName . "";}else{echo "Create your own recipe";} ?> </h1>
+        <form action="create.php" method="post" enctype="multipart/form-data">
 			<table style="width: 100%">
-				<form action="create.php" method="post" enctype="multipart/form-data">
+				
 				<tr>
-					<td style="width: 30%; vertical-align: top;">
+					<td style="width: 30%">
 						<table style="width: 100%">
 							<tr>
 								<td style="display: flex;">
@@ -136,29 +170,38 @@
 								</td>
 							</tr>
 							<tr>
-								<td>
-									<div id="ingredientsTable">
-										<input type='number' name='amount' style="width: 32px; margin-right: 4px;">
-										<select name='unit'>
-											<option value='teaspoon'>tsp</option>
-											<option value='tablespoon'>tbsp</option>
-											<option value='floz'>fl oz</option>
-											<option value='oz'>oz</option>
-											<option value='cup'>cup</option>
-											<option value='pint'>pint</option>
-											<option value='quart'>quart</option>
-											<option value='ml'>ml</option>
-											<option value='liter'>l</option>
-											<option value='g'>g</option>
-										</select>
-										<input type='text' name='ingredient' placeholder='ingredient' style="width:100%; margin-left: 4px;"><br/>
-									</div>
+                                <td>
+                                    <div id="ingredients-column">
+                                        <?php if(isset($recipeName)){
+                                            $groceryList = showIngredients($ingredients,$db);
+                                                foreach($groceryList as $ingredient => $quantity){
+                                                echo "<div class='ingredients-row'>
+                                                        <input class='ingredients-row-num' type='number' name='ingredients[*][num]' value=" . $quantity[0] ." style='width: 32px; margin-right: 4px;'>
+                                                        <select class='ingredients-row-select' name='ingredients[*][unit]' onload='this.value = 'pint''>
+                                                            <option value='teaspoon' "; if($quantity[1] == 'teaspoon'){echo 'selected';} echo ">tsp</option>
+			                                        		<option value='tablespoon' "; if($quantity[1] == 'tablespoon'){echo 'selected';} echo ">tbsp</option>
+			                                        		<option value='floz' "; if($quantity[1] == 'floz'){echo 'selected';} echo ">fl oz</option>
+			                                        		<option value='oz' "; if($quantity[1] == 'oz'){echo 'selected';} echo ">oz</option>
+                                                            <option value='cup' "; if($quantity[1] == 'cup'){echo 'selected';} echo ">cup</option>
+                                                            <option value='pint'  "; if($quantity[1] == 'pint'){echo 'selected';} echo ">pint</option>
+			                                        		<option value='quart' "; if($quantity[1] == 'quart'){echo 'selected';} echo ">quart</option>
+			                                        		<option value='ml' "; if($quantity[1] == 'ml'){echo 'selected';} echo ">ml</option>
+			                                        		<option value='liter' "; if($quantity[1] == 'liter'){echo 'selected';} echo ">l</option>
+                                                            <option value='g' "; if($quantity[1] == 'g'){echo 'selected';} echo ">g</option>
+			                                        	</select>
+			                                        	<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' value=" . $ingredient .">
+                                                        <div class='ingredientsX' onclick='removeIngredientLine(this)'>&#10006;</div>
+			                                        </div>";
+                                                } 
+                                        }else {
+                                                    echo '<script> newIngredientLine() </script>';
+                                            } ?>
+                                    </div>
 								</td>
 							</tr>
-							<tr>
+                            <tr>
 								<td>
-									<button style="width: 100%">Add More Ingredients</button>
-									<input type='hidden' value='placeholder json'/>
+									<button type="button" onclick="newIngredientLine()"style="width: 100%">Add More Ingredients</button>
 								</td>
 							</tr>
 							<tr>
@@ -204,19 +247,13 @@
 						<input type="reset" value = "Clear">
 					<td>
 				</tr>
-				</form>
-			</table>
+				
+			</table></form>
 			<?php
 			if(isset($recipeid)){
-				include 'deleteRecipe.php';//include delete modal
+                    include 'deleteRecipe.php';//include delete modal
 			}
 			?>
-
-			<div id = "results">
-				<?php
-					echo $outcome;
-				?>
-			</div>
 		</div>
 	</body>
 </html>

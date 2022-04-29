@@ -87,7 +87,11 @@
                         echo "</td><td style='padding-left: 5px;'>";
                         
                         /*echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";*/
-                        echo "<h3>Ingredients</h3><p>" . $queryResultRow['ingredients'] . "</p>";
+                        echo "<h3>Ingredients</h3><p>";
+                        $groceryList =  showIngredients($queryResultRow['ingredients'],$db);
+                        foreach($groceryList as $ingredient => $quantity){
+                            echo  $quantity[0] . ' '. $quantity[1] . ' ' . $ingredient . "<br>"; 
+                        }
                         echo "<h3>Instructions</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
                         echo "<h3>Dietary Information</h3>";
                         foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
