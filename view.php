@@ -75,7 +75,7 @@
                         echo "<h1>Unknown Recipe</h1>";
                     }
                     else{
-                        echo "<table><tbody style='vertical-align: top;'><td style='width: 50%;'>";
+                        echo "<table style='width: 100%;'><tbody style='vertical-align: top;'><td style='width: 45%;'>";
 						$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 						if (file_exists($filename)) {
 							echo '<img src="coverimages/' . $recipeid . '" alt="recipe cover image exists" style="width: 100%; box-shadow: 0 0 3px gray;"/>';

@@ -140,9 +140,9 @@
 												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
 												if (file_exists($filename)) {
-													echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
+													echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
 												} else {
-													echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+													echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
 												}
 												
 												
@@ -283,9 +283,9 @@
 													$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
 													if (file_exists($filename)) {
-														echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
+														echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
 													} else {
-														echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+														echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
 													}
 													
 													echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
