@@ -48,7 +48,6 @@
 							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
 						}
 						else{
-							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
 						$res = pg_query_params($db, "INSERT INTO recipes (recipeid, recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING recipeid", array($recipeid, $recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree));
 						}
 					}
