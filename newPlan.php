@@ -64,7 +64,7 @@
                 margin: 7vh 0 calc(7vh + 1vw);
             }
             .meal-tile:hover{
-                border: 1px solid var(--green);
+                border: 1px solid grey;
             }
             .meal-tile:hover div.meal-tile-cover{
                 display: block;
@@ -79,7 +79,9 @@
                 display: none;
                 position: absolute;
                 background-image: url(Images/plus.png);
-                background-size: contain;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100% 100%;
                 height: 100%;
                 width: 100%;
             }

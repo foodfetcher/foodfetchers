@@ -65,4 +65,67 @@
 	/* function makeUser($db, ) {
 		
 	} */
+    function showIngredients($ingredients, $db){
+            $groceryList = Array();
+                $ingrArr = json_decode($ingredients);
+                foreach($ingrArr as $ingrRow){
+                    $match = false;
+                    $ingrRow->ingr=ltrim($ingrRow->ingr," ");
+                    $ingrRow->ingr=rtrim($ingrRow->ingr," ");
+                    foreach($groceryList as $exists => $total){
+                        if(strtolower($exists) == strtolower($ingrRow->ingr) && $total[1] == $ingrRow->unit){
+                            $groceryList[$exists] = array($ingrRow->num + $total[0],$ingrRow->unit);
+                            $match = true;
+                        }
+                    }
+                    if(!$match){
+                            $groceryList = $groceryList + array($ingrRow->ingr =>array($ingrRow->num,$ingrRow->unit));
+                        }
+                }
+            
+            return $groceryList;
+            
+        
+    }
+    function getIngredients($planId, $db){
+        $res = pg_query($db, "SELECT ingredients FROM mealline INNER JOIN
+        recipes ON mealline.recipeid=recipes.recipeid WHERE mealid=$planId
+        ");
+        echo pg_last_error($db);
+        
+            $groceryList = Array();
+            while($row = pg_fetch_assoc($res)){
+                $ingrArr = json_decode($row["ingredients"]);
+                foreach($ingrArr as $ingrRow){
+                    $match = false;
+                    $ingrRow->ingr=ltrim($ingrRow->ingr," ");
+                    $ingrRow->ingr=rtrim($ingrRow->ingr," ");
+                    foreach($groceryList as $exists => $total){
+                        if(strtolower($exists) == strtolower($ingrRow->ingr) && $total[1] == $ingrRow->unit){
+                            $groceryList[$exists] = array($ingrRow->num + $total[0],$ingrRow->unit);
+                            $match = true;//$cy=$cy+1;echo "Cycle: ".$cy. "Ex: ".$exists. "<br>";
+                        }
+                    }
+                    if(!$match){
+                            $groceryList = $groceryList + array($ingrRow->ingr =>array($ingrRow->num,$ingrRow->unit));
+                            //echo 'gl: ';
+                            //print_r($groceryList);echo '<br>';
+                        }
+                    //echo '<li>'.$ingrRow->num.' '.$ingrRow->unit.' '.$ingrRow->ingr.'</li>';
+                }
+            
+            }
+            //print_r($groceryList);
+            return $groceryList;
+            
+        
+    }
+    function listIngredients($planId, $db){
+        $groceryList= getIngredients($planId, $db);
+        echo '<ul class="ingredients-list">';
+        foreach($groceryList as $ingredient => $quantity){
+                echo '<li>' . $quantity[0] . ' '. $quantity[1] . ' ' . $ingredient . '</li>';
+            }
+        echo '</ul>';
+    }
 ?>
