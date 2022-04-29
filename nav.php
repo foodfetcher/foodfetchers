@@ -12,10 +12,10 @@
         echo '<a href = browse.php>Browse Recipes</a>';
 		
         if($log == "Logout"){
-            $first = $_SESSION["firstname"];
+            $username = $_SESSION["username"];
             echo "<a href = create.php>Create Recipe</a>
 				<a href = MealPlans.php>Meal Plans</a>";
-            echo "<div id = 'logout'>Hello, <a href=viewAccount.php>$first</a><br><a href = login.php>$log</a></div>";
+            echo "<div id = 'logout'>Hello, <a href=viewAccount.php>$username</a><br><a href = login.php>$log</a></div>";
         }
         else{
             echo "<a href = login.php>$log</a>";

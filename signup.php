@@ -19,17 +19,10 @@
 					$outcome = 'Account with that email already exits! <a href="login.php">Login?</a>';
 				}
 				else{
-					$res2 = pg_query_params($db, "INSERT INTO customers (email, passwd, firstname, lastname, address1, address2, zipcode, state, phonenumber, city) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING userid", array(
+					$res2 = pg_query_params($db, "INSERT INTO customers (email, username, passwd) VALUES ($1, $2, $3) RETURNING userid", array(
 					strtolower($_POST['email']),
-					$_POST['password'],
-					$_POST['firstName'],
-					$_POST['lastName'],
-					$_POST['address'],
-					$_POST['address2'],
-					$_POST['zip'],
-					$_POST['state'],
-					$_POST['number'],
-					$_POST['city']));
+					$_POST['username'],
+					$_POST['password']));
 					if (pg_num_rows($res2) == 1){
 						$outcome = "success";
 						echo '<meta http-equiv="refresh" content="3;url=login.php" />';
@@ -53,26 +46,12 @@
         <div id = "Content">
             <form name = "signup" action = "signup.php" method = "post">
                 <h1> Create an Account </h1>
-                <label for="firstName">First Name:*</label>
-                <input type = "text" name = "firstName" id = "firstName" required>
-                <label for="lastName">Last Name:*</label>
-                <input type = "text" name = "lastName" id = "lastName" required> </br>
                 <label for="email">Email Address:*</label>
-                <input type = "email" name = "email" id = "email" required>
+                <input type = "email" name = "email" id = "email" required> </br>
+                <label for="username">Username:*</label>
+                <input type = "text" name = "username" id = "username" required> </br>
                 <label for="password">Password:*</label>
                 <input type = "password" name = "password" id = "password" required> </br>
-                <label for="address">Address:*</label>
-                <input type = "text" name = "address" id = "address" required>
-                <label for="city">City:*</label>
-                <input type = "text" name = "city" id = "city" required> </br>
-                <label for="state">State:*</label>
-                <input type = "text" name = "state" id = "state" required>
-                <label for="zip">Zip Code:*</label>
-                <input type = "number" name = "zip" id = "zip" required> </br>
-                <label for="address2">Address 2:</label>
-                <input type = "text" name = "address2" id = "address2">
-                <label for="number">Phone Number:</label>
-                <input type = "number" name = "number" id = "number"> </br>
                 <label>* Denotes required field </label> </br>
                 
                 <input type="submit" value = "Submit">

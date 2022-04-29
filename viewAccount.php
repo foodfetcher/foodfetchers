@@ -47,10 +47,9 @@
 			<div id="profile">
 				<?php
 					$email = $_SESSION["email"];
-					$firstname = $_SESSION["firstname"];
-					$lastname = $_SESSION["lastname"];
+					$username = $_SESSION["username"];
 					$userid = $_SESSION['userid'];
-					echo "<div id='Name'>Name: $firstname $lastname</div>";
+					echo "<div id='Name'>Name: $username</div>";
 					echo "<div id='Email'>Email: $email</div>";
 					echo '</br><a id="password" href=changePassword.php>Change Password</a></br></br>';
 				?>

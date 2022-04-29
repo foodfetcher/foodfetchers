@@ -47,8 +47,7 @@
 						echo '<meta http-equiv="refresh" content="3;url=home.php" />';
 						$log = "Logout";
 						$_SESSION["userid"] = $row["userid"];
-						$_SESSION["firstname"] = $row["firstname"];
-						$_SESSION["lastname"] = $row["lastname"];
+						$_SESSION["username"] = $row["username"];
 						$_SESSION["email"] = $row["email"];
 						$_POST = array();
 					}
@@ -78,7 +77,7 @@
 			</form>
             <?php 
                 if($outcome == 'success'){
-                    echo '<p>Welcome back ' . $_SESSION["firstname"] . '!<br>Redirecting you to <a href="home.php">Home</a>.</p>';
+                    echo '<p>Welcome back ' . $_SESSION["username"] . '!<br>Redirecting you to <a href="home.php">Home</a>.</p>';
 				}
 				else{
 					if($db === false){
