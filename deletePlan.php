@@ -8,7 +8,7 @@ function showModal(){
     document.getElementById('deleteModal').style.display='flex';
 }
 function showOutcome(){
-    document.getElementById('resultsTitle').innerHTML= 'resultsTitle'; 
+    document.getElementById('resultsTitle').innerHTML= 'resultsTitle';
 }
 function returnFromPage(){
     window.location.href = "browse.php";
@@ -133,7 +133,7 @@ function returnFromPage(){
             <input type="submit" value="Delete" onclick="showOutcome()" id="deleteButton">
         </div>
         <input type='hidden' name='delete' value='true'>
-        <input type='hidden' name='recipeid' value="<?php echo $recipeid ?>">
+        <input type='hidden' name='mealid' value="<?php echo $mealid ?>">
     </div>
 </div>
 </form>
