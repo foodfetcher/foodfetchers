@@ -4,27 +4,22 @@
 	function getDefaultDB() {
 		return pg_connect('host=localhost user=fetcher1 password=1234 dbname=main');
 	}
-	
+
 	//returns true if the passwords should be considered to be equal, false otherwise
-	function comparePasswords($givenPassword, $DBPassword, $userid) {
-		if($givenPassword == $DBPassword){
-			return True;
-		}
-		else{
-			return False;
-		}
+	function comparePasswords($givenPassword, $DBPassword) {
+		return password_verify($givenPassword, $DBPassword);
 	}
-	
+
 	//converts the given "password" string to one suitable for storing in the database
 	//(will hash/salt it)
-	function passwordToDB($password, $userid) {
-		return $password;
+	function passwordToDB($password) {
+		return password_hash($password, PASSWORD_DEFAULT);
 	}
-	
+
 	/* function doesUserExist($db, $email) : string|false|null{
 		$res = pg_query_params($db, "SELECT userid FROM customers WHERE email=$1;", $email);
 	} */
-	
+
 	//gets user info from the given database using the given identifier
 	//$db = the database connection to get the info from (use getDefaultDB?)
 	//$identifier = whatever information you're using to identify the user. Valid entries are:
@@ -37,8 +32,8 @@
 		}else{
 			$res = pg_query_params($db, "SELECT * FROM customers WHERE userid=$1;", $identifier);
 		}
-		
-		
+
+
 		if($res == false){
 			return pg_last_error($db);
 		}else{
@@ -48,7 +43,7 @@
 			return pg_fetch_assoc($res);
 		}
 	} */
-	
+
 	//checks if $givenPassword is the same as the password for the user with $userid
 	//uses $db as the database to connect to
 	/* function validatePassword($db, $userid, $givenPassword) : boolean|string|null{
@@ -61,8 +56,8 @@
 			return pg_fetch_row($res, 0)[0] === $givenPassword;
 		}
 	} */
-	
+
 	/* function makeUser($db, ) {
-		
+
 	} */
 ?>

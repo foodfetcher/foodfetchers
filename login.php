@@ -26,21 +26,20 @@
 				include "DButils.php";
 				$email = strtolower($_POST['email']);
 				$password = $_POST['password'];
-				
+
 				$db = getDefaultDB();
-				
-				$query = "SELECT * FROM customers WHERE email='$email'";
-				$res = pg_query($db, $query);
-				
+
+				$res = pg_query_params($db, "SELECT * FROM customers WHERE email=$1", Array($email));
+
 				//echo pg_last_error($db);
 				if(pg_num_rows($res) == 0){
-					$outcome = "Incorrect email or password (email)";
+					$outcome = "Incorrect email";
 				}
 				else{
 					$row = pg_fetch_assoc($res);
 					//print_r($row);
-					if($password != $row["passwd"]){
-						$outcome = "Incorrect email or password (password)";
+					if(!comparePasswords($password, $row["passwd"])){
+						$outcome = "Incorrect password";
 					}
 					else{
 						$outcome = "success";
@@ -53,9 +52,9 @@
 					}
 				}
 				pg_close($db);
-			} 
+			}
 		?>
-		
+
 	</head>
     <body>
 		<div id = "background"></div>
@@ -70,12 +69,12 @@
 					<input type = "email" name = "email" id = "email" style="flex: 1;" value="<?php if(isset($_POST['email'])){ echo htmlentities($_POST['email']);}?>" required></td></tr>
 					<tr><td style="display: flex;"><label for="password" style="flex: 0; white-space: pre; padding-top: 4px;">Password: </label>
 					<input type = "password" name = "password" id = "password" style="flex: 1;" value="<?php if(isset($_POST['password'])){ echo htmlentities($_POST['password']);}?>" required></td></tr>
-					
+
 					<tr><td><input type="submit" value = "Log In">
 					<!--<input type="reset" value = "Clear">-->
 				</td></tr></table>
 			</form>
-            <?php 
+            <?php
                 if($outcome == 'success'){
                     echo '<p>Welcome back ' . $_SESSION["username"] . '!<br>Redirecting you to <a href="home.php">Home</a>.</p>';
 				}
