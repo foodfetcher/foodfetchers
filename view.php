@@ -8,13 +8,13 @@
 	{
 		$log = "Login";
     }
-    
+
     $recipeid = (int)$_GET["id"] ?? (int)$_POST["id"];
     $queryResultRow = Array();
     $creatorInfo = Array();
     include "DButils.php";
 	$db = getDefaultDB();
-    
+
     $res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeid'");
     if(pg_num_rows($res) == 0){
         $invalidRecipe = true;
@@ -24,7 +24,7 @@
         $creatorid = $queryResultRow['creatorid'];
         $res = pg_query($db, "SELECT username FROM customers WHERE userid=$creatorid");
         if(pg_num_rows($res) == 0){
-            
+
             $creatorInfo['username'] = "Recipe creator could not be found.";
         }
         else{
@@ -33,8 +33,8 @@
             $creatorInfo['username'] = $row['username'];
         }
     }
-    
-    
+
+
     if(isset($_POST["favorite"])){
         $userid = $_SESSION["userid"];
         $res = pg_query($db, "INSERT INTO favorites (recipeid, userid) values ($recipeid, $userid);");
@@ -45,8 +45,8 @@
         $res = pg_query($db, "DELETE FROM favorites WHERE recipeid='$recipeid' AND userid='$userid';");
         echo pg_last_error($db);
 	}
-    
-    
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,10 +63,10 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-        ?> 
+        ?>
         <div id = "Content">
             <h1 style="margin-block-end: 0.2em;"> <?php echo $queryResultRow["recipename"]; ?> </h1>
-			<?php echo "<p>Created by " . $creatorInfo['firstname'] . " " . $creatorInfo['lastname'] . "</p>"; ?>
+			<?php echo "<p>Created by " . $creatorInfo['username'] . "</p>"; ?>
             <div id = "results">
                 <?php
                     if(isset($invalidRecipe)){
@@ -81,9 +81,9 @@
 						else {
 							echo '<img src="coverimages/logo.png" alt="recipe cover image does not exist" style="width: 100%; box-shadow: 0 0 3px gray;"/>';
 						}
-                        
+
                         echo "</td><td style='padding-left: 5px;'>";
-                        
+
                         /*echo "<p>At: " . $queryResultRow['creationdate'] . "</p>";*/
                         echo "<h3>Ingredients</h3><p>" . $queryResultRow['ingredients'] . "</p>";
                         echo "<h3>Instructions</h3><p>" . str_replace("\n", "<br/>", $queryResultRow['instructions']) . "</p>";
