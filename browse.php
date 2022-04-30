@@ -8,7 +8,7 @@
 	{
 		$log = "Login";
     }
-    
+
     header("cache-control: private");
     header("pragma: private");
 ?>
@@ -22,7 +22,7 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-        ?> 
+        ?>
         <div id = "Content">
             <form action="browse.php" method="post">
 				<table style="width: 100%;">
@@ -35,28 +35,28 @@
 										<h1 style="margin-block-start: 0; margin-block-end: 0.25em;"> Search Recipes </h1>
 									</td>
 								</tr>
-								
+
 								<tr>
 									<td style="display: flex;">
 										<label for="recipeName" style="flex: 0; white-space: pre; padding-top: 4px;";>Recipe Name:</label>
 										<input type="text" id="recipeName" placeholder="steamed hams" name="recipeNameName" style="flex: 1; margin-left: 4px;"><br/>
 									</td>
 								</tr>
-								
+
 								<tr>
 									<td style="display: flex;">
 										<label for="author" style="flex: 0; white-space: pre; padding-top: 4px;">Author:</label>
 										<input type="text" id="author" placeholder="John Smith" name="authorName" style="flex: 1; margin-left: 4px;"><br/>
 									</td>
 								</tr>
-								
+
 								<tr>
 									<td style="display: flex;">
 										<label for="keywords" style="flex: 0; white-space: pre; padding-top: 4px;">Key Words:</label>
 										<input type="text" id="keywords" placeholder="walnuts, ice cream, sugar" name="keywordName" style="flex: 1; margin-left: 4px;"><br/>
 									</td>
 								</tr>
-								
+
 								<tr>
 									<td style="text-align: left;">
 										<h3 style="margin-block-start: 0.5em; margin-block-end: 0.25em;">Dietary Preferences</h3>
@@ -84,7 +84,7 @@
 										</table>
 									</td>
 								</tr>
-										
+
 								<tr>
 									<td style="cursor: default; padding-top: 5px;">
 										<input type="submit" value="Search" name="searchRecipe">
@@ -115,7 +115,7 @@
 								</tr>
 							</table>
 						</td>
-						
+
 						<!-- Begin Right (results) Column -->
 						<td style="width: 70%; vertical-align: top; border-left: 1px solid #888; padding-left: 5px; font-size: 20px; font-family: ubuntu;">
 							<div id = "results">
@@ -125,9 +125,9 @@
 										$DB_HOST='localhost';
 										$DB_USER='fetcher1';
 										$DB_PASS='1234';
-										$DB_NAME='main'; 
+										$DB_NAME='main';
 										$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
-										
+
 										//clicking the view my recipes button
 										if(isset($_POST['myrecipes'])){
 											echo '<table width="100%">';
@@ -136,7 +136,7 @@
 											while($row = pg_fetch_assoc($res)){
 												$notEmpty = true;
 												$recipeid = $row["recipeid"];
-												
+
 												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
 												if (file_exists($filename)) {
@@ -144,8 +144,8 @@
 												} else {
 													echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
 												}
-												
-												
+
+
 												echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
 												$count += 1;
 												if ($count == 3)
@@ -160,7 +160,7 @@
 												echo 'Sorry, no recipes matched those filters. Try widening your search.';
 											}
 										}
-										
+
 										//clicking the surprise me or search buttons
 										if(isset($_POST['surprise']) or isset($_POST['searchRecipe'])){
 											$recipeName = $_POST['recipeNameName'];
@@ -176,7 +176,7 @@
 											{
 												$vegetarian = "off";
 											}
-											
+
 											if ($vegan = $_POST['veganCheck'] == "false") //false when it is checked?
 											{
 												$vegan = "on";
@@ -185,7 +185,7 @@
 											{
 												$vegan = "off";
 											}
-											
+
 											if ($kosher = $_POST['kosherCheck'] == "false") //false when it is checked?
 											{
 												$kosher = "on";
@@ -194,7 +194,7 @@
 											{
 												$kosher = "off";
 											}
-											
+
 											if ($nutfree = $_POST['nutCheck'] == "false") //false when it is checked?
 											{
 												$nutfree = "on";
@@ -203,7 +203,7 @@
 											{
 												$nutfree = "off";
 											}
-											
+
 											if ($wheatfree = $_POST['wheatCheck'] == "false") //false when it is checked?
 											{
 												$wheatfree = "on";
@@ -212,7 +212,7 @@
 											{
 												$wheatfree = "off";
 											}
-											
+
 											if ($soyfree = $_POST['soyCheck'] == "false") //false when it is checked?
 											{
 												$soyfree = "on";
@@ -221,7 +221,7 @@
 											{
 												$soyfree = "off";
 											}
-											
+
 											if ($glutenfree = $_POST['glutenCheck'] == "false") //false when it is checked?
 											{
 												$glutenfree = "on";
@@ -230,7 +230,7 @@
 											{
 												$glutenfree = "off";
 											}
-											
+
 											if ($dairyfree = $_POST['dairyCheck'] == "false") //false when it is checked?
 											{
 												$dairyfree = "on";
@@ -239,8 +239,8 @@
 											{
 												$dairyfree = "off";
 											}
-											
-											
+
+
 											$res = pg_query_params($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* $1 AND ingredients ~~* $2
 											AND (vegetarian = $3 OR vegetarian = $4)
 											AND (vegan = $5 OR vegan = $4)
@@ -250,9 +250,9 @@
 											AND (soyfree = $9 OR soyfree = $4)
 											AND (glutenfree = $10 OR glutenfree = $4)
 											AND (dairyfree = $11 OR dairyfree = $4)
-											AND (firstname ~~* $12 OR lastname ~~* $12)",
+											AND (username ~~* $12)",
 											array("%" . $recipeName . "%", "%" . $keywordName . "%", $vegetarian, $alwayson, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, "%" . $authorName . "%"));
-											
+
 											// clicking the surprise me button
 											if(isset($_POST['surprise'])){
 												$resultArray=array();
@@ -272,14 +272,14 @@
 													echo 'Sorry, no recipes matched those filters. Try widening your search.';
 												}
 											}
-											
+
 											// clicking the search button
 											if(isset($_POST['searchRecipe'])){
 												echo '<table width="100%">';
 												while($row = pg_fetch_assoc($res)){
 													$notEmpty = true;
 													$recipeid = $row["recipeid"];
-													
+
 													$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
 													if (file_exists($filename)) {
@@ -287,7 +287,7 @@
 													} else {
 														echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
 													}
-													
+
 													echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
 													$count += 1;
 													if ($count == 3)
