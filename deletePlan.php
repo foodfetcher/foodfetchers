@@ -134,12 +134,12 @@ function returnFromPage(){
             <input type="submit" value="Delete" onclick="showOutcome()" id="deleteButton">
         </div>
         <input type='hidden' name='delete' value='true'>
-        <input id="trueDelete" type='hidden' name='recipeid' value="">
+        <input id="trueDelete" type='hidden' name='mealid' value="">
     </div>
 </div>
 </form>
-<?php
-if(isset($outcome)){
+<?php 
+if(isset($deleteOutcome)){
     if(isset($_POST["delete"])){
         $resultMessage="deleted.";
     } else {
