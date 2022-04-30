@@ -22,17 +22,15 @@
     else{
         $queryResultRow = pg_fetch_assoc($res);
         $creatorid = $queryResultRow['creatorid'];
-        $res = pg_query($db, "SELECT firstname, lastname FROM customers WHERE userid=$creatorid");
+        $res = pg_query($db, "SELECT username FROM customers WHERE userid=$creatorid");
         if(pg_num_rows($res) == 0){
             
-            $creatorInfo['firstname'] = "creator";
-            $creatorInfo['lastname'] = "could not be found";
+            $creatorInfo['username'] = "Recipe creator could not be found.";
         }
         else{
             $row = pg_fetch_assoc($res);
             //print_r($row);
-            $creatorInfo['firstname'] = $row['firstname'];
-            $creatorInfo['lastname'] = $row['lastname'];
+            $creatorInfo['username'] = $row['username'];
         }
     }
     

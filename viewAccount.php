@@ -41,16 +41,15 @@
         <?php
             include 'nav.php'; //write out the nav bar
 			$maxCol = 6;
-        ?> 
+        ?>
         <div id="Content">
             <h1> My Profile</h1>
 			<div id="profile">
 				<?php
 					$email = $_SESSION["email"];
-					$firstname = $_SESSION["firstname"];
-					$lastname = $_SESSION["lastname"];
+					$username = $_SESSION["username"];
 					$userid = $_SESSION['userid'];
-					echo "<div id='Name'>Name: $firstname $lastname</div>";
+					echo "<div id='Name'>Name: $username</div>";
 					echo "<div id='Email'>Email: $email</div>";
 					echo '</br><a id="password" href=changePassword.php>Change Password</a></br></br>';
 				?>
@@ -62,7 +61,7 @@
 				$DB_HOST='localhost';
 				$DB_USER='fetcher1';
 				$DB_PASS='1234';
-				$DB_NAME='main'; 
+				$DB_NAME='main';
 				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
 
 				//display account recipes
@@ -87,7 +86,7 @@
 						echo '<td>';
 						if (file_exists($filename)) {
 							echo '<a href="view.php?id=' . $recipeid . '"><img id="favImage" src="coverimages/' . $recipeid . '" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
-						} 
+						}
 						else {
 							echo '<a href="view.php?id=' . $recipeid . '"><img id="favImage" src="coverimages/logo.png" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
 						}
@@ -110,7 +109,7 @@
 				/*$DB_HOST='localhost';
 				$DB_USER='fetcher1';
 				$DB_PASS='1234';
-				$DB_NAME='main'; 
+				$DB_NAME='main';
 				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
 				*/
 				//display account recipes
@@ -149,7 +148,7 @@
 				/*$DB_HOST='localhost';
 				$DB_USER='fetcher1';
 				$DB_PASS='1234';
-				$DB_NAME='main'; 
+				$DB_NAME='main';
 				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
 				*/
 				//display account recipes
@@ -176,7 +175,7 @@
 						echo '<td>';
 						if (file_exists($filename)) {
 							echo '<a href="view.php?id=' . $recipeid . '"><img id="recipeImage" src="coverimages/' . $recipeid . '" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
-						} 
+						}
 						else {
 							echo '<a href="view.php?id=' . $recipeid . '"><img id="recipeImage" src="coverimages/logo.png" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
 						}
