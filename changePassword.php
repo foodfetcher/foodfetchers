@@ -36,8 +36,8 @@
 				$newPass = $_POST['newpass'];
 				$confirmPass = $_POST['confirmpass'];
 
-				$query = "SELECT * FROM customers WHERE email='$email'";
-				$res = pg_query($db, $query);
+				
+				$res = pg_query_params($db, "SELECT * FROM customers WHERE email=$1", Array($email));
 				$row = pg_fetch_assoc($res);
 
 				if (!comparePasswords($existingPass, $row["passwd"])){  //password must match one already in database

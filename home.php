@@ -61,7 +61,7 @@
 					$arrayCount = (count($idArray));
 					$recipeOfTheDay = mt_rand(1,$arrayCount-1);
 					$recipeOfTheDay = $idArray[$recipeOfTheDay];
-					$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
+					$res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1", Array($recipeOfTheDay));
 					while($row = pg_fetch_assoc($res)){
 						echo '<h3>Recipe of the Day</h3>';
 						$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;

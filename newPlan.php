@@ -346,9 +346,9 @@
                                         $DB_NAME='main'; 
                                         $db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
                                         $userid = $_SESSION['userid'];
-                                        $res = pg_query($db, "SELECT * FROM favorites
+                                        $res = pg_query_params($db, "SELECT * FROM favorites
                                         INNER JOIN recipes ON favorites.recipeid=recipes.recipeid 
-                                        WHERE favorites.userid='$userid';");
+                                        WHERE favorites.userid=$1;", Array($userid));
                                         echo pg_last_error($db);
                                         while($row = pg_fetch_assoc($res)){
                                         echo '<div id= "'. $row['recipeid'] .'" data-recipeid="'. $row['recipeid'] .'"  class ="meal-tile" draggable="true" ondragstart="drag(event)">
@@ -375,7 +375,7 @@
                                 $userid = $_SESSION['userid'];
                                 $mealname = $_POST["mealname"];
                                 $timestamp = date('Y-m-d H:i:s');
-                                $mealid = pg_fetch_assoc(pg_query($db, "INSERT INTO meals (mealname, customerid, creationdate) VALUES ('$mealname', $userid, '$timestamp') RETURNING mealid;"))["mealid"];
+                                $mealid = pg_fetch_assoc(pg_query_params($db, "INSERT INTO meals (mealname, customerid, creationdate) VALUES ($1, $2, $3) RETURNING mealid;", Array($mealname, $userid, $timestamp)))["mealid"];
                         
                                 echo pg_last_error($db) . "<br/>";
                                 $week = array(explode(" ", $_POST["sunday"], PHP_INT_MAX),
@@ -389,16 +389,16 @@
                                 foreach($week as $day=>$arr){
                                     foreach($arr as $item){
                                         if($item != ""){
-                                            pg_query($db, "INSERT INTO mealline (mealid, recipeid, day) VALUES ($mealid, $item, $day);");
+                                            pg_query_params($db, "INSERT INTO mealline (mealid, recipeid, day) VALUES ($1, $2, $3);", Array($mealid, $item, $day));
                                             //echo pg_last_error($db) . "<br/>";
                                             //echo "inserted $item to $day <br/>";
                                         }
                                     }
                                 }  
                                 
-                                        $res = pg_query($db, "SELECT * FROM favorites
+                                        $res = pg_query_params($db, "SELECT * FROM favorites
                                         INNER JOIN recipes ON favorites.recipeid=recipes.recipeid 
-                                        WHERE favorites.userid='$userid';");
+                                        WHERE favorites.userid=$1;", Array($userid));
                                         echo pg_last_error($db);
                                         while($row = pg_fetch_assoc($res)){
                                         echo '<div id= "'. $row['recipeid'] .'B" class ="meal-tile" draggable="true" ondragstart="drag(event)">

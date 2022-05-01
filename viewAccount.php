@@ -65,7 +65,7 @@
 				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
 
 				//display account recipes
-				$favoriteRes = pg_query($db, "SELECT * FROM favorites WHERE userid='$userid'");
+				$favoriteRes = pg_query_params($db, "SELECT * FROM favorites WHERE userid=$1", Array($userid));
 
 				if ($favoriteRes === false){
 					echo 'It looks like you do not have any favorited recipes. Go to the browse page to discover some new favorites!';
@@ -91,7 +91,7 @@
 							echo '<a href="view.php?id=' . $recipeid . '"><img id="favImage" src="coverimages/logo.png" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
 						}
 
-						$recipeName = pg_query($db, "SELECT recipename FROM recipes WHERE recipeid='$recipeid'");
+						$recipeName = pg_query_params($db, "SELECT recipename FROM recipes WHERE recipeid=$1", Array($recipeid));
 						$row = pg_fetch_assoc($recipeName);
 						echo '<a href="view.php?id=' . $recipeid . '">' . $row['recipename'] . '</a></br>';
 						echo '</td>';
@@ -113,7 +113,7 @@
 				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
 				*/
 				//display account recipes
-				$res = pg_query($db, "SELECT * FROM meals WHERE customerid='$userid'");
+				$res = pg_query_params($db, "SELECT * FROM meals WHERE customerid=$1", Array($userid));
 
 				if ($res === false){
 					echo 'It looks like you do not have any meal plans. Go to the meal planner to create some meal plans!';
@@ -152,7 +152,7 @@
 				$db = pg_connect("host={$DB_HOST} user={$DB_USER} password={$DB_PASS} dbname={$DB_NAME}");
 				*/
 				//display account recipes
-				$res1 = pg_query($db, "SELECT * FROM recipes WHERE creatorid='$userid'");
+				$res1 = pg_query_params($db, "SELECT * FROM recipes WHERE creatorid=$1", Array($userid));
 
 				if ($res1 === false){
 					echo 'It looks like you do have not created any recipes. Go to the create recipe page to make one!';
@@ -180,7 +180,7 @@
 							echo '<a href="view.php?id=' . $recipeid . '"><img id="recipeImage" src="coverimages/logo.png" alt="recipe cover image" style="width:100px; height:100px; object-fit:cover;"></a></br>';
 						}
 
-						$recipeName = pg_query($db, "SELECT recipename FROM recipes WHERE recipeid='$recipeid'");
+						$recipeName = pg_query_params($db, "SELECT recipename FROM recipes WHERE recipeid=$1", Array($recipeid));
 						$row = pg_fetch_assoc($recipeName);
 						echo '<a href="view.php?id=' . $recipeid . '">' . $row['recipename'] . '</a></br>';
 						echo '</td>';

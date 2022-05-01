@@ -132,7 +132,7 @@
 										if(isset($_POST['myrecipes'])){
 											echo '<table width="100%">';
 											$userid = $_SESSION['userid'];
-											$res = pg_query($db, "SELECT * FROM recipes WHERE creatorid='$userid'");
+											$res = pg_query_params($db, "SELECT * FROM recipes WHERE creatorid=$1", Array($userid));
 											while($row = pg_fetch_assoc($res)){
 												$notEmpty = true;
 												$recipeid = $row["recipeid"];
