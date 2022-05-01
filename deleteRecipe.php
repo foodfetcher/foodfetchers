@@ -99,6 +99,26 @@ function returnFromPage(){
 #cancelButton:hover{
     opacity:1;
 }
+
+#deleteOpen{
+    padding: 5px 16px;
+    background-color: #eee;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 155px;
+    margin: 0 4px 0 0px;
+}
+#deleteOpen:hover {
+	background-color: #fff;
+	border: 1px solid var(--green);
+	border-bottom: 2px solid var(--green);
+	padding-bottom: 4px;
+}
+#deleteOpen:active {
+	background-color: var(--green);
+}
 #results{
     display:none;
     position: fixed;
@@ -120,7 +140,7 @@ function returnFromPage(){
 }
 </style>
 <form action="create.php" method="post">
-<input type='button' value = 'Delete' onclick="showModal()">
+<input id="deleteOpen" type='button' value = 'Delete' onclick="showModal()">
 <div id="deleteModal" onclick="clearModal(this)">
     <span id="closeX" onclick="document.getElementById('deleteModal').style.display='none'">
     &#10006;
@@ -134,6 +154,7 @@ function returnFromPage(){
         </div>
         <input type='hidden' name='delete' value='true'>
         <input type='hidden' name='recipeid' value="<?php echo $recipeid ?>">
+        <input id="saveName" type='hidden' name='saveName' value="<?php echo $recipeName ?>">
     </div>
 </div>
 </form>
@@ -144,15 +165,11 @@ if(isset($outcome)){
                 } else {
                     $resultMessage="created.";
                 }
-                if(!isset($recipeName)){
-                    $recipeName = "recipe";
-                     echo '<style>#colorText{color:unset;}</style>';
-                }
                 echo '<style>#resultsModal{display:flex;}</style>';
             }?>
                     <div id="resultsModal" onclick="returnFromPage()">
                         <div id="resultsPrompt">
-                        <h2 id="resultsTitle"> Success, <span id="colorText"><?php echo $recipeName ?></span> was <?php echo $resultMessage ?> </h2>
+                        <h2 id="resultsTitle"> Success, <span id="colorText"><?php echo $_SESSION["lastDeleted"]; ?></span> was <?php echo $resultMessage ?> </h2>
                         <p id="resultsSubTitle">Click anywhere to continue...</p>
                         </div>
                     </div>

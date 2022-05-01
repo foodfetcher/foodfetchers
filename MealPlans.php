@@ -7,6 +7,8 @@
 	else
 	{
 		$log = "Login";
+        echo '<meta http-equiv="refresh" content="3;url=home.php" />';
+        $loginError = '<p>Logged Out... Redirecting Home...</p>';
     }
     
 	include 'DButils.php';
@@ -24,6 +26,7 @@
     
    //handle recipe deletion
 	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["delete"]) && filter_var($_POST["delete"], FILTER_VALIDATE_BOOLEAN)){
+        $_SESSION["lastDeleted"]=$_POST["saveName"];
 		$res = pg_query_params($db, "SELECT mealid FROM meals WHERE mealid=$1 AND customerid=$2;", Array($_POST["mealid"], $userid));
 		if(pg_num_rows($res) == 0){
 			$deleteOutcome = "You do not have permission to edit this meal plan!";
@@ -83,9 +86,15 @@
             list.firstElementChild.classList.toggle("print-list");
             window.print();
         }
+        function showScroll(){
+            var elt = document.getElementById('plan-display');
+            if(elt.clientHeight < (elt.scrollHeight - document.getElementById('bottom-spacer').scrollHeight - 8)){
+                document.getElementById('scroll-image').style.display = "unset";
+            }
+        }
         </script>
     </head>
-    <body>
+    <body onload="showScroll()">
         <div id = "background">
         <?php
             include 'nav.php'; //write out the nav bar
@@ -94,7 +103,7 @@
             <div id = "plan-display">
                 <?php
                     $res = pg_query($db, "SELECT * FROM meals WHERE customerid=$userid");
-                    echo pg_last_error($db);
+                    echo $loginError;
                     while($row = pg_fetch_assoc($res)){
                     $planName=$row["mealname"];
                     echo '<div class="plan-title">

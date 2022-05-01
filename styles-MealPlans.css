@@ -216,6 +216,7 @@
                 pointer-events: none;
                 filter: invert(1);
                 background-color: rgba(255,255,255,.4);
+                display: none;
             }
             .submit-clear{
                 width: calc(100% - 2vw);

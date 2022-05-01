@@ -46,7 +46,8 @@
                 flex-direction:column;
                 margin:  auto auto auto auto;
                 width: 85vw;
-                height: 90vh;
+                height: 88vh;
+                box-shadow: 0 0 4px rgba(0,0,0,0.3);
             }  
         /* meal tile: element for each meal with image and name */
             .meal-tile{
@@ -152,7 +153,7 @@
             }
         /* Weekly schedule with days */
             #schedule{
-                height:57%;   
+                height:61%;   
                 background-color: var(--color2-darkGreyT);
                 display:flex;
                 flex-direction:row;
@@ -214,16 +215,32 @@
             }
             #submit-clear{
                 width:100%;
-                height:10%;
+                height:6%;
                 display:flex;
                 flex-direction:row;
             }
             #submit-clear input{
                 width:100%;
-                height:50%; 
+                height:100%; 
                 font-size:2vh; 
                 border-radius: 0;
                 padding:0;
+            }
+            .back-button{
+                width: 6%;
+                height: 6%;
+                border: 0;
+                font-size: min(4vh, 1.3vw);
+                overflow: hidden;
+                background-color: rgba(244,244,244,.6);
+                position: fixed;
+                top: calc(80px + 2.3vh);
+                left: .5vw;
+                padding-right: .5vw;
+                box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            }
+            .back-button:hover{
+                background-color: rgba(244,244,244,.95);
             }
         </style>
         <script>
@@ -306,6 +323,9 @@
         ?> 
         
         <div id = "content-container">
+        <button type="button" class="back-button" onclick="window.location.href='MealPlans.php';">
+            &#5176; Back
+        </button>
             <form id="new-plan-form" method="post">
                 <div id="new-meal-name">
                     <label for="mealname" style="font-size:2.5vh; ">Meal Plan Name: &nbsp;</label>
