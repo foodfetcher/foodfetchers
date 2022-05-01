@@ -4,9 +4,10 @@ function clearModal(el){
         event.target.style.display = "none";
     }
 }
-function showModal(planId){
+function showModal(planId,planName){
     document.getElementById('deleteModal').style.display='flex';
     document.getElementById('trueDelete').value=planId;
+    document.getElementById('saveName').value=planName;
 }
 function showOutcome(){
     document.getElementById('resultsTitle').innerHTML= 'resultsTitle'; 
@@ -135,6 +136,7 @@ function returnFromPage(){
         </div>
         <input type='hidden' name='delete' value='true'>
         <input id="trueDelete" type='hidden' name='mealid' value="">
+        <input id="saveName" type='hidden' name='saveName' value="">
     </div>
 </div>
 </form>
@@ -145,16 +147,12 @@ if(isset($deleteOutcome)){
     } else {
         $resultMessage="created.";
     }
-    if(!isset($recipeName)){
-        $recipeName = "Recipe";
-        echo '<style>#colorText{color:unset;}</style>';
-    }
     echo '<style>#resultsModal{display:flex;}</style>';
 }
  ?>
 <div id="resultsModal" onclick="returnFromPage()">
     <div id="resultsPrompt">
-        <h2 id="resultsTitle"> Success, <span id="colorText"><?php echo $recipeName ?></span> was <?php echo $resultMessage ?> </h2>
+        <h2 id="resultsTitle"> Success, <span id="colorText"><?php echo $_SESSION["lastDeleted"]; ?></span> was <?php echo $resultMessage ?> </h2>
         <p id="resultsSubTitle">Click anywhere to continue...</p>
     </div>
 </div>

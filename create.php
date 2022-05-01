@@ -22,6 +22,12 @@
 				//print_r($_POST);
 				$recipeid = $_POST["recipeid"];
                 $recipeName = $_POST["recipeName"];
+                ;
+                foreach($_POST["ingredients"] as &$postIngr){
+                    if(strstr($postIngr['num'],"/")){
+                        $postIngr['frac'] = true ;
+                    }
+                }
 				$ingredients = json_encode($_POST["ingredients"]);
 				$instructions = $_POST["instructions"];
 				$vegetarian = filter_var($_POST["vegetarian"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
@@ -41,9 +47,11 @@
 				$timestamp = date('Y-m-d H:i:s');
 				$db = getDefaultDB();
 				if(isset($recipeid)){
+                    $_SESSION["lastDeleted"]=$_POST["recipeName"];
 					$res = pg_query_params($db, "SELECT recipeid FROM recipes WHERE recipeid=$1 AND creatorid=$2;", Array($recipeid, $userid));
 					if(pg_num_rows($res) != 0){
 						if(isset($_POST["delete"])){
+                            $_SESSION["lastDeleted"]=$_POST["saveName"];
 							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
 						}
 						else{
@@ -109,6 +117,9 @@
 		?>
         <script>
         var ingIndx = 0;
+        function setInc(val){
+            ingIndx = val;
+        }
         function newIngredientLine(){
             var inputs = document.getElementById("ingredients-template").content.firstElementChild.children;
             for(var i=0;i<3; i++){
@@ -127,25 +138,26 @@
     <body>
         <template id="ingredients-template">
 			<div class="ingredients-row">
-				<input class='ingredients-row-num' type='number' step='0.1' name='ingredients[*][num]' style='width: 44px; margin-right: 4px;'>
+				<input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qt.' name='ingredients[*][num]' style="width: 32px; margin-right: 4px;">
 				<select class='ingredients-row-select' name='ingredients[*][unit]'>
-                    <option value='pinch'>pinch</option>
-					<option value='dash'>dash</option>
-					<option value='teaspoon'>tsp</option>
+                    <option value='teaspoon'>tsp</option>
 					<option value='tablespoon'>tbsp</option>
 					<option value='floz'>fl oz</option>
 					<option value='oz'>oz</option>
                     <option value='cup'>cup</option>
-					<option value='can'>can</option>
                     <option value='pint'>pint</option>
 					<option value='quart'>quart</option>
 					<option value='ml'>ml</option>
 					<option value='liter'>l</option>
                     <option value='g'>g</option>
+                    <option value='pinch'>pinch</option>
+					<option value='dash'>dash</option>
+                    <option value='can'>can</option>
 				</select>
-				<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' placeholder='ingredient' style='width: 100%;'>
+				<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' placeholder='ingredient' required>
+                <input class='ingredients-row-ing' type='hidden' name='ingredients[*][frac]' value="false">
                 <div class='ingredientsX' onclick="removeIngredientLine(this)">&#10006;</div>
-                <?php if(isset($recipeName)){echo '<style>.ingredientsX{display:block;}</style>';}else{echo '<style>.ingredientsX{display:none;}</style>';} ?>
+                <!-- if(isset($recipeName)){echo '<style>.ingredientsX{display:block;}</style>';}else{echo '<style>.ingredientsX{display:none;}</style>';} ?>-->
 			</div>
         </template>
 		<div id="background"></div>
@@ -177,10 +189,11 @@
                                     <div id="ingredients-column">
                                         <?php if(isset($recipeName)){
                                             $groceryList = showIngredients($ingredients,$db);
+                                            $inc=0;
                                                 foreach($groceryList as $ingredient => $quantity){
                                                 echo "<div class='ingredients-row'>
-                                                        <input class='ingredients-row-num' type='number' name='ingredients[*][num]' value=" . $quantity[0] ." style='width: 32px; margin-right: 4px;'>
-                                                        <select class='ingredients-row-select' name='ingredients[*][unit]' onload='this.value = 'pint''>
+                                                        <input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qt.' name='ingredients[".$inc."][num]' value=" . $quantity[0] ." style='width: 32px; margin-right: 4px;'>
+                                                        <select class='ingredients-row-select' name='ingredients[".$inc."][unit]' onload='this.value = 'pint''>
                                                             <option value='teaspoon' "; if($quantity[1] == 'teaspoon'){echo 'selected';} echo ">tsp</option>
 			                                        		<option value='tablespoon' "; if($quantity[1] == 'tablespoon'){echo 'selected';} echo ">tbsp</option>
 			                                        		<option value='floz' "; if($quantity[1] == 'floz'){echo 'selected';} echo ">fl oz</option>
@@ -191,11 +204,18 @@
 			                                        		<option value='ml' "; if($quantity[1] == 'ml'){echo 'selected';} echo ">ml</option>
 			                                        		<option value='liter' "; if($quantity[1] == 'liter'){echo 'selected';} echo ">l</option>
                                                             <option value='g' "; if($quantity[1] == 'g'){echo 'selected';} echo ">g</option>
+                                                            <option value='pinch' "; if($quantity[1] == 'pinch'){echo 'selected';} echo ">pinch</option>
+                                                            <option value='dash' "; if($quantity[1] == 'dash'){echo 'selected';} echo ">dash</option>
+                                                            <option value='can' "; if($quantity[1] == 'can'){echo 'selected';} echo ">can</option>
 			                                        	</select>
-			                                        	<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' value=" . $ingredient .">
+			                                        	<input class='ingredients-row-ing' type='text' name='ingredients[".$inc."][ingr]' value='" . $ingredient ."' required>
+                                                        <input class='ingredients-row-ing' type='hidden' name='ingredients[".$inc."][frac]' value='false'>
                                                         <div class='ingredientsX' onclick='removeIngredientLine(this)'>&#10006;</div>
 			                                        </div>";
+                                                    $inc++;
+                                                   
                                                 } 
+                                                 echo "<script>setInc(".$inc.")</script>";
                                         }else {
                                                     echo '<script> newIngredientLine() </script>';
                                             } ?>

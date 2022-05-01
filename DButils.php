@@ -60,6 +60,51 @@
 	/* function makeUser($db, ) {
 
 	} */
+    function toDecimal($val){
+        if(isset($val)){
+            if(strstr($val,"/")){
+                $slash = strpos($val,"/");
+                $numerator = substr($val,0, $slash+1);
+                $denominator = substr($val, $slash+1);
+                $val = $numerator / $denominator;
+                
+            }
+        }
+        return $val;
+    }
+    function toFraction($gl){
+        $fraction = array();
+        $fraction['1/8'] = 0.125;
+        $fraction['1/3'] = 0.333;
+        $fraction['1/4'] = 0.25;
+        $fraction['3/8'] = 0.375;
+        $fraction['1/2'] = 0.5;
+        $fraction['5/8'] = 0.625;
+        $fraction['2/3'] = 0.667;
+        $fraction['3/4'] = 0.75;
+        $fraction['7/8'] = 0.875;
+        
+        foreach($gl as $ingredient => $quantity){
+            if($quantity[2] == "true"){
+            $gl[$ingredient][0] = round($quantity[0],3);
+            $wholeComp = floor($quantity[0]);
+            $fracComp = round($quantity[0],3) - $wholeComp;
+            
+            foreach($fraction as $arr=>$comp){
+                if(round($fracComp,3) == round($comp,3)){
+                    if($wholeComp){
+                        $gl[$ingredient][0] = $wholeComp.' '.$arr;
+                    } else {
+                        $gl[$ingredient][0] = $arr;
+                    }
+                    break;
+                }
+            }
+            }
+        }
+        return $gl;
+        
+    }
     function showIngredients($ingredients, $db){
             $groceryList = Array();
                 $ingrArr = json_decode($ingredients);
@@ -69,15 +114,15 @@
                     $ingrRow->ingr=rtrim($ingrRow->ingr," ");
                     foreach($groceryList as $exists => $total){
                         if(strtolower($exists) == strtolower($ingrRow->ingr) && $total[1] == $ingrRow->unit){
-                            $groceryList[$exists] = array($ingrRow->num + $total[0],$ingrRow->unit);
+                            $groceryList[$exists] = array(toDecimal($ingrRow->num) + $total[0],$ingrRow->unit, $ingrRow->frac);
                             $match = true;
                         }
                     }
                     if(!$match){
-                            $groceryList = $groceryList + array($ingrRow->ingr =>array($ingrRow->num,$ingrRow->unit));
+                            $groceryList = $groceryList + array($ingrRow->ingr =>array(toDecimal($ingrRow->num),$ingrRow->unit, $ingrRow->frac));
                         }
                 }
-            
+            $groceryList = toFraction($groceryList);
             return $groceryList;
             
         
@@ -97,20 +142,17 @@
                     $ingrRow->ingr=rtrim($ingrRow->ingr," ");
                     foreach($groceryList as $exists => $total){
                         if(strtolower($exists) == strtolower($ingrRow->ingr) && $total[1] == $ingrRow->unit){
-                            $groceryList[$exists] = array($ingrRow->num + $total[0],$ingrRow->unit);
-                            $match = true;//$cy=$cy+1;echo "Cycle: ".$cy. "Ex: ".$exists. "<br>";
+                            $groceryList[$exists] = array(toDecimal($ingrRow->num) + $total[0],$ingrRow->unit, $ingrRow->frac);
+                            $match = true;
                         }
                     }
                     if(!$match){
-                            $groceryList = $groceryList + array($ingrRow->ingr =>array($ingrRow->num,$ingrRow->unit));
-                            //echo 'gl: ';
-                            //print_r($groceryList);echo '<br>';
+                            $groceryList = $groceryList + array($ingrRow->ingr =>array(toDecimal($ingrRow->num),$ingrRow->unit, $ingrRow->frac));
                         }
-                    //echo '<li>'.$ingrRow->num.' '.$ingrRow->unit.' '.$ingrRow->ingr.'</li>';
                 }
             
             }
-            //print_r($groceryList);
+            $groceryList = toFraction($groceryList);
             return $groceryList;
             
         

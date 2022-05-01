@@ -343,10 +343,15 @@ input[type=checkbox] {
 	display: flex;
 	flex-direction: row;
 }
+.ingredients-row:hover .ingredientsX{
+	display: block;
+}
 .ingredients-row-num{
+	width: 20%;
     margin: 0;
 }
 .ingredients-row-select{
+	width: 20%;
     height: 27px;
     padding: 0;
 }
@@ -356,6 +361,7 @@ input[type=checkbox] {
 }
 
 .ingredientsX{
+    display: none;
     font-size: 20px;
     font-weight: bold;
     padding-left: 5px;
