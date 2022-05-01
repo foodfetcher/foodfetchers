@@ -90,7 +90,7 @@
                         foreach($groceryList as $ingredient => $quantity){
                             echo  $quantity[0] . ' '. $quantity[1] . ' ' . $ingredient . "<br>"; 
                         }
-                        echo "<h3>Instructions</h3><p>" . str_replace("\n", "<br/><br/>", $queryResultRow['instructions']) . "</p>";
+                        echo "<h3>Instructions</h3><p style='text-align: left'>" . str_replace("\n", "<br/><br/>", $queryResultRow['instructions']) . "</p>";
                         echo "<h3>Dietary Information</h3>";
                         foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
 							if($queryResultRow[$diet] == "t"){
