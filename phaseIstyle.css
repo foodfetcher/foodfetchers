@@ -347,15 +347,14 @@ input[type=checkbox] {
 	display: block;
 }
 .ingredients-row-num{
-	width: 20%;
     margin: 0;
 }
 .ingredients-row-select{
-	width: 20%;
     height: 27px;
     padding: 0;
 }
 .ingredients-row-ing{
+	width: 100%;
 	margin-left: 4px;
     flex:1;
 }

@@ -138,12 +138,14 @@
     <body>
         <template id="ingredients-template">
 			<div class="ingredients-row">
-				<input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qt.' name='ingredients[*][num]' style="width: 32px; margin-right: 4px;">
+				<input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qty.' name='ingredients[*][num]' style="width: 32px; margin-right: 4px;">
 				<select class='ingredients-row-select' name='ingredients[*][unit]'>
-                    <option value='teaspoon'>tsp</option>
+                    <option value=''></option>
+					<option value='teaspoon'>tsp</option>
 					<option value='tablespoon'>tbsp</option>
 					<option value='floz'>fl oz</option>
 					<option value='oz'>oz</option>
+					<option value='lb'>lb</option>
                     <option value='cup'>cup</option>
                     <option value='pint'>pint</option>
 					<option value='quart'>quart</option>
@@ -194,10 +196,12 @@
                                                 echo "<div class='ingredients-row'>
                                                         <input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qt.' name='ingredients[".$inc."][num]' value=" . $quantity[0] ." style='width: 32px; margin-right: 4px;'>
                                                         <select class='ingredients-row-select' name='ingredients[".$inc."][unit]' onload='this.value = 'pint''>
-                                                            <option value='teaspoon' "; if($quantity[1] == 'teaspoon'){echo 'selected';} echo ">tsp</option>
+                                                            <option value='' "; if($quantity[1] == ''){echo 'selected';} echo "></option>
+															<option value='teaspoon' "; if($quantity[1] == 'teaspoon'){echo 'selected';} echo ">tsp</option>
 			                                        		<option value='tablespoon' "; if($quantity[1] == 'tablespoon'){echo 'selected';} echo ">tbsp</option>
 			                                        		<option value='floz' "; if($quantity[1] == 'floz'){echo 'selected';} echo ">fl oz</option>
 			                                        		<option value='oz' "; if($quantity[1] == 'oz'){echo 'selected';} echo ">oz</option>
+															<option value='lb' "; if($quantity[1] == 'lb'){echo 'selected';} echo ">lb</option>
                                                             <option value='cup' "; if($quantity[1] == 'cup'){echo 'selected';} echo ">cup</option>
                                                             <option value='pint'  "; if($quantity[1] == 'pint'){echo 'selected';} echo ">pint</option>
 			                                        		<option value='quart' "; if($quantity[1] == 'quart'){echo 'selected';} echo ">quart</option>
