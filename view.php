@@ -143,7 +143,7 @@
 							$res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1 AND creatorid=$2;", Array($recipeid, $userid));
 							//echo $recipeid . $userid . " " . pg_last_error($db);
 							if(pg_num_rows($res) != 0){
-								echo "<a href='create.php?recipeid=$recipeid'>edit</a>";
+								echo "<a href='create.php?recipeid=$recipeid'><button>edit this recipe</button></a>";
 							}
                         }
                     }
