@@ -10,11 +10,11 @@
                         $dayName = $weekDays[$day];
                         echo "<div class='day'><h2>$dayName</h2><div class='day-tile-content'>";
                         
-                        $resA = pg_query($db, "SELECT * FROM mealline WHERE day=$day AND mealid=$mealid;");
+                        $resA = pg_query_params($db, "SELECT * FROM mealline WHERE day=$1 AND mealid=$2;", Array($day, $mealid));
                         echo pg_last_error($db);
                         while($rowA = pg_fetch_assoc($resA)){
                             $thisId = $rowA["recipeid"] ;
-                            $result = pg_query($db, "SELECT * FROM recipes WHERE recipeid=$thisId;");
+                            $result = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1;", Array($thisId));
                             $rrow = pg_fetch_assoc($result);
                             //print_r($row);
                             if(!empty($rrow)){

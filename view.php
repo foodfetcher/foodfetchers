@@ -15,14 +15,14 @@
     include "DButils.php";
 	$db = getDefaultDB();
 
-    $res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeid'");
+    $res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1", Array($recipeid));
     if(pg_num_rows($res) == 0){
         $invalidRecipe = true;
     }
     else{
         $queryResultRow = pg_fetch_assoc($res);
         $creatorid = $queryResultRow['creatorid'];
-        $res = pg_query($db, "SELECT username FROM customers WHERE userid=$creatorid");
+        $res = pg_query_params($db, "SELECT username FROM customers WHERE userid=$1", Array($creatorid));
         if(pg_num_rows($res) == 0){
 
             $creatorInfo['username'] = "Recipe creator could not be found.";
@@ -37,12 +37,12 @@
 
     if(isset($_POST["favorite"])){
         $userid = $_SESSION["userid"];
-        $res = pg_query($db, "INSERT INTO favorites (recipeid, userid) values ($recipeid, $userid);");
+        $res = pg_query_params($db, "INSERT INTO favorites (recipeid, userid) values ($1,$2);", Array($recipeid, $userid));
         echo pg_last_error($db);
     }
 	else if(isset($_POST["unfavorite"])){
 		$userid = $_SESSION["userid"];
-        $res = pg_query($db, "DELETE FROM favorites WHERE recipeid='$recipeid' AND userid='$userid';");
+        $res = pg_query_params($db, "DELETE FROM favorites WHERE recipeid=$1 AND userid=$2;", Array($recipeid, $userid));
         echo pg_last_error($db);
 	}
 
@@ -124,7 +124,7 @@
                         echo "</td></tbody></table>";
                         if(isset($_SESSION["userid"])){
 							$userid = $_SESSION["userid"];
-							$res = pg_query($db, "SELECT * FROM favorites WHERE recipeid='$recipeid' AND userid='$userid';");
+							$res = pg_query_params($db, "SELECT * FROM favorites WHERE recipeid=$1 AND userid=$2;", Array($recipeid, $userid));
 							if(pg_num_rows($res) != 0){
 								echo '<form method="post">';
 								echo '<input name="unfavorite" type="hidden" value="yes">';

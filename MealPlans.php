@@ -102,7 +102,7 @@
         ?> 
             <div id = "plan-display">
                 <?php
-                    $res = pg_query($db, "SELECT * FROM meals WHERE customerid=$userid");
+                    $res = pg_query_params($db, "SELECT * FROM meals WHERE customerid=$1", Array($userid));
                     echo $loginError;
                     while($row = pg_fetch_assoc($res)){
                     $planName=$row["mealname"];

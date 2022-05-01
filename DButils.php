@@ -128,9 +128,9 @@
         
     }
     function getIngredients($planId, $db){
-        $res = pg_query($db, "SELECT ingredients FROM mealline INNER JOIN
-        recipes ON mealline.recipeid=recipes.recipeid WHERE mealid=$planId
-        ");
+        $res = pg_query_params($db, "SELECT ingredients FROM mealline INNER JOIN
+        recipes ON mealline.recipeid=recipes.recipeid WHERE mealid=$1
+        ", Array($planId));
         echo pg_last_error($db);
         
             $groceryList = Array();
