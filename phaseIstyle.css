@@ -344,11 +344,9 @@ input[type=checkbox] {
 	flex-direction: row;
 }
 .ingredients-row-num{
-	width: 20%;
     margin: 0;
 }
 .ingredients-row-select{
-	width: 20%;
     height: 27px;
     padding: 0;
 }

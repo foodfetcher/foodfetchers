@@ -127,20 +127,23 @@
     <body>
         <template id="ingredients-template">
 			<div class="ingredients-row">
-				<input class='ingredients-row-num' type='number' name='ingredients[*][num]' style="width: 32px; margin-right: 4px;">
+				<input class='ingredients-row-num' type='number' step='0.1' name='ingredients[*][num]' style='width: 44px; margin-right: 4px;'>
 				<select class='ingredients-row-select' name='ingredients[*][unit]'>
-                    <option value='teaspoon'>tsp</option>
+                    <option value='pinch'>pinch</option>
+					<option value='dash'>dash</option>
+					<option value='teaspoon'>tsp</option>
 					<option value='tablespoon'>tbsp</option>
 					<option value='floz'>fl oz</option>
 					<option value='oz'>oz</option>
                     <option value='cup'>cup</option>
+					<option value='can'>can</option>
                     <option value='pint'>pint</option>
 					<option value='quart'>quart</option>
 					<option value='ml'>ml</option>
 					<option value='liter'>l</option>
                     <option value='g'>g</option>
 				</select>
-				<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' placeholder='ingredient'>
+				<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' placeholder='ingredient' style='width: 100%;'>
                 <div class='ingredientsX' onclick="removeIngredientLine(this)">&#10006;</div>
                 <?php if(isset($recipeName)){echo '<style>.ingredientsX{display:block;}</style>';}else{echo '<style>.ingredientsX{display:none;}</style>';} ?>
 			</div>
