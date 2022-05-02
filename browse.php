@@ -22,6 +22,8 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
+			      include "DButils.php";
+            $db = getDefaultDB();
         ?>
         <div id = "Content">
             <form action="browse.php" method="post">
@@ -113,6 +115,47 @@
 										?>
 									</td>
 								</tr>
+								<tr>
+									<td>
+										<?php
+											$dateSeed = date("Ymd"); //sets the current date to a YYYYMMDD format
+											mt_srand($dateSeed); //sets the date from above as the seed to the random number generator below, ensuring each day will have only one recipe
+											$allRecipes = pg_query($db, "SELECT recipeid FROM recipes");
+											$idArray=array();
+											while($row = pg_fetch_assoc($allRecipes)){
+												$recipeid = $row["recipeid"];
+												$intrecipeid = intval($recipeid);
+												array_push($idArray, $intrecipeid);
+											}
+											//var_dump($idArray);
+											//echo "</br>";
+											//asort($idArray);
+											//$arrayCount = (count($idArray));
+											$recipeOfTheDay = mt_rand(1,10);
+											//echo "random num generated: " . $recipeOfTheDay;
+											//echo "</br>";
+											//var_dump($idArray);
+											//echo "</br>";
+											//sort($idArray);
+											//var_dump($idArray);
+											$recipeOfTheDay = $idArray[$recipeOfTheDay];
+											$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
+											while($row = pg_fetch_assoc($res)){
+												echo '<h3>Recipe of the Day</h3>';
+												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+
+												if (file_exists($filename)) {
+													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
+													} 
+													else 
+													{
+													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+													}
+												echo '<h3 style="margin-block-end: 0;"><a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></h3>';
+											}
+										?>
+									</td>
+								</tr>
 							</table>
 						</td>
 
@@ -132,7 +175,9 @@
 										if(isset($_POST['myrecipes'])){
 											echo '<table width="100%">';
 											$userid = $_SESSION['userid'];
-											$res = pg_query_params($db, "SELECT * FROM recipes WHERE creatorid=$1", Array($userid));
+
+											$res = pg_query_params($db, "SELECT * FROM recipes WHERE creatorid=$1", array($userid));
+
 											while($row = pg_fetch_assoc($res)){
 												$notEmpty = true;
 												$recipeid = $row["recipeid"];
@@ -241,7 +286,8 @@
 											}
 
 
-											$res = pg_query_params($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* $1 AND ingredients ~~* $2
+											$res = pg_query_params($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* $1
+											AND (ingredients ~~* $2 OR instructions ~~* $2)
 											AND (vegetarian = $3 OR vegetarian = $4)
 											AND (vegan = $5 OR vegan = $4)
 											AND (kosher = $6 OR kosher = $4)
