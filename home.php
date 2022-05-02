@@ -159,6 +159,7 @@
 			include "DButils.php";
             $db = getDefaultDB();
         ?> 
+<<<<<<< Updated upstream
         <div id="intro" style="">
             <p id="title">
                 Fast.<br>Simple.<br>Delicious.<br>
@@ -208,6 +209,24 @@
 			}
 			echo '</table>';
 		?>
+=======
+		<div id="landing">
+			<div id="intro">
+				<p id="title">
+					Fast.<br>Simple.<br>Delicious.<br>
+				</p>
+				<p id="sub-title">
+					<i>The Meal Planner Made For You</i>
+				</p>
+				<?php
+					if ($log == "Login"){ 
+						echo '<a href = signup.php><div id = "interested">
+							<p> Click Here to Get Started! </p>
+							</div></a>';
+					};
+				?>
+			</div>
+>>>>>>> Stashed changes
 		</div>
         
         <div id="border-line" style="height:1.5vh; background-color:var(--green);"></div>
