@@ -194,7 +194,7 @@
                                             $inc=0;
                                                 foreach($groceryList as $ingredient => $quantity){
                                                 echo "<div class='ingredients-row'>
-                                                        <input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qt.' name='ingredients[".$inc."][num]' value=" . $quantity[0] ." style='width: 32px; margin-right: 4px;'>
+                                                        <input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qty.' name='ingredients[".$inc."][num]' value='" . $quantity[0] ."' style='width: 32px; margin-right: 4px;'>
                                                         <select class='ingredients-row-select' name='ingredients[".$inc."][unit]' onload='this.value = 'pint''>
                                                             <option value='' "; if($quantity[1] == ''){echo 'selected';} echo "></option>
 															<option value='teaspoon' "; if($quantity[1] == 'teaspoon'){echo 'selected';} echo ">tsp</option>
