@@ -1,5 +1,5 @@
 <?php
-    echo '<div id = "header">
+    echo '<nav id="navbar"><div id = "header">
 		<a href = home.php>
 			<div id = "logo">
 				<img src="Images/logo-dark.png" width="65" height="85" alt="Food Fetcher Logo">
@@ -12,10 +12,10 @@
         echo '<a href = browse.php>Browse Recipes</a>';
 		
         if($log == "Logout"){
-            $first = $_SESSION["firstname"];
+            $username = $_SESSION["username"];
             echo "<a href = create.php>Create Recipe</a>
-				<a href = viewMeals.php>Meal Plans</a>";
-            echo "<div id = 'logout'>Hello, <a href=viewAccount.php>$first</a><br><a href = login.php>$log</a></div>";
+				<a href = MealPlans.php>Meal Plans</a>";
+            echo "<div id = 'logout'>Hello, <a href=viewAccount.php>$username</a><br><a href = login.php>$log</a></div>";
         }
         else{
             echo "<a href = login.php>$log</a>";
@@ -25,5 +25,5 @@
             echo "<a id='signup' href = signup.php>Sign Up</a>";
         }
 		
-    echo'</div></div><div id = "headpad"></div>'; 
+    echo'</div></div><div id = "headpad"></div></nav>'; 
 ?>

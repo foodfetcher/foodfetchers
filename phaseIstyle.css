@@ -163,6 +163,7 @@ input[type=checkbox] {
 #headpad {
 	height: 80px;
 }
+
 #sidepad {
 	width: 10vw;
 }
@@ -172,118 +173,199 @@ input[type=checkbox] {
 	border-radius: 15px;
 	background-color: rgba(255,255,255,0.95);
 	text-align: center;
+	width: 1000px;
+	margin: 40px auto;
+	padding: 10px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Homepage Intro */
+#landing {
+	height: calc(100vh - 14px);
+	display: flex;
+}
+
+#intro {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	color: #fff;
+	justify-content: center;
+	padding: 0 2vw;
+	background-color: rgba(0,0,0,0.3);
+}
+
+#intro a:hover {
+	text-decoration: none;
+}
+
+#title{
+	font-size: 11.5vh; 
+	text-shadow: 2px 2px 9px #000; 
+	margin: 0;
+}
+
+#sub-title{
+	font-size: 3vh; 
+	text-shadow: 2px 2px 3px #000;
+	color: var(--lightgreen);
+}
+
+/* Interested Banner (Call to Action) */
+#interested {
+	background-color: #fff;
+	box-shadow: 0 0 6px rgba(0,0,0,0.7);
+	bottom: 0;
+	color: #333;
+	padding: 4px 10px;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 200ms;
+	border: 1px solid transparent;
+}
+
+#interested:hover {
+	background-color: var(--lightgreen);
+	transition: 0ms;
+	border: 1px solid var(--green);
+	color: #000;
+}
+
+#interested:active {
+	background-color: var(--green);
+}
+
+#interested p {
+	font-size: 2.5vh;
+	margin: 0;
+	padding: .45vh 0vw .1vh 0vw;
+}
+
+/* Info Section */
+#info {
+	height: 50vh;
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	background-color: white;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+#info-cover {
+	position: absolute;
+	height: 100%;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	right: 100vw;
+	background-color: white;
+}
+
+#info-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#info-title p {
+	margin: 0vh 2vw;
+	text-align: left;
+	color: #333;
+}
+
+/* Plate Animation*/
+#plate1 {
+	position: relative;
+	right: 10vw;
+	margin: 0 -10vw 0 0;
+	transform: rotate(0deg);
+	left: -10vw;
+	transition: transform 3s, left 3s;
+}
+
+#info:hover #plate1{
+	transform: rotate(180deg);
+	left: 80vw;
+	transition: transform 3s 0.25s, left 3s 0.25s;
+}
+
+#info-cover {
+	left: -100vw;
+	transition: left 3s;
+}
+
+#info:hover #info-cover{
+	left: 0vw;
+	transition: left 3s 0.25s;
+}
+
+
+#profile {
+	text-align: center;
+	background-color: rgba(255,255,255,0.95);
+}
+
+/* Profile */
+.profile {
+	border-radius: 15px;
+	background-color: rgba(255,255,255,0.95);
+	text-align: center;
 	max-width: 1000px;
 	margin: 40px auto;
 	padding: 10px;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-/* Meal Planner */
-#content-container{
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-	min-height: calc(100vh - 80px);
-}
-
-#left-nav-container{
-	width: 10vw;
-	min-width: 120px;
-}
-
-#left-nav{
-    background-color: var(--teal);
-    width: 10vw;
-	position: fixed;
-	height: 100%;
-}
-
-#left-nav a{
-    font-family: Arial;
-	color: white;
-	text-decoration: none;
-}
-
-#left-nav div{
-    min-height: 45px;
-    display: flex;
-    align-items: center;
-    padding: .15vh .5vw .15vh .5vw;
-    border: 1px solid transparent;
-}
-
-#left-nav div:hover{
-    background-color: rgba(255,255,255,0.15);
-	border: 1px solid rgba(255,255,255,0.25);
-    min-height: 45px;
-}
-
-.day-tile{
-    display: flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-}
-
-.day-tile-label{
-    width: 4.125vh;
-    min-height: 8.5vh; 
-    margin: 0 .25vw 0 0;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    writing-mode: vertical-lr;
-    border-right: 2px solid var(--teal);
-	cursor: default;
-}
-
-.meal-tile{
-    border: 1px solid var(--teal);
-    position: relative;
-    background-color: #dbf9d1;
-    width: 8.25vh;
-    height: 8.25vh;
-    text-align: center;
-    align-items: center;
-	cursor: pointer;
-	transition: border 200ms;
-	margin: 1px;
-}
-
-.meal-tile:hover{
-    border: 1px solid black;
-}
-
-.meal-tile:hover div.meal-tile-cover{
-    display: block;
-}
-
-.meal-tile-text{
-	width: 100%;
-	position: absolute;
-	text-align: center;
-	background-color: rgba(244,244,244,.8);
-}
-
-.meal-tile-cover{
-    display: none;
-    position: absolute;
-    background-image: url(Images/plus.png);
-    background-size: contain;
-    height: 100%;
-    width: 100%;
-}
-
-#content-with-sidenav {
-    margin: 40px auto auto auto;
-    width: 78%;
-    background-color: white;
-    border-radius: 15px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
+/* Result Image */
 #resultImage {
     width: 225px;
     height: 225px;
     object-fit: cover;
+	transition: box-shadow 200ms;
+}
+
+#resultImage:hover {
+	box-shadow: 0 0 3px gray;
+	transition: 0ms;
+}
+
+/* Ingredient Table */
+
+#ingredients-column{
+    display:flex;
+    flex-direction:column;
+}
+.ingredients-row{
+	display: flex;
+	flex-direction: row;
+}
+.ingredients-row:hover .ingredientsX{
+	display: block;
+}
+.ingredients-row-num{
+    margin: 0;
+}
+.ingredients-row-select{
+    height: 27px;
+    padding: 0;
+}
+.ingredients-row-ing{
+	width: 100%;
+	margin-left: 4px;
+    flex:1;
+}
+
+.ingredientsX{
+    display: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+.ingredientsX:hover {
+    cursor: pointer;
+    color: #f44336;
 }
