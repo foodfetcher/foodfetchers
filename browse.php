@@ -22,8 +22,8 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-			      include "DButils.php";
-            $db = getDefaultDB();
+			include "DButils.php";
+			$db = getDefaultDB();
         ?>
         <div id = "Content">
             <form action="browse.php" method="post">
@@ -118,41 +118,41 @@
 								<tr>
 									<td>
 										<?php
-											$dateSeed = date("Ymd"); //sets the current date to a YYYYMMDD format
-											mt_srand($dateSeed); //sets the date from above as the seed to the random number generator below, ensuring each day will have only one recipe
-											$allRecipes = pg_query($db, "SELECT recipeid FROM recipes");
-											$idArray=array();
-											while($row = pg_fetch_assoc($allRecipes)){
-												$recipeid = $row["recipeid"];
-												$intrecipeid = intval($recipeid);
-												array_push($idArray, $intrecipeid);
-											}
+											//$dateSeed = date("Ymd"); //sets the current date to a YYYYMMDD format
+											//mt_srand($dateSeed); //sets the date from above as the seed to the random number generator below, ensuring each day will have only one recipe
+											//$allRecipes = pg_query($db, "SELECT recipeid FROM recipes");
+											//$idArray=array();
+											//while($row = pg_fetch_assoc($allRecipes)){
+												//$recipeid = $row["recipeid"];
+												//$intrecipeid = intval($recipeid);
+												//array_push($idArray, $intrecipeid);
+											//}
 											//var_dump($idArray);
 											//echo "</br>";
 											//asort($idArray);
 											//$arrayCount = (count($idArray));
-											$recipeOfTheDay = mt_rand(1,10);
+											//$recipeOfTheDay = mt_rand(1,10);
 											//echo "random num generated: " . $recipeOfTheDay;
 											//echo "</br>";
 											//var_dump($idArray);
 											//echo "</br>";
 											//sort($idArray);
 											//var_dump($idArray);
-											$recipeOfTheDay = $idArray[$recipeOfTheDay];
-											$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
-											while($row = pg_fetch_assoc($res)){
-												echo '<h3>Recipe of the Day</h3>';
-												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+											//$recipeOfTheDay = $idArray[$recipeOfTheDay];
+											//$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
+											//while($row = pg_fetch_assoc($res)){
+												//echo '<h3>Recipe of the Day</h3>';
+												//$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
-												if (file_exists($filename)) {
-													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
-													} 
-													else 
-													{
-													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
-													}
-												echo '<h3 style="margin-block-end: 0;"><a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></h3>';
-											}
+												//if (file_exists($filename)) {
+													//echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
+													//} 
+													//else 
+													//{
+													//echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+													//}
+												//echo '<h3 style="margin-block-end: 0;"><a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></h3>';
+											//}
 										?>
 									</td>
 								</tr>
@@ -351,6 +351,35 @@
 										}
 
 										pg_close($db);
+									}
+									else{
+										echo '<table width="100%">';
+										$res = pg_query($db, "SELECT * FROM recipes");
+										while($row = pg_fetch_assoc($res)){
+											$notEmpty = true;
+											$recipeid = $row["recipeid"];
+
+											$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+
+											if (file_exists($filename)) {
+												echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
+											} else {
+												echo '<td width="33%" style="vertical-align:top; overflow-wrap: anywhere; padding-bottom: 8px;"><a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+											}
+
+											echo '<a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></td>';
+											$count += 1;
+											if ($count == 3)
+											{
+												echo '<tr>';
+												$count = 0;
+											}
+										}
+										echo '</table>';
+										if ($count == 0 && $notEmpty == false)
+										{
+											echo 'Sorry, no recipes matched those filters. Try widening your search.';
+										}
 									}
 								?>
 							</div>
