@@ -22,7 +22,7 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-			include "DButils.php";
+            include "DButils.php";
 			$db = getDefaultDB();
         ?>
         <div id = "Content">
@@ -156,7 +156,6 @@
 										?>
 									</td>
 								</tr>
-							</table>
 						</td>
 
 						<!-- Begin Right (results) Column -->
@@ -296,8 +295,9 @@
 											AND (soyfree = $9 OR soyfree = $4)
 											AND (glutenfree = $10 OR glutenfree = $4)
 											AND (dairyfree = $11 OR dairyfree = $4)
-											AND (username ~~* $12)",
-											array("%" . $recipeName . "%", "%" . $keywordName . "%", $vegetarian, $alwayson, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, "%" . $authorName . "%"));
+											AND (username ~~* $12)
+                                            AND (creatorid=$13 OR private='false')",
+											array("%" . $recipeName . "%", "%" . $keywordName . "%", $vegetarian, $alwayson, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, "%" . $authorName . "%",$user));
 
 											// clicking the surprise me button
 											if(isset($_POST['surprise'])){
@@ -351,8 +351,7 @@
 										}
 
 										pg_close($db);
-									}
-									else{
+									} else {
 										echo '<table width="100%">';
 										$res = pg_query($db, "SELECT * FROM recipes");
 										while($row = pg_fetch_assoc($res)){
