@@ -7,7 +7,8 @@
 	else
 	{
 		$log = "Login";
-        echo '<meta http-equiv="refresh" content="3;url=home.php" />';
+        header("Location: home.php");
+        die('<a href="home.php">Click here if you are not automatically redirected</a>');
         $loginError = '<p>Logged Out... Redirecting Home...</p>';
     }
     
