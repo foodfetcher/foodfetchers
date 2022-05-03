@@ -22,7 +22,7 @@
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-			include "DButils.php";
+            include "DButils.php";
 			$db = getDefaultDB();
         ?>
         <div id = "Content">
@@ -115,6 +115,7 @@
 										?>
 									</td>
 								</tr>
+							
 								<tr>
 									<td>
 										<?php
@@ -156,9 +157,8 @@
 										?>
 									</td>
 								</tr>
-							</table>
+                                </table>
 						</td>
-
 						<!-- Begin Right (results) Column -->
 						<td style="width: 70%; vertical-align: top; border-left: 1px solid #888; padding-left: 5px; font-size: 20px; font-family: ubuntu;">
 							<div id = "results">
@@ -175,9 +175,7 @@
 										if(isset($_POST['myrecipes'])){
 											echo '<table width="100%">';
 											$userid = $_SESSION['userid'];
-
 											$res = pg_query_params($db, "SELECT * FROM recipes WHERE creatorid=$1", array($userid));
-
 											while($row = pg_fetch_assoc($res)){
 												$notEmpty = true;
 												$recipeid = $row["recipeid"];
@@ -285,9 +283,9 @@
 												$dairyfree = "off";
 											}
 
-
+                                            $user=$_SESSION['userid'];
 											$res = pg_query_params($db, "SELECT * FROM recipes INNER JOIN customers ON recipes.creatorid=customers.userid WHERE recipename ~~* $1
-											AND (ingredients ~~* $2 OR instructions ~~* $2)
+                                            AND (ingredients ~~* $2 OR instructions ~~* $2)
 											AND (vegetarian = $3 OR vegetarian = $4)
 											AND (vegan = $5 OR vegan = $4)
 											AND (kosher = $6 OR kosher = $4)
@@ -296,8 +294,9 @@
 											AND (soyfree = $9 OR soyfree = $4)
 											AND (glutenfree = $10 OR glutenfree = $4)
 											AND (dairyfree = $11 OR dairyfree = $4)
-											AND (username ~~* $12)",
-											array("%" . $recipeName . "%", "%" . $keywordName . "%", $vegetarian, $alwayson, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, "%" . $authorName . "%"));
+											AND (username ~~* $12)
+                                            AND (creatorid=$13 OR private='false')",
+											array("%" . $recipeName . "%", "%" . $keywordName . "%", $vegetarian, $alwayson, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, "%" . $authorName . "%",$user));
 
 											// clicking the surprise me button
 											if(isset($_POST['surprise'])){
@@ -351,8 +350,7 @@
 										}
 
 										pg_close($db);
-									}
-									else{
+									} else {
 										echo '<table width="100%">';
 										$res = pg_query($db, "SELECT * FROM recipes");
 										while($row = pg_fetch_assoc($res)){

@@ -14,9 +14,9 @@
     $creatorInfo = Array();
     include "DButils.php";
 	$db = getDefaultDB();
+    $user=$_SESSION['userid'];
 
-    $res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1", Array($recipeid));
-    if(pg_num_rows($res) == 0){
+$res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1  AND (creatorid=$2 OR private='false')", Array($recipeid, $user));    if(pg_num_rows($res) == 0){
         $invalidRecipe = true;
     }
     else{

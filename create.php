@@ -22,6 +22,7 @@
 				//print_r($_POST);
 				$recipeid = $_POST["recipeid"];
                 $recipeName = $_POST["recipeName"];
+                $_SESSION["userAction"]="created.";
                 ;
                 foreach($_POST["ingredients"] as &$postIngr){
                     if(strstr($postIngr['num'],"/")){
@@ -38,6 +39,7 @@
 				$soyfree = filter_var($_POST["soyfree"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$glutenfree = filter_var($_POST["glutenfree"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 				$dairyfree = filter_var($_POST["dairyfree"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
+                $private = filter_var($_POST["private"], FILTER_VALIDATE_BOOLEAN) ? "true" : "false";
 
 				$coverImage = $_FILES['coverimage'];
 
@@ -46,8 +48,9 @@
 				$userid = $_SESSION["userid"];
 				$timestamp = date('Y-m-d H:i:s');
 				$db = getDefaultDB();
+                $_SESSION["lastDeleted"]=$_POST["recipeName"];
 				if(isset($recipeid)){
-                    $_SESSION["lastDeleted"]=$_POST["recipeName"];
+                    $_SESSION["userAction"]="updated.";
 					$res = pg_query_params($db, "SELECT recipeid FROM recipes WHERE recipeid=$1 AND creatorid=$2;", Array($recipeid, $userid));
 					if(pg_num_rows($res) != 0){
 						if(isset($_POST["delete"])){
@@ -56,18 +59,18 @@
 						}
 						else{
 							pg_query_params($db, "DELETE FROM recipes WHERE recipeid=$1;", Array($recipeid));
-						$res = pg_query_params($db, "INSERT INTO recipes (recipeid, recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING recipeid", array($recipeid, $recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree));
+						$res = pg_query_params($db, "INSERT INTO recipes (recipeid, recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree, private) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING recipeid", array($recipeid, $recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, $private));
 						}
 					}
 					else{
 						$outcome = "You do not have permission to edit this recipe";
 					}
 				}
-				else{
-					$res = pg_query_params($db, "INSERT INTO recipes (recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING recipeid", array($recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree));
+				else{//private
+					$res = pg_query_params($db, "INSERT INTO recipes (recipename, ingredients, instructions, creatorid, creationdate, vegetarian, vegan, kosher, nutfree, wheatfree, soyfree, glutenfree, dairyfree, private) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING recipeid", array($recipeName, $ingredients, $instructions, $userid, $timestamp, $vegetarian, $vegan, $kosher, $nutfree, $wheatfree, $soyfree, $glutenfree, $dairyfree, $private));
 				}
 				if($res === false){
-					$outcome = pg_last_error($db) . $vegetarian;
+					$outcome = pg_last_error($db);
 				}
 				else{
 					$recipeid = pg_fetch_assoc($res)["recipeid"];
@@ -110,7 +113,7 @@
 					$soyfree = $recipeInfo["soyfree"] == 't' ? "true" : "false";
 					$glutenfree = $recipeInfo["glutenfree"] == 't' ? "true" : "false";
 					$dairyfree = $recipeInfo["dairyfree"] == 't' ? "true" : "false";
-					//var_dump($vegetarian);
+					$private = $recipeInfo["private"] == 't' ? "true" : "false";
 				}
 				pg_close($db);
 			}
@@ -122,7 +125,7 @@
         }
         function newIngredientLine(){
             var inputs = document.getElementById("ingredients-template").content.firstElementChild.children;
-            for(var i=0;i<3; i++){
+            for(var i=0;i<4; i++){
                 inputs[i].name = inputs[i].name.slice(0,12) + ingIndx + inputs[i].name.slice(13);
             }
             ingIndx++;
@@ -259,6 +262,10 @@
 											<label for="dairyfree">Dairy-Free</label>
 										</td>
 									</table>
+                                        <div id="private-row">
+                                            <input type="checkbox" name="private" <?php if($private=="true"){echo "checked";} ?>>
+											<label for="private">Private</label><br/>
+                                        </div>
 								</td>
 							</tr>
 						</table>
@@ -276,11 +283,27 @@
 				</tr>
 				
 			</table></form>
-			<?php
-			if(isset($recipeid)){
-                    include 'deleteRecipe.php';//include delete modal
-			}
-			?>
+                <?php
+                    if(isset($recipeid)){
+                            include 'deleteRecipe.php';//include delete modal
+                    }
+                ?>
 		</div>
+            <?php
+                if(isset($outcome)){
+                    if(isset($_POST["delete"])){
+                        $resultMessage="deleted.";
+                    } else {
+                        $resultMessage= $_SESSION["userAction"];
+                    }
+                    echo '<style>#Content{display:none;}
+                            #resultsModal{display:flex;}</style>';
+            }?>
+            <div id="resultsModal" onclick="returnFromPage()">
+                    <div id="resultsPrompt">
+                        <h2 id="resultsTitle"> Success, <span id="colorText"><?php echo $_SESSION["lastDeleted"]; ?></span> was <?php echo $resultMessage ?> </h2>
+                        <p id="resultsSubTitle">Click anywhere to continue...</p>
+                    </div>
+            </div>
 	</body>
 </html>

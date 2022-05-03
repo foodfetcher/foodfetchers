@@ -18,17 +18,7 @@ function returnFromPage(){
 #colorText{
     color: var(--teal);
 }
-#deleteModal,
-#resultsModal{
-    display:none;
-    position:fixed;
-    z-index: 1;
-    width:100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.85);
-    top: 0;
-    left: 0;
-}
+
 #resultsModal{
     //display:flex;
 }
@@ -158,18 +148,3 @@ function returnFromPage(){
     </div>
 </div>
 </form>
-<?php
-if(isset($outcome)){
-                if(isset($_POST["delete"])){
-                    $resultMessage="deleted.";
-                } else {
-                    $resultMessage="created.";
-                }
-                echo '<style>#resultsModal{display:flex;}</style>';
-            }?>
-                    <div id="resultsModal" onclick="returnFromPage()">
-                        <div id="resultsPrompt">
-                        <h2 id="resultsTitle"> Success, <span id="colorText"><?php echo $_SESSION["lastDeleted"]; ?></span> was <?php echo $resultMessage ?> </h2>
-                        <p id="resultsSubTitle">Click anywhere to continue...</p>
-                        </div>
-                    </div>
