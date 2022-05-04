@@ -352,7 +352,7 @@
 										pg_close($db);
 									} else {
 										echo '<table width="100%">';
-										$res = pg_query($db, "SELECT * FROM recipes");
+										$res = pg_query_params($db, "SELECT * FROM recipes WHERE creatorid=$1 OR private='false'", Array($_SESSION['userid']));
 										while($row = pg_fetch_assoc($res)){
 											$notEmpty = true;
 											$recipeid = $row["recipeid"];
