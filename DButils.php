@@ -1,5 +1,6 @@
 <?php
 
+	
 	//returns a connection to the local main database over a unix socket
 	function getDefaultDB() {
 		return pg_connect('host=localhost user=fetcher1 password=1234 dbname=main');
@@ -60,13 +61,16 @@
 	/* function makeUser($db, ) {
 
 	} */
+    
     function toDecimal($val){
         if(isset($val)){
             if(strstr($val,"/")){
+                $space = strpos($val, " ");
+                $whole = substr($val,0, $space);
                 $slash = strpos($val,"/");
-                $numerator = substr($val,0, $slash+1);
+                $numerator = substr($val,$space+1, $slash-$space-1);
                 $denominator = substr($val, $slash+1);
-                $val = $numerator / $denominator;
+                $val = $whole + $numerator / $denominator;
                 
             }
         }
