@@ -61,7 +61,7 @@
         <?php
             include 'nav.php'; //write out the nav bar
 		?>
-        <div id = "Content" style = "max-width: 320px;">
+        <div id = "Content" style = "width: 320px;">
             <h1> Log In </h1>
 			<form name = "login" action = "login.php" method = "post" onSubmit="">
 				<table style="width: 100%;"><tr><td style="display: flex;">

@@ -52,7 +52,7 @@
         <div id="info">
             <div id="info-cover">
                 <div>
-					<table style="border-spacing: 4vh; font-size: 2.5vh; color: #333;">
+					<table style="border-spacing: 3vh; font-size: 2.5vh; color: #333;">
 						<tr>
 							<td style="border: 4px solid var(--green); border-right: 0;"></td>
 							<td><p>Upload your own <br>delicious recipes.</p></td>
@@ -69,7 +69,7 @@
 							<td style="border: 4px solid var(--green); border-left: 0;"></td>
 							
 							<td style="border: 4px solid var(--green); border-right: 0;"></td>
-							<td><p>We'll fill out your grocery lists <br>to ensure you're <b>always prepared</b> <br>with every ingredient you need.</p></td>
+							<td><p>We will fill out your grocery lists <br>to ensure you're <b>always prepared</b> <br>with every ingredient you need.</p></td>
 							<td style="border: 4px solid var(--green); border-left: 0;"></td>
 						</tr>
 					</table>

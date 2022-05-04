@@ -130,7 +130,7 @@
                     $res = pg_query_params($db, "SELECT * FROM meals WHERE customerid=$1", Array($userid));
                     echo $loginError;
                     while($row = pg_fetch_assoc($res)){
-                    $planName=$row["mealname"];
+                    $planName=htmlentities($row["mealname"], ENT_QUOTES | ENT_IGNORE);
                     echo '<div class="plan-title">
                               <div class="plan-title-text" data-planid='.$row["mealid"].' onclick="scrollToTop(this)" >'.$planName.'</div>
                           </div>';

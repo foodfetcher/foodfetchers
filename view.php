@@ -90,7 +90,7 @@ $res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1  AND (creat
                         foreach($groceryList as $ingredient => $quantity){
                             echo  $quantity[0] . ' '. $quantity[1] . ' ' . $ingredient . "<br>"; 
                         }
-                        echo "<h3>Instructions</h3><p style='text-align: left'>" . str_replace("\n", "<br/><br/>", $queryResultRow['instructions']) . "</p>";
+                        echo "<h3>Instructions</h3><p style='text-align: justify'>" . str_replace("\n", "<br/><br/>", $queryResultRow['instructions']) . "</p>";
                         echo "<h3>Dietary Information</h3>";
                         foreach(Array("vegetarian","vegan","kosher","nutfree","wheatfree","soyfree","glutenfree","dairyfree") as $diet){
 							if($queryResultRow[$diet] == "t"){
@@ -129,21 +129,21 @@ $res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1  AND (creat
 								echo '<form method="post">';
 								echo '<input name="unfavorite" type="hidden" value="yes">';
 								echo '<input name="id" type="hidden" value="' . $recipeid . '">';
-								echo '<input type="submit" value = "Remove from favorites">';
+								echo '<input type="submit" value = "Remove from Favorites">';
 								echo "</form>";
 							}
 							else{
 								echo '<form method="post">';
 								echo '<input name="favorite" type="hidden" value="yes">';
 								echo '<input name="id" type="hidden" value="' . $recipeid . '">';
-								echo '<input type="submit" value = "Add to favorites">';
+								echo '<input type="submit" value = "Add to Favorites">';
 								echo "</form>";
 							}
 
 							$res = pg_query_params($db, "SELECT * FROM recipes WHERE recipeid=$1 AND creatorid=$2;", Array($recipeid, $userid));
 							//echo $recipeid . $userid . " " . pg_last_error($db);
 							if(pg_num_rows($res) != 0){
-								echo "<a href='create.php?recipeid=$recipeid'><button>edit this recipe</button></a>";
+								echo "<a href='create.php?recipeid=$recipeid'><button style='margin-top: 4px;'>Edit Recipe</button></a>";
 							}
                         }
                     }

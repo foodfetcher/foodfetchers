@@ -119,8 +119,8 @@
 								<tr>
 									<td>
 										<?php
-											//$dateSeed = date("Ymd"); //sets the current date to a YYYYMMDD format
-											//mt_srand($dateSeed); //sets the date from above as the seed to the random number generator below, ensuring each day will have only one recipe
+											$dateSeed = date("Ymd"); //sets the current date to a YYYYMMDD format
+											mt_srand($dateSeed); //sets the date from above as the seed to the random number generator below, ensuring each day will have only one recipe
 											//$allRecipes = pg_query($db, "SELECT recipeid FROM recipes");
 											//$idArray=array();
 											//while($row = pg_fetch_assoc($allRecipes)){
@@ -132,7 +132,7 @@
 											//echo "</br>";
 											//asort($idArray);
 											//$arrayCount = (count($idArray));
-											//$recipeOfTheDay = mt_rand(1,10);
+											$recipeOfTheDay = mt_rand(176,179);
 											//echo "random num generated: " . $recipeOfTheDay;
 											//echo "</br>";
 											//var_dump($idArray);
@@ -140,20 +140,21 @@
 											//sort($idArray);
 											//var_dump($idArray);
 											//$recipeOfTheDay = $idArray[$recipeOfTheDay];
-											//$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
-											//while($row = pg_fetch_assoc($res)){
-												//echo '<h3>Recipe of the Day</h3>';
-												//$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
+											$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
+											while($row = pg_fetch_assoc($res)){
+												echo '</br></br><h3>Recipe of the Day</h3>';
+												$recipeid = $row["recipeid"];
+												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
-												//if (file_exists($filename)) {
-													//echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
-													//} 
-													//else 
-													//{
-													//echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
-													//}
-												//echo '<h3 style="margin-block-end: 0;"><a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></h3>';
-											//}
+												if (file_exists($filename)) {
+													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
+												} 
+												else {
+													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
+												}
+												echo '<h3 style="margin-block-end: 0;"><a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></h3>';
+											}
+											mt_srand();
 										?>
 									</td>
 								</tr>
