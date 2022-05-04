@@ -18,6 +18,32 @@
         <title> Food Fetchers | Meal Planner </title>
         <link rel="stylesheet" href="phaseIstyle.css">
         <style>
+        #resultsPrompt{
+    margin: auto;
+    background-color:  var(--color1-white);
+    width: 50%;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    text-align:center;
+    padding: 5vh 3vw;
+}
+#resultsPrompt{
+    height: 20%;
+}
+#resultsTitle{
+    margin: 3vh 0;
+    font-size: min(6vh, 3vw);
+}
+#resultsSubTitle{
+    margin: 0 0 3vh 0;
+    font-size: min(3.2vh, 1.8vw);
+    flex: 3;
+}
+#colorText{
+    color: var(--teal);
+}
         /* Colors */
             :root {
                 --color1-white: rgb(244,244,244);
@@ -313,6 +339,9 @@
                 }
                 document.getElementById(value + "Hidden").value="";//clear input
             }
+            function returnFromPage(el){
+                window.location.href = "MealPlans.php?view=" + el;
+            }
         </script>
     </head>
     <body>
@@ -385,6 +414,8 @@
                                 explode(" ", $_POST["thursday"], PHP_INT_MAX),
                                 explode(" ", $_POST["friday"], PHP_INT_MAX),
                                 explode(" ", $_POST["saturday"], PHP_INT_MAX));
+                                $_SESSION["lastDeleted"] = $mealid;
+                                $outcome = "sucess";
                         
                                 foreach($week as $day=>$arr){
                                     foreach($arr as $item){
@@ -472,5 +503,15 @@
             </form>
         </div>
         </div>
+        <?php
+                if(isset($outcome)){
+                    echo '<style>#resultsModal{display:flex;}</style>';
+            }?>
+            <div id="resultsModal" onclick="returnFromPage(<?php echo $_SESSION["lastDeleted"];?>)">
+                    <div id="resultsPrompt">
+                        <h2 id="resultsTitle"> Success, <span id="colorText"><?php echo  $_SESSION["lastQuery"]["mealname"]; ?></span> was created.</h2>
+                        <p id="resultsSubTitle">Click anywhere to continue...</p>
+                    </div>
+            </div>
     </body>
 </html>
