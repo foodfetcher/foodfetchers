@@ -46,7 +46,7 @@
         ?>
         <div id="Content">
             <h1> My Profile</h1>
-			<div id="profile">
+			<div id="profile" style="background-color: transparent;">
 				<?php
 					$email = $_SESSION["email"];
 					$res = pg_query_params($db, "SELECT username FROM customers WHERE email=$1", array($email));
