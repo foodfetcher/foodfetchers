@@ -1,4 +1,4 @@
-#plan-display{
+            #plan-display{
                 width: 75vw;
                 height:calc(90% - 80px);
                 margin: 2.5vh auto 0 auto;
@@ -6,12 +6,15 @@
                 display:flex;
                 flex-wrap: wrap;
                 align-content: flex-start;
-                overflow-y:auto;
-                overflow-x:hidden;
+                overflow:hidden auto;
                 scroll-padding: .9vh 1vw;
                 border-top: 1vh solid rgba(0,0,0,0);
                 border-bottom: 1vh solid rgba(0,0,0,0);
                 scrollbar-width: none;
+                scroll-behavior: smooth;
+            }
+            #plan-display::-webkit-scrollbar {
+                display: none;
             }
             .plan-title{
                 width:100%;
@@ -335,6 +338,7 @@
                 text-align: center;
                 background-color: rgba(244,244,244,.8);
                 font-size: min(3vh,1vw);
+                color: black;
             }
             .meal-tile-cover{
                 display: none;
@@ -346,3 +350,4 @@
                 height: 100%;
                 width: 100%;
             }
+            
