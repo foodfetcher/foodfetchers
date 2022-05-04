@@ -1,6 +1,4 @@
-
-
-<div class="view-meal">
+            <div class="view-meal">
         
                 <div class="week-display">
                     <?php
@@ -18,16 +16,16 @@
                             $rrow = pg_fetch_assoc($result);
                             //print_r($row);
                             if(!empty($rrow)){
-                             echo '<div class ="meal-tile">
+                             echo '<a href="view.php?id='.$thisId.'" class ="meal-tile">
                                             <div class = "meal-tile-text">' . $rrow['recipename'] . '</div>
                                             <div class= "meal-tile-cover" ></div>';
                                             $ffilename = 'coverimages/' . $rrow['recipeid'];
 												if (file_exists($ffilename)) {
 													echo '<img  src="coverimages/' . $rrow['recipeid'] . '" alt="recipe cover image" style="width:100%;height:100%;object-fit:cover;">
-                                        </div>';
+                                        </a>';
 												} else {
 													echo '<img src="Images/logo.png" alt="recipe cover image" style="width:100%;height:100%;object-fit:cover;">
-                                                </div>';}
+                                                </a>';}
                             }
                         }
                         echo "</div></div>";
@@ -39,5 +37,5 @@
                 <div class="submit-clear">
                         <input type="button" value = "Delete Meal Plan" onclick="showModal('<?php echo $mealid ?>','<?php echo $planName ?>')" >
                         <input type="button" value = "View Ingredients" onclick="openIngredients(this)" >
-                    </div>
-</div>
+                </div>
+            </div>
