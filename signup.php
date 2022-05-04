@@ -45,7 +45,7 @@
         <?php
             include 'nav.php'; //write out the nav bar
 		?>
-        <div id = "Content">
+        <div id = "Content" style = "width: 400px;">
             <form name = "signup" action = "signup.php" method = "post">
                 <h1> Create an Account </h1>
                 <label for="email">Email Address:*</label>
