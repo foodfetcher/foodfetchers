@@ -49,6 +49,22 @@
         <link rel="stylesheet" href="phaseIstyle.css">
         <link rel="stylesheet" href="styles-MealPlans.css">
         <script>
+        
+        var scrollLock;
+        
+        function openView(){
+            var query = window.location.search;
+            console.log(query);
+            var params = new URLSearchParams(query);
+            var name = params.get('view');
+            var children= document.getElementById("plan-display").children;
+            for (let i=0; i < children.length; i++){
+                if(children[i].className == "plan-title" && children[i].firstElementChild.getAttribute("data-planid") == name){
+                    scrollToTop(children[i].firstElementChild);
+                    break;
+                }
+            }
+        }
         function scrollToTop(el){
             el.scrollIntoView({behavior:"smooth"});
             toggleOpen(el);
@@ -61,6 +77,9 @@
                 el.classList.toggle("open");
                 viewMeal.style.height = null;
                 viewIngredients.style.height = null;
+                if(scrollLock){
+                    document.getElementById("plan-display").scroll(0,0);
+                }
             } else {
                 el.classList.toggle("open");
                 viewMeal.style.height = "calc(90% - 1vh)";
@@ -91,11 +110,16 @@
             var elt = document.getElementById('plan-display');
             if(elt.clientHeight < (elt.scrollHeight - document.getElementById('bottom-spacer').scrollHeight - 8)){
                 document.getElementById('scroll-image').style.display = "unset";
+                document.getElementById('plan-display').style.overflow = "hidden auto";
+                scrollLock = false;
+            } else {
+                document.getElementById('plan-display').style.overflow = "hidden";
+                scrollLock = true;
             }
         }
         </script>
     </head>
-    <body onload="showScroll()">
+    <body onload="showScroll(); openView()">
         <div id = "background">
         <?php
             include 'nav.php'; //write out the nav bar
@@ -108,7 +132,7 @@
                     while($row = pg_fetch_assoc($res)){
                     $planName=$row["mealname"];
                     echo '<div class="plan-title">
-                              <div class="plan-title-text" onclick="scrollToTop(this)" >'.$planName.'</div>
+                              <div class="plan-title-text" data-planid='.$row["mealid"].' onclick="scrollToTop(this)" >'.$planName.'</div>
                           </div>';
                                               
                     $mealid = $row['mealid'];
