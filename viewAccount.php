@@ -35,12 +35,17 @@
 				width: 8%;
 			}
 		</style>
+        <script>
+        function goToMealPlan(el){
+            window.location.href = "MealPlans.php?view=" + el;
+        }
+        </script>
     </head>
     <body>
 		<div id = "background"></div>
         <?php
             include 'nav.php'; //write out the nav bar
-			include "DButils.php";
+            include "DButils.php";
 			$db = getDefaultDB();
 			$maxCol = 6;
         ?>
@@ -49,15 +54,14 @@
 			<div id="profile">
 				<?php
 					$email = $_SESSION["email"];
-					$res = pg_query_params($db, "SELECT username FROM customers WHERE email=$1", array($email));
+                    $res = pg_query_params($db, "SELECT username FROM customers WHERE email=$1", array($email));
 					while($row = pg_fetch_assoc($res)){
 						$username = $row["username"];
 					}
-					//$username = $_SESSION["username"];
 					$userid = $_SESSION['userid'];
 					echo "<div id='Name'>Name: $username</div>";
 					echo "<div id='Email'>Email: $email</div>";
-					echo '</br><a id="username" href=changeUsername.php>Change Username</a></br>';
+                   	echo '</br><a id="username" href=changeUsername.php>Change Username</a></br>';
 					echo '</br><a id="password" href=changePassword.php>Change Password</a></br></br>';
 				?>
 			</div>
@@ -138,7 +142,7 @@
 						}
 						//echo '<td>';
 						echo '<td>';
-						echo '<a href="viewMeal.php?id=' . $row["mealid"] . '"><div>' . $row['mealname'] . '</div></a>';
+						echo '<a><div style="cursor:pointer;" onclick="goToMealPlan('.$row['mealid'] .')">' . $row['mealname'] . '</div></a>';
 						echo '</td>';
 						$count++;
 					}
