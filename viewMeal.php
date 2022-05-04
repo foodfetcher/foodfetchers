@@ -37,7 +37,7 @@
                     
                 </div>
                 <div class="submit-clear">
-                        <input type="button" value = "Delete Meal Plan" onclick="showModal('<?php echo $mealid ?>','<?php echo $planName ?>')" >
+                        <input type="button" value = "Delete Meal Plan" onclick="showModal('<?php echo $mealid ?>','<?php echo htmlentities($planName, ENT_QUOTES | ENT_IGNORE); ?>')" >
                         <input type="button" value = "View Ingredients" onclick="openIngredients(this)" >
                     </div>
 </div>
