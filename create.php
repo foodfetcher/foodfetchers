@@ -141,7 +141,7 @@
     <body>
         <template id="ingredients-template">
 			<div class="ingredients-row">
-				<input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qty.' name='ingredients[*][num]' style="width: 32px; margin-right: 4px;">
+				<input class='ingredients-row-num' type='text' pattern='([0-9]*[ ]?([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?'  maxlength='10' placeholder='Qty.' name='ingredients[*][num]' style="width: 32px; margin-right: 4px;" required oninvalid="this.setCustomValidity('Enter a number, fraction or decimal such as: 1, 1.5, .5, 0.5, 1/2, 1 1/2')" oninput="this.setCustomValidity('')" >
 				<select class='ingredients-row-select' name='ingredients[*][unit]'>
                     <option value=''></option>
 					<option value='teaspoon'>tsp</option>
@@ -159,7 +159,7 @@
 					<option value='dash'>dash</option>
                     <option value='can'>can</option>
 				</select>
-				<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' placeholder='ingredient' required>
+				<input class='ingredients-row-ing' type='text' name='ingredients[*][ingr]' placeholder='ingredient' required maxlength='30'>
                 <input class='ingredients-row-ing' type='hidden' name='ingredients[*][frac]' value="false">
                 <div class='ingredientsX' onclick="removeIngredientLine(this)">&#10006;</div>
                 <!-- if(isset($recipeName)){echo '<style>.ingredientsX{display:block;}</style>';}else{echo '<style>.ingredientsX{display:none;}</style>';} ?>-->
@@ -180,7 +180,7 @@
 							<tr>
 								<td style="display: flex;">
 									<label for="recipeName" style="flex: 0; white-space: pre; padding-top: 4px;">Recipe Name:</label>
-									<input type="text" name="recipeName" placeholder="steamed hams" style="flex: 1; margin-left: 4px;" value="<?php echo $recipeName;?>" required><br/>
+									<input type="text" name="recipeName" placeholder="steamed hams" style="flex: 1; margin-left: 4px;" value="<?php echo $recipeName;?>" required   maxlength='30'><br/>
 								</td>
 							</tr>
 							<tr>
@@ -195,10 +195,11 @@
                                         <?php if(isset($recipeName)){
                                             $groceryList = showIngredients($ingredients,$db);
                                             $inc=0;
+                                            $invalidInp = "Enter a number, fraction or decimal such as: 1, 1.5, .5, 0.5, 1/2, 1 1/2";
                                                 foreach($groceryList as $ingredient => $quantity){
                                                 echo "<div class='ingredients-row'>
-                                                        <input class='ingredients-row-num' type='text' pattern='(([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' placeholder='Qty.' name='ingredients[".$inc."][num]' value='" . $quantity[0] ."' style='width: 32px; margin-right: 4px;'>
-                                                        <select class='ingredients-row-select' name='ingredients[".$inc."][unit]' onload='this.value = 'pint''>
+                                                        <input class='ingredients-row-num' type='text' pattern='([0-9]*[ ]?([0-9]+[\/][1-9]+[0-9]*)?)|([0-9]*([.]?[0-9]*)+)?' maxlength='10' placeholder='Qty.' name='ingredients[".$inc."][num]' value='" . $quantity[0] ."' style='width: 32px; margin-right: 4px;' required oninvalid=\"this.setCustomValidity('Enter a number, fraction or decimal such as: 1, 1.5, .5, 0.5, 1/2, 1 1/2')\" oninput=\"this.setCustomValidity('')\">
+                                                        <select class='ingredients-row-select' name='ingredients[".$inc."][unit]'>
                                                             <option value='' "; if($quantity[1] == ''){echo 'selected';} echo "></option>
 															<option value='teaspoon' "; if($quantity[1] == 'teaspoon'){echo 'selected';} echo ">tsp</option>
 			                                        		<option value='tablespoon' "; if($quantity[1] == 'tablespoon'){echo 'selected';} echo ">tbsp</option>
@@ -215,7 +216,7 @@
                                                             <option value='dash' "; if($quantity[1] == 'dash'){echo 'selected';} echo ">dash</option>
                                                             <option value='can' "; if($quantity[1] == 'can'){echo 'selected';} echo ">can</option>
 			                                        	</select>
-			                                        	<input class='ingredients-row-ing' type='text' name='ingredients[".$inc."][ingr]' value='" . $ingredient ."' required>
+			                                        	<input class='ingredients-row-ing' type='text' name='ingredients[".$inc."][ingr]' value='" . $ingredient ."' required  maxlength='30'>
                                                         <input class='ingredients-row-ing' type='hidden' name='ingredients[".$inc."][frac]' value='false'>
                                                         <div class='ingredientsX' onclick='removeIngredientLine(this)'>&#10006;</div>
 			                                        </div>";
