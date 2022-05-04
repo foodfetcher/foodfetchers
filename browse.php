@@ -143,15 +143,15 @@
 											$res = pg_query($db, "SELECT * FROM recipes WHERE recipeid='$recipeOfTheDay'");
 											while($row = pg_fetch_assoc($res)){
 												echo '</br></br><h3>Recipe of the Day</h3>';
+												$recipeid = $row["recipeid"];
 												$filename = '/var/www/html/foodFetchers/master/coverimages/' . $recipeid;
 
 												if (file_exists($filename)) {
 													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/' . $recipeid . '" id="resultImage" alt="recipe cover image"/></a></br>';
-													} 
-													else 
-													{
+												} 
+												else {
 													echo '<a href="view.php?id=' . $row["recipeid"] . '"><img src="coverimages/logo.png" id="resultImage" alt="recipe cover image"/></a></br>';
-													}
+												}
 												echo '<h3 style="margin-block-end: 0;"><a href="view.php?id=' . $row["recipeid"] . '">' . $row['recipename'] . '</a></h3>';
 											}
 											mt_srand();
