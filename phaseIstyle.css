@@ -259,9 +259,16 @@ input[type=checkbox]:checked {
 	display: flex;
 	flex-direction: row;
 	background-color: white;
-	overflow: hidden;
+	overflow-x: scroll;
+	overflow-y: hidden;
 	padding: 0;
 	margin: 0;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+#info::-webkit-scrollbar {
+	display: none;
 }
 
 #info-cover {
