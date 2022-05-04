@@ -170,7 +170,7 @@
             include 'nav.php'; //write out the nav bar
 		?>
 		<div id = "Content">
-		<h1> <?php if(isset($recipeName)){echo "Editing: " . $recipeName . "";}else{echo "Create your own recipe";} ?> </h1>
+		<h1> <?php if(isset($recipeName)){echo "Editing: " . $recipeName . "";}else{echo "Create Your Own Recipe";} ?> </h1>
         <form action="create.php" method="post" enctype="multipart/form-data">
 			<table style="width: 100%">
 				
@@ -180,7 +180,7 @@
 							<tr>
 								<td style="display: flex;">
 									<label for="recipeName" style="flex: 0; white-space: pre; padding-top: 4px;">Recipe Name:</label>
-									<input type="text" name="recipeName" placeholder="steamed hams" style="flex: 1; margin-left: 4px;" value="<?php echo $recipeName;?>" required><br/>
+									<input type="text" name="recipeName" placeholder="e.g. steamed hams" style="flex: 1; margin-left: 4px;" value="<?php echo $recipeName;?>" required><br/>
 								</td>
 							</tr>
 							<tr>
@@ -243,28 +243,28 @@
 										<td style="width: 50%;">
 											<?php if(isset($recipeid)){ echo('<input type="hidden" name="recipeid" value="' . $recipeid . '">');}?>
 											<input type="checkbox" name="vegetarian" <?php if($vegetarian=="true"){echo "checked";} ?>>
-											<label for="vegetarian">Vegetarian</label><br/>
+											<label for="vegetarian" style="vertical-align: text-bottom;">Vegetarian</label><br/>
 											<input type="checkbox" name="vegan" <?php if($vegan=="true"){echo "checked";} ?>>
-											<label for="vegan">Vegan</label><br/>
+											<label for="vegan" style="vertical-align: text-bottom;">Vegan</label><br/>
 											<input type="checkbox" name="kosher" <?php if($kosher=="true"){echo "checked";} ?>>
-											<label for="kosher">Kosher</label><br/>
+											<label for="kosher" style="vertical-align: text-bottom;">Kosher</label><br/>
 											<input type="checkbox" name="nutfree" <?php if($nutfree=="true"){echo "checked";} ?>>
-											<label for="nutfree">Nut-Free</label>
+											<label for="nutfree" style="vertical-align: text-bottom;">Nut-Free</label>
 										</td>
 										<td style="width: 50%; padding-left: 5px;">
 											<input type="checkbox" name="wheatfree" <?php if($wheatfree=="true"){echo "checked";} ?>>
-											<label for="wheatfree">Wheat-Free</label><br/>
+											<label for="wheatfree" style="vertical-align: text-bottom;">Wheat-Free</label><br/>
 											<input type="checkbox" name="soyfree" <?php if($soyfree=="true"){echo "checked";} ?>>
-											<label for="soyfree">Soy-Free</label><br/>
+											<label for="soyfree" style="vertical-align: text-bottom;">Soy-Free</label><br/>
 											<input type="checkbox" name="glutenfree" <?php if($glutenfree=="true"){echo "checked";} ?>>
-											<label for="glutenfree">Gluten-Free</label><br/>
+											<label for="glutenfree" style="vertical-align: text-bottom;">Gluten-Free</label><br/>
 											<input type="checkbox" name="dairyfree" <?php if($dairyfree=="true"){echo "checked";} ?>>
-											<label for="dairyfree">Dairy-Free</label>
+											<label for="dairyfree" style="vertical-align: text-bottom;">Dairy-Free</label>
 										</td>
 									</table>
                                         <div id="private-row">
                                             <input type="checkbox" name="private" <?php if($private=="true"){echo "checked";} ?>>
-											<label for="private">Private</label><br/>
+											<label for="private" style="vertical-align: text-bottom;">Private Recipe</label><br/>
                                         </div>
 								</td>
 							</tr>
@@ -272,7 +272,7 @@
 					</td>
 					<td style="width: 70%; vertical-align: top; border-left: 1px solid #888; padding-left: 5px;">
 						<label for="instructions">Instructions</label><br>
-						<textarea name="instructions" rows="14" cols="90" style="resize: vertical;" placeholder="describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post! (just don't be evil with those tags)" required><?php echo $instructions;?></textarea>
+						<textarea name="instructions" rows="14" cols="90" style="resize: vertical;" placeholder="Describe how to make your recipe! You can even use html tags and image links to spice things up. Treat it like a blog post!" required><?php echo $instructions;?></textarea>
 					</td>
 				</tr>
 				<tr>

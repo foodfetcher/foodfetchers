@@ -15,6 +15,11 @@
     --color2-darkGreyT: rgba(0,0,0,.35);
 }
 
+@font-face {
+	font-family: ubuntu;
+	src: url(Ubuntu.ttf);
+}
+
 body {
 	margin: 0;
 	font-family: Arial;
@@ -32,7 +37,7 @@ body {
 
 h1, h2, h3 {
 	text-align: center;
-	font-family: Ubuntu, Arial;
+	font-family: ubuntu, Arial;
 }
 
 h3, p {
@@ -68,7 +73,7 @@ input[type=text]:active, input[type=email]:active, input[type=password]:active, 
 	transition: 0ms;
 }
 
-input[type=submit], input[type=reset] {
+button, input[type=submit], input[type=reset] {
 	padding: 5px 16px;
 	background-color: #eee;
 	font-size: 16px;
@@ -77,20 +82,24 @@ input[type=submit], input[type=reset] {
 	border-radius: 4px;
 }
 
-input[type=submit]:hover, input[type=reset]:hover {
+button:hover, input[type=submit]:hover, input[type=reset]:hover {
 	background-color: #fff;
 	border: 1px solid var(--green);
 	border-bottom: 2px solid var(--green);
 	padding-bottom: 4px;
 }
 
-input[type=submit]:active, input[type=reset]:active {
+button:active, input[type=submit]:active, input[type=reset]:active {
 	background-color: var(--green);
 }
 
 input[type=checkbox] {
 	height: 16px;
 	width: 16px;
+}
+
+input[type=checkbox]:checked {
+	accent-color: var(--teal);
 }
 
 /* Header */
@@ -181,7 +190,7 @@ input[type=checkbox] {
 
 /* Homepage Intro */
 #landing {
-	height: calc(100vh - 14px);
+	height: 98.5vh;
 	display: flex;
 }
 
@@ -348,15 +357,14 @@ input[type=checkbox] {
 	display: block;
 }
 .ingredients-row-num{
-	width: 20%;
     margin: 0;
 }
 .ingredients-row-select{
-	width: 20%;
     height: 27px;
     padding: 0;
 }
 .ingredients-row-ing{
+    width: 100%;
 	margin-left: 4px;
     flex:1;
 }
