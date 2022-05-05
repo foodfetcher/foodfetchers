@@ -65,12 +65,19 @@
     function toDecimal($val){
         if(isset($val)){
             if(strstr($val,"/")){
+                if(strstr($val," ")){
                 $space = strpos($val, " ");
                 $whole = substr($val,0, $space);
                 $slash = strpos($val,"/");
                 $numerator = substr($val,$space+1, $slash-$space-1);
                 $denominator = substr($val, $slash+1);
                 $val = $whole + $numerator / $denominator;
+                return $val;
+                }
+                $slash = strpos($val,"/");
+                $numerator = substr($val,0, $slash);
+                $denominator = substr($val, $slash+1);
+                $val = $numerator / $denominator;
                 
             }
         }
